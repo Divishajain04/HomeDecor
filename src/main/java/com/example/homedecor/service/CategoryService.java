@@ -20,6 +20,6 @@ public Boolean addCategory(Category category)throws CategoryException;
 	
 	public List<Category> getAllCategory()throws CategoryException;
 
-	public Category findCategoryByName(String categoryName) throws CategoryException;
+	public Category getCategoryByName(String CategoryName)throws CategoryException;
 
 }

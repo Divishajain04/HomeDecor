@@ -26,17 +26,11 @@ import com.example.homedecor.exception.ProductException;
 import com.example.homedecor.exception.WishlistException;
 
 @Service
-public class AdminServiceImpl implements AdminService{
-	
+public class AdminServiceImpl implements AdminService {
+
 	@Autowired
 	private AdminRepository adminRepositary;
-	
-	@Autowired
-	private ProductRepository productRepository;
-	
-	@Autowired
-	private CategoryRepository categoryRepository;
-	
+
 	@Override
 	public Boolean addAdmin(Admin admin) throws AdminException {
 		if (admin == null) {
@@ -45,8 +39,7 @@ public class AdminServiceImpl implements AdminService{
 		Optional<Admin> addAdmin = this.adminRepositary.findById(admin.getAdminID());
 		if (addAdmin.isPresent()) {
 			throw new AdminException(" This Admin Id is already present! Try with new");
-		}
-		else {
+		} else {
 			this.adminRepositary.save(admin);
 		}
 		return true;
@@ -58,7 +51,7 @@ public class AdminServiceImpl implements AdminService{
 		if (foundAdminById.isEmpty()) {
 			throw new AdminException("Admin ID is not present in the record");
 		}
-		return foundAdminById; 
+		return foundAdminById;
 	}
 
 	@Override
@@ -67,82 +60,33 @@ public class AdminServiceImpl implements AdminService{
 		Optional<Admin> foundAdmin = this.adminRepositary.findByAdminIDAndAdminPassword(adminId, password);
 		if (foundAdmin.isEmpty()) {
 			throw new AdminException("Invalid Id or password");
-		}
-		else {
+		} else {
 			isLoginBoolean = true;
 		}
 		return isLoginBoolean;
 	}
 
 	@Override
-	public Boolean updatePassword(Integer adminId, String password) throws AdminException {
-		return null;
+	public Boolean updatePassword(Integer adminId, String oldPassword, String newPassword) throws AdminException {
+		Admin foundCAdmin  = this.adminRepositary.findById(adminId).get();
+		String savedPassword = foundCAdmin.getAdminPassword();
+		Boolean isLogin = false;
+		if (savedPassword.compareTo(oldPassword) == 0) {
+			foundCAdmin.getAdminPassword().replaceAll(oldPassword, newPassword);
+			foundCAdmin.setAdminPassword(newPassword);
+			adminRepositary.save(foundCAdmin);
+			isLogin=true;
+		} else {
+			throw new AdminException("Old password dosen't match");
+		}
+		return isLogin;
 	}
 
 	@Override
-	public List<Customer> getAllCustomer() {
-		return null;
-	}
-
-	@Override
-	public List<Product> getAllProduct() throws ProductException {
-		List<Product> products = this.productRepository.findAll();
-		if (products.isEmpty()) {
-			throw new ProductException("Products are not present in the record");
-		}
-		return products;
-	}
-
-	@Override
-	public List<OrderByCustomer> getAllOrder() throws OrderException {
-		return null;
-	}
-
-	@Override
-	public List<Cart> getAllCart() throws CartException {
-		return null;
-	}
-
-	@Override
-	public List<Wishlist> getAllWishlist() throws WishlistException {
-		return null;
-	}
-
-	@Override
-	public List<Category> getAllCategory() throws CategoryException {
-		List<Category> resultList = this.categoryRepository.findAll();
-		if (resultList.isEmpty()) {
-			throw new CategoryException("Category is not present in the database");
-		}
-		return resultList;
-	}
-	
-	public boolean addCategory(Category category)throws CategoryException{
-		if (category == null) {
-			throw new CategoryException("Category not added");
-		}
-		Optional<Category> addCategoryResult = this.categoryRepository.findById(category.getCategoryId());
-		if (addCategoryResult.isPresent()) {
-			throw new CategoryException("Category Id is already present in the record");
-		}
-		else {
-		this.categoryRepository.save(category);
-		}
-		return true;
-	}
-
-	@Override
-	public Boolean addProduct(Product product) throws ProductException {
-		if (product == null) {
-			throw new ProductException("Product not added");
-		}
-		Optional<Product> addProductRecord = this.productRepository.findById(product.getProductId());
-		if (addProductRecord.isPresent()) {
-			throw new ProductException("Product Id is already present in the record");
-		}
-		else {
-			this.productRepository.save(product);
-		}
+	public Boolean deleteAdminById(Integer adminId) throws AdminException {
+		Optional<Admin> foundAdmin = this.adminRepositary.findById(adminId);
+		if (foundAdmin.isEmpty())throw new AdminException("Admin not exist for this Id "+adminId);
+		this.adminRepositary.deleteById(adminId);
 		return true;
 	}
 

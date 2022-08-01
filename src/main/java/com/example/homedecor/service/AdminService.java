@@ -19,31 +19,15 @@ import com.example.homedecor.exception.ProductException;
 import com.example.homedecor.exception.WishlistException;
 
 public interface AdminService {
+
+	public Boolean addAdmin(Admin admin) throws AdminException;
+
+	public Optional<Admin> getAdminById(Integer adminId) throws AdminException;
+
+	public Boolean login(Integer adminId, String password) throws AdminException;
+
+	Boolean updatePassword(Integer adminId, String oldPassword, String newPassword) throws AdminException;
 	
-public Boolean addAdmin(Admin admin)throws AdminException;
-	
-	public Optional<Admin> getAdminById(Integer adminId)throws AdminException;
-	
-	public Boolean login(Integer adminId, String password)throws AdminException;
-	
-	public Boolean updatePassword(Integer adminId, String password)throws AdminException;
-	
-	public List<Customer> getAllCustomer()throws ProductException;
-	
-	public List<Product> getAllProduct()throws ProductException;
-	
-	public List<OrderByCustomer> getAllOrder()throws OrderException;
-	
-	public List<Cart> getAllCart()throws CartException;
-	
-	public List<Wishlist> getAllWishlist()throws WishlistException;
-	
-	public List<Category> getAllCategory()throws CategoryException;
-	
-	public Boolean addProduct(Product product)throws ProductException;
-	
-	public boolean addCategory(Category category)throws CategoryException;
-	
-	
+	public Boolean deleteAdminById(Integer adminId)throws AdminException;
 
 }

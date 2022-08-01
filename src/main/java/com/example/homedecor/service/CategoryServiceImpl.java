@@ -18,51 +18,54 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public Boolean addCategory(Category category) throws CategoryException {
-		if (category == null) {
-			throw new CategoryException("Category not added");
+		if(category==null)throw new CategoryException("Category not added");
+     	Optional<Category> foundCategory=this.categoryRepositary.findById(category.getCategoryId());
+		if(foundCategory.isPresent()) {
+			throw new CategoryException("Category already exist");
 		}
-		Optional<Category> addCategoryResult = this.categoryRepositary.findById(category.getCategoryId());
-		if (addCategoryResult.isPresent()) {
-			throw new CategoryException("Category Id is already present in the record");
-		} else {
+		else {
 			this.categoryRepositary.save(category);
 		}
+		this.categoryRepositary.save(category);
 		return true;
 	}
 
 	@Override
 	public Optional<Category> getCategoryById(Integer categoryId) throws CategoryException {
-
-		Optional<Category> resultCategory = this.categoryRepositary.findById(categoryId);
-		if (resultCategory.isEmpty()) {
-			throw new CategoryException("This category Id is not present in the database");
-		}
-		return resultCategory;
+		Optional<Category> foundCategory=this.categoryRepositary.findById(categoryId);
+		if(foundCategory.isEmpty())throw new CategoryException("Category not exist for this Id"+categoryId);
+		return this.categoryRepositary.findById(categoryId);
 	}
 
 	@Override
 	public Category updateCategory(Category category) throws CategoryException {
+		if(category==null)throw new CategoryException("Category not updated");
+     	Optional<Category> foundCategory=this.categoryRepositary.findById(category.getCategoryId());
+		if(foundCategory.isEmpty())throw new CategoryException("Category not exist for update");
 		return this.categoryRepositary.save(category);
 	}
 
 	@Override
 	public Boolean deleteCategoryById(Integer categoryId) throws CategoryException {
+		Optional<Category> foundCategory=this.categoryRepositary.findById(categoryId);
+		if(foundCategory.isEmpty())throw new CategoryException("Category not exist for this Id"+categoryId);
 		this.categoryRepositary.deleteById(categoryId);
 		return true;
 	}
 
 	@Override
 	public List<Category> getAllCategory() throws CategoryException {
-		List<Category> categories = this.categoryRepositary.findAll();
-		if (categories.isEmpty()) {
-			throw new CategoryException("Category is not present in the database");
-		}
-		return categories;
+		List<Category> foundCategory=this.categoryRepositary.findAll();
+		if(foundCategory.isEmpty())throw new CategoryException("Category is empty");
+		return this.categoryRepositary.findAll();
 	}
 
 	@Override
-	public Category findCategoryByName(String categoryName) throws CategoryException {
-		return this.categoryRepositary.findByCategoryNameStartingWith(categoryName);
+	public Category getCategoryByName(String CategoryName) throws CategoryException {
+		Category foundCategory=this.categoryRepositary.findByCategoryNameStartingWith(CategoryName);
+		if(foundCategory==null)throw new CategoryException("No Category avilable by this name");
+		return foundCategory;
 	}
 
+	
 }

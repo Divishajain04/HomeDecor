@@ -20,45 +20,52 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public Boolean addCart(Cart cart) throws CartException {
-		if (cart == null) {
-			throw new CartException("Cart not added");
-		}
-		Optional<Cart> addCartResult = this.cartRepository.findById(cart.getCartId());
-		if (addCartResult.isPresent()) {
-			throw new CartException("Cart Id is already present in the record");
+
+		if (cart == null)
+			throw new CartException("cart not added");
+		Optional<Cart> foundCart = this.cartRepository.findById(cart.getCartId());
+		if (foundCart.isPresent()) {
+			throw new CartException("cart already exist");
 		} else {
 			this.cartRepository.save(cart);
 		}
-		return true;
-	}
 
-	@Override
-	public Optional<Cart> getCartById(Integer cartId) throws CartException {
-		Optional<Cart> foundCart = this.cartRepository.findById(cartId);
-		if (foundCart.isEmpty()) {
-			throw new CartException("Invalid Cart Id");
-		}
-		return foundCart;
-	}
-
-	@Override
-	public List<Cart> getAllCart() throws CartException {
-		List<Cart> cartList = this.cartRepository.findAll();
-		if (cartList.isEmpty()) {
-			throw new CartException("Cart is empty");
-		}
-		return cartList;
-	}
-
-	@Override
-	public Boolean deleteCartById(Integer cartId) throws CartException {
-		this.cartRepository.deleteById(cartId);
 		return true;
 	}
 
 	@Override
 	public Cart updateCart(Cart cart) throws CartException {
+		if (cart == null)
+			throw new CartException("cart not updated please fill the mandatory feilds");
+		Optional<Cart> foundCart = this.cartRepository.findById(cart.getCartId());
+		if (foundCart.isEmpty())
+			throw new CartException("Cart not avilable for this Id");
 		return this.cartRepository.save(cart);
+	}
+
+	@Override
+	public Optional<Cart> getCartById(Integer cartId) throws CartException {
+		Optional<Cart> foundCart = this.cartRepository.findById(cartId);
+		if (foundCart.isEmpty())
+			throw new CartException("Cart not avilable for this Id " + cartId);
+		return this.cartRepository.findById(cartId);
+	}
+
+	@Override
+	public List<Cart> getAllCart() throws CartException {
+		List<Cart> foundCart = this.cartRepository.findAll();
+		if (foundCart.isEmpty())
+			throw new CartException("Cart is null");
+		return this.cartRepository.findAll();
+	}
+
+	@Override
+	public Boolean deleteCartById(Integer cartId) throws CartException {
+		Optional<Cart> foundCart = this.cartRepository.findById(cartId);
+		if (foundCart.isEmpty())
+			throw new CartException("Cart not avilable for this Id " + cartId);
+		this.cartRepository.deleteById(cartId);
+		return true;
 	}
 
 }

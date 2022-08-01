@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.homedecor.dto.Cart;
 import com.example.homedecor.dto.OrderByCustomer;
-import com.example.homedecor.exception.CartException;
 import com.example.homedecor.exception.OrderException;
 import com.example.homedecor.service.OrderServiceImpl;
 
@@ -25,31 +23,58 @@ public class OrderController {
 	private OrderServiceImpl orderServiceImpl;
 	
 	@PostMapping("order")
-	public Boolean addOrder(@RequestBody OrderByCustomer orderByCustomer) throws OrderException{
-		this.orderServiceImpl.addOrder(orderByCustomer);
+	public Boolean addOrder(@RequestBody OrderByCustomer orderByCustomer) throws OrderException {
+		try {
+			this.orderServiceImpl.addOrder(orderByCustomer);
+		} catch (OrderException e) {
+			throw new OrderException(e.getMessage());
+		}
 		return true;
 	}
 	
 	
 	@GetMapping("order/{orderId}")
-	public Optional<OrderByCustomer> getOrderById(@PathVariable ("orderId") Integer orderId) throws OrderException {
-		return this.orderServiceImpl.getOrderById(orderId);
+	public Optional<OrderByCustomer> getOrderById(@PathVariable ("orderId") Integer orderId) throws OrderException  {
+		Optional<OrderByCustomer> foundOrder=null;
+		try {
+			foundOrder= this.orderServiceImpl.getOrderById(orderId);
+		} catch (OrderException e) {
+			throw new OrderException(e.getMessage());
+		}
+		 return foundOrder;
 	}
 	
 	
 	@PatchMapping("order")
 	public OrderByCustomer updateOrder(@RequestBody OrderByCustomer order) throws OrderException {
-		return this.orderServiceImpl.updateOrder(order);
+		OrderByCustomer foundOrder=null;
+		 try {
+			foundOrder= this.orderServiceImpl.updateOrder(order);
+		} catch (OrderException e) {
+			throw new OrderException(e.getMessage());
+		}
+		 return foundOrder;
 	}
 	
 	@GetMapping("order/")
 	public List<OrderByCustomer> getAllOrders() throws OrderException {
-		return this.orderServiceImpl.getAllOrder();
+		List<OrderByCustomer> foundOrder=null;
+		 try {
+			foundOrder= this.orderServiceImpl.getAllOrder();
+		} catch (OrderException e) {
+			throw new OrderException(e.getMessage());
+		}
+		 return foundOrder;
+		
 	}
 	
 	@DeleteMapping("order/{orderId}")
-	public Boolean deleteOrderById(@PathVariable ("orderId") Integer orderId) throws OrderException {
-		this.orderServiceImpl.deleteOrderById(orderId);
+	public Boolean deleteOrderById(@PathVariable("orderId") Integer orderId) throws OrderException {
+		try {
+			this.orderServiceImpl.deleteOrderById(orderId);
+		} catch (OrderException e) {
+			throw new OrderException(e.getMessage());
+		}
 		return true;
 	}
 

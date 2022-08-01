@@ -26,32 +26,56 @@ public class CartController {
 	private CartServiceImpl cartService;
 	
 	@PostMapping("cart")
-	public Boolean addCart(@RequestBody Cart cart) throws CartException{
-		this.cartService.addCart(cart);
-		return true;
+	public String addCart(@RequestBody Cart cart) throws CartException  {
+		try {
+			this.cartService.addCart(cart);
+		} catch (CartException e) {
+			throw new CartException(e.getMessage());
+		}
+		return "Cart added Successfully";
 	}
-	
 	
 	@GetMapping("cart/{cartId}")
-	public Optional<Cart> getCartById(@PathVariable ("cartId") Integer cartId) throws CartException {
-		return this.cartService.getCartById(cartId);
+	public Optional<Cart> getCartById(@PathVariable ("cartId") Integer cartId) throws CartException  {
+		Optional<Cart> foundCart=null;
+		 try {
+			foundCart=this.cartService.getCartById(cartId);
+		} catch (CartException e) {
+			throw new CartException(e.getMessage());
+		}
+		 return foundCart;
 	}
-	
 	
 	@PatchMapping("cart")
 	public Cart updateCart(@RequestBody Cart cart) throws CartException {
-		return this.cartService.updateCart(cart);
+		Cart cartUpdated=null;
+		 try {
+			cartUpdated=this.cartService.updateCart(cart);
+		} catch (CartException e) {
+			throw new CartException(e.getMessage());
+		}
+		 return cartUpdated;
 	}
 	
 	@GetMapping("cart/")
-	public List<Cart> getAllCarts() throws CartException {
-		return this.cartService.getAllCart();
+	public List<Cart> getAllCart() throws CartException {
+		List<Cart> foundAllCart=null;
+		try {
+			foundAllCart=this.cartService.getAllCart();
+		} catch (CartException e) {
+			throw new CartException(e.getMessage());
+		}
+		return foundAllCart;
 	}
 	
 	@DeleteMapping("cart/{cartId}")
-	public Boolean deleteCartById(@PathVariable ("cartId") Integer cartId) throws CartException {
-		this.cartService.deleteCartById(cartId);
-		return true;
+	public String deleteCartById(@PathVariable ("cartId") Integer cartId) throws CartException  {
+		try {
+			this.cartService.deleteCartById(cartId);
+		} catch (CartException e) {
+			throw new CartException(e.getMessage());
+		}
+		return "Cart deleted successfully";
 	}
 	
 	

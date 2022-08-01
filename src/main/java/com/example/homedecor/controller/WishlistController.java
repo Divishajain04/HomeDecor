@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.homedecor.dto.Cart;
 import com.example.homedecor.dto.Wishlist;
 import com.example.homedecor.exception.CartException;
+import com.example.homedecor.exception.OrderException;
 import com.example.homedecor.exception.WishlistException;
 import com.example.homedecor.service.WishlistServiceImpl;
 
@@ -26,31 +27,57 @@ public class WishlistController {
 	
 	
 	@PostMapping("wishlist")
-	public Boolean addProductInWishlist(@RequestBody Wishlist wishlist) throws WishlistException{
-		this.wishlistServiceImpl.addWishlist(wishlist);
+	public Boolean addProductInWishlist(@RequestBody Wishlist wishlist) throws WishlistException {
+		try {
+			this.wishlistServiceImpl.addWishlist(wishlist);
+		} catch (WishlistException e) {
+			throw new WishlistException(e.getMessage());
+		}
 		return true;
 	}
 	
 	
 	@GetMapping("wishlist/{wishlistId}")
 	public Optional<Wishlist> getWishlistById(@PathVariable ("wishlistId") Integer wishlistId) throws WishlistException {
-		return this.wishlistServiceImpl.getWishlistById(wishlistId);
+		Optional<Wishlist> foundWishlist=null;
+		try {
+			foundWishlist=this.wishlistServiceImpl.getWishlistById(wishlistId);
+		} catch (WishlistException e) {
+			throw new WishlistException(e.getMessage());
+		}
+		return foundWishlist;
 	}
 	
 	
 	@PatchMapping("wishlist")
 	public Wishlist updateWishlist(@RequestBody Wishlist wishlist) throws WishlistException {
-		return this.wishlistServiceImpl.updateWishlist(wishlist);
+		 Wishlist foundWishlist=null;
+		try {
+			this.wishlistServiceImpl.updateWishlist(wishlist);
+		} catch (WishlistException e) {
+			throw new WishlistException(e.getMessage());
+		}
+		return foundWishlist;
 	}
 	
 	@GetMapping("wishlist/")
 	public List<Wishlist> getAllWishlist() throws WishlistException {
-		return this.wishlistServiceImpl.getAllWishlist();
+		List<Wishlist> foundWishlist=null;
+		try {
+			this.wishlistServiceImpl.getAllWishlist();
+		} catch (WishlistException e) {
+			throw new WishlistException(e.getMessage());
+		}
+		return foundWishlist;
 	}
 	
 	@DeleteMapping("wishlist/{wishlistId}")
 	public Boolean deleteWishlistById(@PathVariable ("wishlistId") Integer wishlistId) throws WishlistException {
-		this.wishlistServiceImpl.deleteWishlistById(wishlistId);
+		try {
+			this.wishlistServiceImpl.deleteWishlistById(wishlistId);
+		} catch (WishlistException e) {
+			throw new WishlistException(e.getMessage());
+		}
 		return true;
 	}	
 }
