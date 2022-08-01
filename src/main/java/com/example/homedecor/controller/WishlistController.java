@@ -3,6 +3,7 @@ package com.example.homedecor.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.query.criteria.internal.predicate.IsEmptyPredicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,13 +63,13 @@ public class WishlistController {
 	
 	@GetMapping("wishlist/")
 	public List<Wishlist> getAllWishlist() throws WishlistException {
-		List<Wishlist> foundWishlist=null;
+		List<Wishlist> foundAllWishlist ;
 		try {
-			this.wishlistServiceImpl.getAllWishlist();
+			foundAllWishlist=this.wishlistServiceImpl.getAllWishlist();
 		} catch (WishlistException e) {
 			throw new WishlistException(e.getMessage());
 		}
-		return foundWishlist;
+		return foundAllWishlist;
 	}
 	
 	@DeleteMapping("wishlist/{wishlistId}")
