@@ -53,13 +53,25 @@ public class WishlistServiceImpl implements WishlistService{
 
 	@Override
 	public Boolean deleteWishlistById(Integer wishlistId) throws WishlistException {
-		 this.wishlistRepository.deleteById(wishlistId);
-		 return true;
+		Optional<Wishlist> findWishlist = this.wishlistRepository.findById(wishlistId);
+		if(findWishlist.isEmpty()) {
+			throw new WishlistException("Id not found");
+		}
+		else {
+			this.wishlistRepository.deleteById(wishlistId);
+		}
+		return true;
 	}
 
 	@Override
 	public Wishlist updateWishlist(Wishlist wishlist) throws WishlistException {
-		return	this.wishlistRepository.save(wishlist);
+		Optional<Wishlist> findWishlist = this.wishlistRepository.findById(wishlist.getWishlistId());
+		if(findWishlist.isEmpty()) {
+			throw new WishlistException("Wishlist Id doesn't exist");
+		}else {
+			this.wishlistRepository.save(wishlist);
+		}
+		return wishlist;
 	}
 
 }

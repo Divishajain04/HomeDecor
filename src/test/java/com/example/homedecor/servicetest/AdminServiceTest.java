@@ -1,6 +1,7 @@
 package com.example.homedecor.servicetest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -21,31 +22,31 @@ public class AdminServiceTest {
 	
 	@AfterEach
 	void deleteAdminByIdTest() throws AdminException {
-		assertEquals(true,adminService.deleteAdminById(2));
+		assertEquals(true,adminService.deleteAdminById(8));
 	}
 	
 	@Test
 	void addAdminTest() throws AdminException {
-		Admin admin=new Admin(2,"Prince","prince");
+		Admin admin=new Admin(8,"Lucky","luck");
 		assertTrue(adminService.addAdmin(admin));
 		assertNotNull(adminService != null);
 	}
 	
 	@Test
 	void getAdminByIdTest() throws AdminException {
-		Admin admin=new Admin(2,"Prince","prince");
+		Admin admin=new Admin(8,"Lucky","luck");
 		assertTrue(adminService.addAdmin(admin));
-		Admin admi=adminService.getAdminById(2).get();
+		Admin admi=adminService.getAdminById(8).get();
 		Integer id=admi.getAdminID();
-		assertEquals(id,2);
+		assertEquals(id,8);
 		assertNotNull(adminService.getAdminById(id));
 	}
 	
 	@Test
 	void loginTest() throws AdminException {
-		Admin admin=new Admin(2,"Prince","prince");
+		Admin admin=new Admin(8,"Lucky","luck");
 		assertTrue(adminService.addAdmin(admin));
-		Admin admi=adminService.getAdminById(2).get();
+		Admin admi=adminService.getAdminById(8).get();
 		Integer id=admi.getAdminID();
 		String savePassword=admi.getAdminPassword();
 		
@@ -54,12 +55,12 @@ public class AdminServiceTest {
 	
 	@Test
 	void updatePasswordTest() throws AdminException {
-		Admin admin=new Admin(2,"Prince","prince");
+		Admin admin=new Admin(8,"Lucky","luck");
 		assertTrue(adminService.addAdmin(admin));
-		Admin admi=this.adminService.getAdminById(2).get();
+		Admin admi=this.adminService.getAdminById(8).get();
 		Integer id=admi.getAdminID();
 		String pass=admi.getAdminPassword();
-		assertEquals(true,adminService.updatePassword(id,pass,"princever"));
+		assertEquals(true,adminService.updatePassword(id,pass,"luck008"));
 	}
 
 }
