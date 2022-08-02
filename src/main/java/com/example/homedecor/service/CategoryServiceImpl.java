@@ -20,12 +20,9 @@ public class CategoryServiceImpl implements CategoryService {
 	public Boolean addCategory(Category category) throws CategoryException {
 		if(category==null)throw new CategoryException("Category not added");
      	Optional<Category> foundCategory=this.categoryRepositary.findById(category.getCategoryId());
-		if(foundCategory.isPresent()) {
+		if(foundCategory.isPresent()) 
 			throw new CategoryException("Category already exist");
-		}
-		else {
-			this.categoryRepositary.save(category);
-		}
+		
 		this.categoryRepositary.save(category);
 		return true;
 	}

@@ -53,23 +53,39 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Boolean deleteProductById(Integer productId) throws ProductException {
+		Optional<Product> foundProduct = this.productRepository.findById(productId);
+		if (foundProduct.isEmpty()) {
+			throw new ProductException("Product Id not exist");
+		}
 		this.productRepository.deleteById(productId);
 		return true;
 	}
 
 	@Override
 	public Product updateProduct(Product product) throws ProductException {
+		Optional<Product> foundProduct = this.productRepository.findById(product.getProductId());
+		if (foundProduct.isEmpty()) {
+			throw new ProductException("Invalid Product Id");
+		}
 		return this.productRepository.save(product);
 	}
 
 	@Override
 	public List<Product> findAllProductHighToLow() throws ProductException {
-		return this.productRepository.findAllByOrderByProductPriceDesc();
+		List<Product> productList = this.productRepository.findAllByOrderByProductPriceDesc();
+		if (productList.isEmpty()) {
+			throw new ProductException("Product list is empty");
+		}
+		return productList;
 	}
 
 	@Override
 	public List<Product> findAllProductLowToHigh() throws ProductException {
-		return this.productRepository.findAllByOrderByProductPriceAsc();
+		List<Product> productList = this.productRepository.findAllByOrderByProductPriceAsc();
+		if (productList.isEmpty()) {
+			throw new ProductException("Product list is empty");
+		}
+		return productList;
 	}
 
 	@Override

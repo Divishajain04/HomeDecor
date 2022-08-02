@@ -1,0 +1,76 @@
+package com.example.homedecor.servicetest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.example.homedecor.dto.Product;
+import com.example.homedecor.exception.ProductException;
+import com.example.homedecor.service.ProductService;
+
+@SpringBootTest
+public class ProductServiceTest {
+	
+	@Autowired
+	private ProductService productService;
+	
+	@AfterEach
+	void deleteProductByIdTest() throws ProductException {
+		assertEquals(true,this.productService.deleteProductById(5));
+	}
+	
+	@Test
+	void addProductTest() throws ProductException {
+		Product product=new Product(5,"Sofa","Double layer Foam",20000.0,20);
+		assertTrue(this.productService.addProducts(product));
+		assertNotNull(this.productService.getProductById(1));
+	}
+	
+	@Test
+	void getProductByIdTest() throws ProductException {
+		Product product=new Product(5,"Sofa","Double layer Foam",20000.0,20);
+		assertTrue(this.productService.addProducts(product));
+		assertNotNull(this.productService.getProductById(1));
+	}
+	
+	@Test
+	void getAllProductTest() throws ProductException {
+		Product product=new Product(5,"Sofa","Double layer Foam",20000.0,20);
+		assertTrue(this.productService.addProducts(product));
+		assertNotNull(this.productService.getAllProduct());
+	}
+	
+	@Test
+	void updateProductTest() throws ProductException {
+		Product product=new Product(5,"Sofa","Double layer Foam",20000.0,20);
+		assertTrue(this.productService.addProducts(product));
+		assertNotNull(this.productService.updateProduct(new Product(5,"Chair","Double layer Foam",20000.0,20)));
+	}
+	
+	@Test
+	void findAllProductHighToLowTest() throws ProductException {
+		Product product=new Product(5,"Sofa","Double layer Foam",20000.0,20);
+		assertTrue(this.productService.addProducts(product));
+		assertNotNull(this.productService.findAllProductHighToLow());
+	}
+	
+	@Test
+	void findAllProductLowToHighTest() throws ProductException {
+		Product product=new Product(5,"Sofa","Double layer Foam",20000.0,20);
+		assertTrue(this.productService.addProducts(product));
+		assertNotNull(this.productService.findAllProductLowToHigh());
+	}
+	
+	@Test
+	void findProductByNameTest() throws ProductException {
+		Product product=new Product(5,"Sofa","Double layer Foam",20000.0,20);
+		assertTrue(this.productService.addProducts(product));
+		assertNotNull(this.productService.findProductByName("Sofa"));
+	}
+
+}
