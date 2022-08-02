@@ -37,17 +37,6 @@ public class Customer {
 		super();
 		this.creationDate = LocalDate.now();
 	}
-	public Customer(Integer customerId, String customerName, String customerEmail, String password,
-			String customerPhoneNo, String customerAddress) {
-		super();
-		this.customerId = customerId;
-		this.customerName = customerName;
-		this.customerEmail = customerEmail;
-		this.password = password;
-		this.customerPhoneNo = customerPhoneNo;
-		this.customerAddress = customerAddress;
-		this.creationDate = LocalDate.now();
-	}
 	
 	
 

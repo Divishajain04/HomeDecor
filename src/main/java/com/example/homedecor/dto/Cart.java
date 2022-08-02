@@ -26,9 +26,7 @@ public class Cart {
 	public Cart() {
 		super();
 	}
-	
-	
-	
+
 	public Cart(Integer cartId, Wishlist wishlist, OrderByCustomer orderByCustomer, List<Product> product) {
 		super();
 		this.cartId = cartId;

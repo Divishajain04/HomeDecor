@@ -29,7 +29,6 @@ public class CartServiceImpl implements CartService {
 		} else {
 			this.cartRepository.save(cart);
 		}
-
 		return true;
 	}
 
@@ -48,7 +47,7 @@ public class CartServiceImpl implements CartService {
 		Optional<Cart> foundCart = this.cartRepository.findById(cartId);
 		if (foundCart.isEmpty())
 			throw new CartException("Cart not avilable for this Id " + cartId);
-		return this.cartRepository.findById(cartId);
+		return foundCart;
 	}
 
 	@Override
