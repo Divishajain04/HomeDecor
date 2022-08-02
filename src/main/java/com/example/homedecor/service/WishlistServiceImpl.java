@@ -65,7 +65,13 @@ public class WishlistServiceImpl implements WishlistService{
 
 	@Override
 	public Wishlist updateWishlist(Wishlist wishlist) throws WishlistException {
-		return	this.wishlistRepository.save(wishlist);
+		Optional<Wishlist> findWishlist = this.wishlistRepository.findById(wishlist.getWishlistId());
+		if(findWishlist.isEmpty()) {
+			throw new WishlistException("Wishlist Id doesn't exist");
+		}else {
+			this.wishlistRepository.save(wishlist);
+		}
+		return wishlist;
 	}
 
 }
