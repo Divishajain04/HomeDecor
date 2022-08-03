@@ -69,10 +69,6 @@ public class Cart {
 		this.product = product;
 	}
 
-	@Override
-	public String toString() {
-		return "Cart [cartId=" + cartId + ", wishlist=" + wishlist + ", orderByCustomer=" + orderByCustomer
-				+ ", product=" + product + "]";
-	}
+
 
 }

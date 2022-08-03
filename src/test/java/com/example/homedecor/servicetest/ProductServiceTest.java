@@ -2,9 +2,10 @@ package com.example.homedecor.servicetest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.AfterEach;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,16 +20,24 @@ import com.example.homedecor.service.ProductService;
 	@Autowired
 	private ProductService productService;
 	
-	@AfterEach
+	
+   @Test
 	void deleteProductByIdTest() throws ProductException {
+	   Product product=new Product(5,"Sofa","Double layer Foam",20000.0,20);
+		assertTrue(this.productService.addProducts(product));
 		assertEquals(true,this.productService.deleteProductById(5));
+		assertThrows(ProductException.class,()->this.productService.deleteProductById(5));
 	}
 	
 	@Test
 	void addProductTest() throws ProductException {
+		assertThrows(ProductException.class,()->this.productService.addProducts(null));
 		Product product=new Product(5,"Sofa","Double layer Foam",20000.0,20);
 		assertTrue(this.productService.addProducts(product));
 		assertNotNull(this.productService.getProductById(5));
+		assertThrows(ProductException.class,()->this.productService.addProducts(product));
+		assertEquals(true,this.productService.deleteProductById(5));
+		
 	}
 	
 	@Test
@@ -36,6 +45,8 @@ import com.example.homedecor.service.ProductService;
 		Product product=new Product(5,"Sofa","Double layer Foam",20000.0,20);
 		assertTrue(this.productService.addProducts(product));
 		assertNotNull(this.productService.getProductById(5));
+		assertEquals(true,this.productService.deleteProductById(5));
+		assertThrows(ProductException.class,()->this.productService.getProductById(5));
 	}
 	
 	@Test
@@ -43,6 +54,8 @@ import com.example.homedecor.service.ProductService;
 		Product product=new Product(5,"Sofa","Double layer Foam",20000.0,20);
 		assertTrue(this.productService.addProducts(product));
 		assertNotNull(this.productService.getAllProducts());
+		assertEquals(true,this.productService.deleteProductById(5));
+		assertThrows(ProductException.class,()->this.productService.getAllProducts());
 	}
 	
 	@Test
@@ -50,6 +63,8 @@ import com.example.homedecor.service.ProductService;
 		Product product=new Product(5,"Sofa","Double layer Foam",20000.0,20);
 		assertTrue(this.productService.addProducts(product));
 		assertNotNull(this.productService.updateProduct(new Product(5,"Chair","Double layer Foam",20000.0,20)));
+		assertEquals(true,this.productService.deleteProductById(5));
+		assertThrows(ProductException.class,()->this.productService.updateProduct(new Product(5,"Chair","Double layer Foam",20000.0,20)));
 	}
 	
 	@Test
@@ -57,6 +72,8 @@ import com.example.homedecor.service.ProductService;
 		Product product=new Product(5,"Sofa","Double layer Foam",20000.0,20);
 		assertTrue(this.productService.addProducts(product));
 		assertNotNull(this.productService.findAllProductsHighToLow());
+		assertEquals(true,this.productService.deleteProductById(5));
+		assertThrows(ProductException.class,()->this.productService.findAllProductsHighToLow());
 	}
 	
 	@Test
@@ -64,6 +81,8 @@ import com.example.homedecor.service.ProductService;
 		Product product=new Product(5,"Sofa","Double layer Foam",20000.0,20);
 		assertTrue(this.productService.addProducts(product));
 		assertNotNull(this.productService.findAllProductsLowToHigh());
+		assertEquals(true,this.productService.deleteProductById(5));
+		assertThrows(ProductException.class,()->this.productService.findAllProductsLowToHigh());
 	}
 	
 	@Test
@@ -71,6 +90,10 @@ import com.example.homedecor.service.ProductService;
 		Product product=new Product(5,"Sofa","Double layer Foam",20000.0,20);
 		assertTrue(this.productService.addProducts(product));
 		assertNotNull(this.productService.findProductByName("Sofa"));
+		assertEquals(true,this.productService.deleteProductById(5));
+		assertThrows(ProductException.class,()->this.productService.findProductByName("Sofa"));
 	}
+	
+	
 
 }

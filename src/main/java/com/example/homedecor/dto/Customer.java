@@ -134,12 +134,7 @@ public class Customer {
 		this.wishlist = wishlist;
 	}
 
-	@Override
-	public String toString() {
-		return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", customerEmail="
-				+ customerEmail + ", customerPhoneNo=" + customerPhoneNo + ", customerAddress=" + customerAddress
-				+ ", creationDate=" + creationDate + "]";
-	}
+	
 
 
 }

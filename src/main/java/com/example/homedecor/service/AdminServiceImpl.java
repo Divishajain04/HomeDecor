@@ -54,6 +54,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Boolean updatePassword(Integer adminId, String oldPassword, String newPassword) throws AdminException {
 		Admin foundAdmin  = this.adminRepositary.findById(adminId).get();
+		
 		String savedPassword = foundAdmin.getAdminPassword();
 		Boolean isLogin = false;
 		if (savedPassword.compareTo(oldPassword) == 0) {

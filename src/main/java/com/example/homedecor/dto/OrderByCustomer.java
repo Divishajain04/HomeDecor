@@ -61,10 +61,6 @@ public class OrderByCustomer {
 		this.payment = payment;
 	}
 
-	@Override
-	public String toString() {
-		return "OrderByCustomer [orderId=" + orderId + ", status=" + status + ", orderDate=" + orderDate + ", payment="
-				+ payment + "]";
-	}
+	
 
 }
