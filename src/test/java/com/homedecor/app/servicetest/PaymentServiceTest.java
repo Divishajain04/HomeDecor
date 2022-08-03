@@ -1,4 +1,4 @@
-package com.example.homedecor.servicetest;
+package com.homedecor.app.servicetest;
 
 
 import org.springframework.boot.test.context.SpringBootTest;

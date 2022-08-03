@@ -1,4 +1,4 @@
-package com.example.homedecor;
+package com.homedecor.app;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
