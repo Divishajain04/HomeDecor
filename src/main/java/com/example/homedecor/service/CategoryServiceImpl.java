@@ -18,7 +18,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public Boolean addCategory(Category category) throws CategoryException {
-		if(category==null)throw new CategoryException("Category not added");
+		if(category==null)throw new CategoryException("Category not added please fill the mandatory details");
      	Optional<Category> foundCategory=this.categoryRepositary.findById(category.getCategoryId());
 		if(foundCategory.isPresent()) 
 			throw new CategoryException("Category already exist");
@@ -38,7 +38,7 @@ public class CategoryServiceImpl implements CategoryService {
 	public Category updateCategory(Category category) throws CategoryException {
 		if(category==null)throw new CategoryException("Category not updated");
      	Optional<Category> foundCategory=this.categoryRepositary.findById(category.getCategoryId());
-		if(foundCategory.isEmpty())throw new CategoryException("Category not exist for update");
+		if(foundCategory.isEmpty())throw new CategoryException("Category not found can't update");
 		return this.categoryRepositary.save(category);
 	}
 
@@ -51,16 +51,16 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<Category> getAllCategory() throws CategoryException {
-		List<Category> foundCategory=this.categoryRepositary.findAll();
-		if(foundCategory.isEmpty())throw new CategoryException("Category is empty");
+	public List<Category> getAllCategories() throws CategoryException {
+		List<Category> foundCategories=this.categoryRepositary.findAll();
+		if(foundCategories.isEmpty())throw new CategoryException("No Categories found");
 		return this.categoryRepositary.findAll();
 	}
 
 	@Override
 	public Category getCategoryByName(String categoryName) throws CategoryException {
 		Category foundCategory=this.categoryRepositary.findByCategoryNameStartingWith(categoryName);
-		if(foundCategory==null)throw new CategoryException("No Category avilable by this name");
+		if(foundCategory==null)throw new CategoryException("No Category found by this name");
 		return foundCategory;
 	}
 

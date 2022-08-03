@@ -53,10 +53,6 @@ public class OrderByCustomer {
 		return orderDate;
 	}
 
-//	public void setOrderDate(LocalDate orderDate) {
-//		this.orderDate = orderDate;
-//	}
-
 	public Payment getPayment() {
 		return payment;
 	}

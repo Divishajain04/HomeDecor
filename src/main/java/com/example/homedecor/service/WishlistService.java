@@ -13,7 +13,7 @@ public interface WishlistService {
 	
 	public Optional<Wishlist> getWishlistById(Integer wishlistId)throws WishlistException;
 	
-	public List<Wishlist> getAllWishlist() throws WishlistException;
+	public List<Wishlist> getAllWishlists() throws WishlistException;
 	
 	public Boolean deleteWishlistById(Integer wishlistId)throws WishlistException;
 	

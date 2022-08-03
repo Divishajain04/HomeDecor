@@ -22,10 +22,10 @@ public class CartServiceImpl implements CartService {
 	public Boolean addCart(Cart cart) throws CartException {
 
 		if (cart == null)
-			throw new CartException("cart not added");
+			throw new CartException("cart not added please fill the mandatory details");
 		Optional<Cart> foundCart = this.cartRepository.findById(cart.getCartId());
 		if (foundCart.isPresent()) {
-			throw new CartException("cart already exist");
+			throw new CartException("Cart already exist");
 		} else {
 			this.cartRepository.save(cart);
 		}
@@ -35,10 +35,10 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public Cart updateCart(Cart cart) throws CartException {
 		if (cart == null)
-			throw new CartException("cart not updated please fill the mandatory feilds");
+			throw new CartException("Cart not updated please fill the mandatory details");
 		Optional<Cart> foundCart = this.cartRepository.findById(cart.getCartId());
 		if (foundCart.isEmpty())
-			throw new CartException("Cart not avilable for this Id");
+			throw new CartException("Cart does not exist for this id :- "+cart.getCartId());
 		return this.cartRepository.save(cart);
 	}
 
@@ -46,15 +46,15 @@ public class CartServiceImpl implements CartService {
 	public Optional<Cart> getCartById(Integer cartId) throws CartException {
 		Optional<Cart> foundCart = this.cartRepository.findById(cartId);
 		if (foundCart.isEmpty())
-			throw new CartException("Cart not avilable for this Id " + cartId);
+			throw new CartException("Cart does not exist for this id" + cartId);
 		return foundCart;
 	}
 
 	@Override
-	public List<Cart> getAllCart() throws CartException {
-		List<Cart> foundCart = this.cartRepository.findAll();
-		if (foundCart.isEmpty())
-			throw new CartException("Cart is null");
+	public List<Cart> getAllCarts() throws CartException {
+		List<Cart> foundCarts = this.cartRepository.findAll();
+		if (foundCarts.isEmpty())
+			throw new CartException("No carts found");
 		return this.cartRepository.findAll();
 	}
 
@@ -62,7 +62,7 @@ public class CartServiceImpl implements CartService {
 	public Boolean deleteCartById(Integer cartId) throws CartException {
 		Optional<Cart> foundCart = this.cartRepository.findById(cartId);
 		if (foundCart.isEmpty())
-			throw new CartException("Cart not avilable for this Id " + cartId);
+			throw new CartException("Cart does not exist for this id " + cartId);
 		this.cartRepository.deleteById(cartId);
 		return true;
 	}

@@ -14,7 +14,7 @@ public interface OrderService {
 
 	public Optional<OrderByCustomer> getOrderById(Integer orderId) throws OrderException;
 
-	public List<OrderByCustomer> getAllOrder() throws OrderException;
+	public List<OrderByCustomer> getAllOrders() throws OrderException;
 
 	public Boolean deleteOrderById(Integer orderId) throws OrderException;
 

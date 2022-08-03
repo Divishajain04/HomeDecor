@@ -12,7 +12,7 @@ public interface CartService {
 	
 	public Optional<Cart> getCartById(Integer cartId)throws CartException ;
 	
-	public List<Cart> getAllCart()throws CartException;
+	public List<Cart> getAllCarts()throws CartException;
 	
 	public Boolean deleteCartById(Integer cartId)throws CartException;
 	

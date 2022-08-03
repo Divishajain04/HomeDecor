@@ -44,7 +44,7 @@ import com.example.homedecor.service.CategoryService;
 	void getAllCategoryTest() throws CategoryException {
 		Category addCategory=new Category(4,"Furniture",null);
 		assertTrue(this.categoryService.addCategory(addCategory));
-		assertNotNull(this.categoryService.getAllCategory());
+		assertNotNull(this.categoryService.getAllCategories());
 	}
 	
 	@Test

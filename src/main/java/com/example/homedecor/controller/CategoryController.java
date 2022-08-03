@@ -46,7 +46,7 @@ public class CategoryController {
 
 	@GetMapping("category/{categoryId}")
 	public Optional<Category> getCategoryById(@PathVariable ("categoryId") Integer categoryId) throws CategoryException  {
-		Optional<Category> foundCategory=null;
+		Optional<Category> foundCategory;
 		 try {
 			foundCategory=this.categoryService.getCategoryById(categoryId);
 		} catch (CategoryException e) {
@@ -59,7 +59,7 @@ public class CategoryController {
 	public List<Category> getAllCategory() throws CategoryException {
 		List<Category> foundAllCategory=null;
 		 try {
-			foundAllCategory=this.categoryService.getAllCategory();
+			foundAllCategory=this.categoryService.getAllCategories();
 		} catch (CategoryException e) {
 			throw new CategoryException(e.getMessage());
 		}

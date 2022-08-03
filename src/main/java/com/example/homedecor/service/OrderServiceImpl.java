@@ -19,7 +19,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Boolean addOrder(OrderByCustomer orderByCustomer) throws OrderException {
 		if (orderByCustomer == null) {
-			throw new OrderException("Order not added");
+			throw new OrderException("Order not added! Please fill the mandatory field");
 		}
 		Optional<OrderByCustomer> addOrderResult = this.orderRepository.findById(orderByCustomer.getOrderId());
 		if (addOrderResult.isPresent()) {
@@ -40,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<OrderByCustomer> getAllOrder() throws OrderException {
+	public List<OrderByCustomer> getAllOrders() throws OrderException {
 		List<OrderByCustomer> orderList = this.orderRepository.findAll();
 		if (orderList.isEmpty()) {
 			throw new OrderException("Order List is empty");
@@ -50,13 +50,20 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Boolean deleteOrderById(Integer orderId) throws OrderException {
+		Optional<OrderByCustomer> foundOrder = this.orderRepository.findById(orderId);
+		if (foundOrder.isEmpty()) {
+			throw new OrderException("Order not exist for this id");
+		}
 		this.orderRepository.deleteById(orderId);
 		return true;
 	}
 
 	@Override
 	public OrderByCustomer updateOrder(OrderByCustomer orderByCustomer) throws OrderException {
-		return this.orderRepository.save(orderByCustomer);
+		Optional<OrderByCustomer> foundOrder = this.orderRepository.findById(orderByCustomer.getOrderId());
+		if (foundOrder.isEmpty()) {
+			throw new OrderException("Order not exist for this id");
+		}
+		return 	this.orderRepository.save(orderByCustomer);	
 	}
-
 }

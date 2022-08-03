@@ -36,7 +36,7 @@ public class PaymentController {
 
 	@GetMapping("payment/{paymentId}")
 	public Optional<Payment> getPaymentById(@PathVariable("paymentId") Integer paymentId) throws OrderException {
-		Optional<Payment> foundPayment = null;
+		Optional<Payment> foundPayment;
 		try {
 			foundPayment = this.paymentServiceImpl.getPaymentById(paymentId);
 		} catch (PaymentException e) {

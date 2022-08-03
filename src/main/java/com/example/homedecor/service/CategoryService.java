@@ -17,7 +17,7 @@ public Boolean addCategory(Category category)throws CategoryException;
 	
 	public Boolean deleteCategoryById(Integer categoryId)throws CategoryException;
 	
-	public List<Category> getAllCategory()throws CategoryException;
+	public List<Category> getAllCategories()throws CategoryException;
 
 	public Category getCategoryByName(String categoryName)throws CategoryException;
 

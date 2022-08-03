@@ -12,15 +12,15 @@ public interface ProductService {
 	
 	public Optional<Product> getProductById(Integer productId)throws ProductException;
 	
-	public List<Product> getAllProduct()throws ProductException;
+	public List<Product> getAllProducts()throws ProductException;
 	
 	public Boolean deleteProductById(Integer productId)throws ProductException;
 	
 	public Product updateProduct(Product product)throws ProductException;
 	
-	public List<Product> findAllProductHighToLow() throws ProductException;
+	public List<Product> findAllProductsHighToLow() throws ProductException;
 
-	public List<Product> findAllProductLowToHigh() throws ProductException;
+	public List<Product> findAllProductsLowToHigh() throws ProductException;
 	
 	public Product findProductByName(String productName) throws ProductException;
 }

@@ -14,31 +14,35 @@ import com.example.homedecor.exception.CustomerException;
 public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
-	private CustomerRepository customerRepositary;
+	private CustomerRepository customerRepository;
 
 	@Override
 	public boolean addCustomer(Customer customer) throws CustomerException {
 		if (customer == null) {
 			throw new CustomerException("Customer not added please fill the mandatory feilds");
 		}
-		Optional<Customer> foundCustomer = this.customerRepositary.findById(customer.getCustomerId());
+		Optional<Customer> foundCustomer = this.customerRepository.findById(customer.getCustomerId());
 		if (foundCustomer.isPresent()) {
 			throw new CustomerException("Customer already exist");
 		} else {
-			this.customerRepositary.save(customer);
+			this.customerRepository.save(customer);
 		}
 		return true;
 	}
 
 	@Override
 	public boolean deleteCustomer(Integer customerId) throws CustomerException {
-		this.customerRepositary.deleteById(customerId);
+		Optional<Customer> foundCustomer = this.customerRepository.findById(customerId);
+		if (foundCustomer.isEmpty()) {
+			throw new CustomerException("This customer is not present in record");
+		}
+		this.customerRepository.deleteById(customerId);
 		return true;
 	}
 
 	@Override
 	public Optional<Customer> getCustomerById(Integer customerId) throws CustomerException {
-		Optional<Customer> foundCustomer = this.customerRepositary.findById(customerId);
+		Optional<Customer> foundCustomer = this.customerRepository.findById(customerId);
 		if (foundCustomer.isEmpty()) {
 			throw new CustomerException("This customer is not present in record");
 		}
@@ -48,7 +52,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Boolean login(Integer customerId, String password) throws CustomerException {
 		Boolean isCustomerLogin = false;
-		Optional<Customer> loginCustomer = this.customerRepositary.findByCustomerIdAndPassword(customerId, password);
+		Optional<Customer> loginCustomer = this.customerRepository.findByCustomerIdAndPassword(customerId, password);
 		if (loginCustomer.isEmpty()) {
 			throw new CustomerException("Invalid Id or Password");
 		}
@@ -59,56 +63,56 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public List<Customer> findAllCustomer() throws CustomerException {
-		List<Customer> allCustomer = this.customerRepositary.findAll();
-		if (allCustomer.isEmpty()) {
+	public List<Customer> findAllCustomers() throws CustomerException {
+		List<Customer> allCustomers = this.customerRepository.findAll();
+		if (allCustomers.isEmpty()) {
 			throw new CustomerException("No customers found");
 		}
-		return allCustomer;
+		return allCustomers;
 	}
 
 	@Override
 	public Boolean updateAddress(Integer customerId, String newAddress) throws CustomerException {
-		Customer foundCustomer = this.customerRepositary.findById(customerId).get();
-		if(foundCustomer==null)throw new CustomerException("customer not exist for this Id " + customerId);
+		Customer foundCustomer = this.customerRepository.findById(customerId).get();
+		if(foundCustomer==null)throw new CustomerException("Customer not exist for this Id " + customerId);
 		String savedAddress=foundCustomer.getCustomerAddress();
 		foundCustomer.getCustomerAddress().replaceAll(savedAddress, newAddress);
 		foundCustomer.setCustomerAddress(newAddress);
-		this.customerRepositary.save(foundCustomer);
+		this.customerRepository.save(foundCustomer);
 		return true;
 	}
 
 	@Override
 	public Boolean updateMobileNo(Integer customerId, String newMobileNo) throws CustomerException {
-		Customer foundCustomer = this.customerRepositary.findById(customerId).get();
-		if(foundCustomer==null)throw new CustomerException("customer not exist for this Id " + customerId);
+		Customer foundCustomer = this.customerRepository.findById(customerId).get();
+		if(foundCustomer==null)throw new CustomerException("Customer not exist for this Id " + customerId);
 		String savedPhoneNo=foundCustomer.getCustomerPhoneNo();
 		foundCustomer.getCustomerPhoneNo().replaceAll(savedPhoneNo, newMobileNo);
 		foundCustomer.setCustomerPhoneNo(newMobileNo);
-		this.customerRepositary.save(foundCustomer);
+		this.customerRepository.save(foundCustomer);
 		return true;
 	}
 
 	@Override
 	public Boolean updateEmail(Integer customerId, String newEmail) throws CustomerException {
-		Customer foundCustomer = this.customerRepositary.findById(customerId).get();
-		if(foundCustomer==null)throw new CustomerException("customer not exist for this Id " + customerId);
+		Customer foundCustomer = this.customerRepository.findById(customerId).get();
+		if(foundCustomer==null)throw new CustomerException("Customer not exist for this Id " + customerId);
 		String savedAddress=foundCustomer.getCustomerEmail();
 		foundCustomer.getCustomerEmail().replaceAll(savedAddress, newEmail);
 		foundCustomer.setCustomerEmail(newEmail);
-		this.customerRepositary.save(foundCustomer);
+		this.customerRepository.save(foundCustomer);
 		return true;
 	}
 
 	@Override
 	public Boolean updatePassword(Integer customerId, String oldPassword, String newPassword) throws CustomerException {
-		Customer foundCustomer = this.customerRepositary.findById(customerId).get();
+		Customer foundCustomer = this.customerRepository.findById(customerId).get();
 		String savedPassword = foundCustomer.getPassword();
 		Boolean isLogin = false;
 		if (savedPassword.compareTo(oldPassword) == 0) {
 			foundCustomer.getPassword().replaceAll(oldPassword, newPassword);
 			foundCustomer.setPassword(newPassword);
-			customerRepositary.save(foundCustomer);
+			customerRepository.save(foundCustomer);
 		} else {
 			throw new CustomerException("Old password dosen't match");
 		}
@@ -119,10 +123,10 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer updateCustomer(Customer customer) throws CustomerException {
 		if (customer == null)
 			throw new CustomerException("Customer not updated please fill the mandatory coloumn");
-		Optional<Customer> foundCustomer = this.customerRepositary.findById(customer.getCustomerId());
+		Optional<Customer> foundCustomer = this.customerRepository.findById(customer.getCustomerId());
 		if (foundCustomer.isEmpty())
 			throw new CustomerException("Customer not avilable for this id ");
-		return this.customerRepositary.save(customer);
+		return this.customerRepository.save(customer);
 	}
 
 }

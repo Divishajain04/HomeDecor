@@ -28,7 +28,7 @@ import com.example.homedecor.service.OrderService;
 	void addOrderTest() throws OrderException {
 		OrderByCustomer getOrder = new OrderByCustomer(8, "Pending", null);
 		assertTrue(orderService.addOrder(getOrder));
-		assertNotNull(orderService!=null);
+		assertNotNull(orderService);
 		
 	}
 	

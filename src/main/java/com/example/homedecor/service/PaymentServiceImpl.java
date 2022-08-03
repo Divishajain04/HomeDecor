@@ -19,11 +19,11 @@ public class PaymentServiceImpl implements PaymentService{
 	@Override
 	public Boolean addPayment(Payment payment) throws PaymentException {
 		if (payment == null) {
-			throw new PaymentException("Payment not added");
+			throw new PaymentException("Payment not added ! Please fill the mandatory field");
 		}
 		Optional<Payment> foundPayment = this.paymentRepository.findById(payment.getPaymentId());
 		if (foundPayment.isPresent()) {
-			throw new PaymentException("Payment Id is already present");
+			throw new PaymentException("This Payment Id already exist");
 		}
 		else {
 			this.paymentRepository.save(payment);
@@ -51,12 +51,21 @@ public class PaymentServiceImpl implements PaymentService{
 
 	@Override
 	public Boolean deletePaymentById(Integer paymentId) throws PaymentException {
+		Optional<Payment> foundPayment = this.paymentRepository.findById(paymentId);
+		if (foundPayment.isEmpty()) {
+			throw new PaymentException("Payment ID is not present in record");
+		}
 		this.paymentRepository.deleteById(paymentId);
 		return true;
 	}
 
 	@Override
 	public Payment updatePayment(Payment payment) throws PaymentException {
+		Optional<Payment> foundPayment = this.paymentRepository.findById(payment.getPaymentId());
+		if (foundPayment.isEmpty()) {
+			throw new PaymentException("Payment ID is not present in record");
+		}
+
 		return this.paymentRepository.save(payment);
 	}
 	

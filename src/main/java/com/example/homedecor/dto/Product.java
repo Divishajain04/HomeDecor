@@ -36,28 +36,6 @@ public class Product {
 	
 	
 
-/*	
-	public Product(Integer productId, String productName, String productDescription, Double productPrice,
-			Integer quantity, Category category) {
-		super();
-		this.productId = productId;
-		this.productName = productName;
-		this.productDescription = productDescription;
-		this.productPrice = productPrice;
-		this.quantity = quantity;
-		this.category = category;
-	}
-	
-	
-
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-*/
 	public Integer getProductId() {
 		return productId;
 	}

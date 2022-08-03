@@ -34,7 +34,7 @@ public class CartController {
 	
 	@GetMapping("cart/{cartId}")
 	public Optional<Cart> getCartById(@PathVariable ("cartId") Integer cartId) throws CartException  {
-		Optional<Cart> foundCart=null;
+		Optional<Cart> foundCart;
 		 try {
 			foundCart=this.cartService.getCartById(cartId);
 		} catch (CartException e) {
@@ -58,7 +58,7 @@ public class CartController {
 	public List<Cart> getAllCart() throws CartException {
 		List<Cart> foundAllCart=null;
 		try {
-			foundAllCart=this.cartService.getAllCart();
+			foundAllCart=this.cartService.getAllCarts();
 		} catch (CartException e) {
 			throw new CartException(e.getMessage());
 		}

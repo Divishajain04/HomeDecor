@@ -35,7 +35,7 @@ public class OrderController {
 	
 	@GetMapping("order/{orderId}")
 	public Optional<OrderByCustomer> getOrderById(@PathVariable ("orderId") Integer orderId) throws OrderException  {
-		Optional<OrderByCustomer> foundOrder=null;
+		Optional<OrderByCustomer> foundOrder;
 		try {
 			foundOrder= this.orderServiceImpl.getOrderById(orderId);
 		} catch (OrderException e) {
@@ -60,7 +60,7 @@ public class OrderController {
 	public List<OrderByCustomer> getAllOrders() throws OrderException {
 		List<OrderByCustomer> foundOrder=null;
 		 try {
-			foundOrder= this.orderServiceImpl.getAllOrder();
+			foundOrder= this.orderServiceImpl.getAllOrders();
 		} catch (OrderException e) {
 			throw new OrderException(e.getMessage());
 		}

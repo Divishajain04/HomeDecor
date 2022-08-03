@@ -19,7 +19,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Boolean addAdmin(Admin admin) throws AdminException {
 		if (admin == null) {
-			throw new AdminException("Admin not added");
+			throw new AdminException("Admin not added please fill the mandatory feilds");
 		}
 		Optional<Admin> addAdmin = this.adminRepositary.findById(admin.getAdminID());
 		if (addAdmin.isPresent()) {
@@ -53,13 +53,13 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Boolean updatePassword(Integer adminId, String oldPassword, String newPassword) throws AdminException {
-		Admin foundCAdmin  = this.adminRepositary.findById(adminId).get();
-		String savedPassword = foundCAdmin.getAdminPassword();
+		Admin foundAdmin  = this.adminRepositary.findById(adminId).get();
+		String savedPassword = foundAdmin.getAdminPassword();
 		Boolean isLogin = false;
 		if (savedPassword.compareTo(oldPassword) == 0) {
-			foundCAdmin.getAdminPassword().replaceAll(oldPassword, newPassword);
-			foundCAdmin.setAdminPassword(newPassword);
-			adminRepositary.save(foundCAdmin);
+			foundAdmin.getAdminPassword().replaceAll(oldPassword, newPassword);
+			foundAdmin.setAdminPassword(newPassword);
+			adminRepositary.save(foundAdmin);
 			isLogin=true;
 		} else {
 			throw new AdminException("Old password dosen't match");

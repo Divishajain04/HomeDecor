@@ -28,21 +28,21 @@ import com.example.homedecor.service.ProductService;
 	void addProductTest() throws ProductException {
 		Product product=new Product(5,"Sofa","Double layer Foam",20000.0,20);
 		assertTrue(this.productService.addProducts(product));
-		assertNotNull(this.productService.getProductById(1));
+		assertNotNull(this.productService.getProductById(5));
 	}
 	
 	@Test
 	void getProductByIdTest() throws ProductException {
 		Product product=new Product(5,"Sofa","Double layer Foam",20000.0,20);
 		assertTrue(this.productService.addProducts(product));
-		assertNotNull(this.productService.getProductById(1));
+		assertNotNull(this.productService.getProductById(5));
 	}
 	
 	@Test
 	void getAllProductTest() throws ProductException {
 		Product product=new Product(5,"Sofa","Double layer Foam",20000.0,20);
 		assertTrue(this.productService.addProducts(product));
-		assertNotNull(this.productService.getAllProduct());
+		assertNotNull(this.productService.getAllProducts());
 	}
 	
 	@Test
@@ -56,14 +56,14 @@ import com.example.homedecor.service.ProductService;
 	void findAllProductHighToLowTest() throws ProductException {
 		Product product=new Product(5,"Sofa","Double layer Foam",20000.0,20);
 		assertTrue(this.productService.addProducts(product));
-		assertNotNull(this.productService.findAllProductHighToLow());
+		assertNotNull(this.productService.findAllProductsHighToLow());
 	}
 	
 	@Test
 	void findAllProductLowToHighTest() throws ProductException {
 		Product product=new Product(5,"Sofa","Double layer Foam",20000.0,20);
 		assertTrue(this.productService.addProducts(product));
-		assertNotNull(this.productService.findAllProductLowToHigh());
+		assertNotNull(this.productService.findAllProductsLowToHigh());
 	}
 	
 	@Test

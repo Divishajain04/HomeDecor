@@ -40,7 +40,7 @@ public class CustomerController {
 	
 	@GetMapping("customer/{customerId}")
 	public Optional<Customer> getCustomerById(@PathVariable("customerId")Integer customerId) throws CustomerException  {
-		Optional<Customer> foundCustomer=null;
+		Optional<Customer> foundCustomer;
 		try {
 			foundCustomer=this.customerService.getCustomerById(customerId);
 		} catch (CustomerException e) {
@@ -53,7 +53,7 @@ public class CustomerController {
 	public List<Customer> getAllCustomers() throws CustomerException  {
 		List<Customer> foundCustomers=null;
 		try {
-			foundCustomers=this.customerService.findAllCustomer();
+			foundCustomers=this.customerService.findAllCustomers();
 		} catch (CustomerException e) {
 			throw new CustomerException(e.getMessage());
 		}

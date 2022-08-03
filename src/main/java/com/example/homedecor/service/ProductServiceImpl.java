@@ -20,11 +20,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Boolean addProducts(Product product) throws ProductException {
 		if (product == null) {
-			throw new ProductException("Product not added");
+			throw new ProductException("Product not added! Please fill the mandatory field.");
 		}
 		Optional<Product> addProductResult = this.productRepository.findById(product.getProductId());
 		if (addProductResult.isPresent()) {
-			throw new ProductException("Product Id is already present in the record");
+			throw new ProductException("Product Id is already present in the record! Try with new Id.");
 		} else {
 			this.productRepository.save(product);
 		}
@@ -41,7 +41,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> getAllProduct() throws ProductException {
+	public List<Product> getAllProducts() throws ProductException {
 		List<Product> productList = this.productRepository.findAll();
 		if (productList.isEmpty()) {
 			throw new ProductException("Product list is empty");
@@ -69,19 +69,19 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> findAllProductHighToLow() throws ProductException {
+	public List<Product> findAllProductsHighToLow() throws ProductException {
 		List<Product> productList = this.productRepository.findAllByOrderByProductPriceDesc();
 		if (productList.isEmpty()) {
-			throw new ProductException("Product list is empty");
+			throw new ProductException("Products are not available in the record");
 		}
 		return productList;
 	}
 
 	@Override
-	public List<Product> findAllProductLowToHigh() throws ProductException {
+	public List<Product> findAllProductsLowToHigh() throws ProductException {
 		List<Product> productList = this.productRepository.findAllByOrderByProductPriceAsc();
 		if (productList.isEmpty()) {
-			throw new ProductException("Product list is empty");
+			throw new ProductException("Products are not available in the record");
 		}
 		return productList;
 	}

@@ -39,7 +39,7 @@ public class WishlistController {
 	
 	@GetMapping("wishlist/{wishlistId}")
 	public Optional<Wishlist> getWishlistById(@PathVariable ("wishlistId") Integer wishlistId) throws WishlistException {
-		Optional<Wishlist> foundWishlist=null;
+		Optional<Wishlist> foundWishlist;
 		try {
 			foundWishlist=this.wishlistServiceImpl.getWishlistById(wishlistId);
 		} catch (WishlistException e) {
@@ -64,7 +64,7 @@ public class WishlistController {
 	public List<Wishlist> getAllWishlist() throws WishlistException {
 		List<Wishlist> foundAllWishlist ;
 		try {
-			foundAllWishlist=this.wishlistServiceImpl.getAllWishlist();
+			foundAllWishlist=this.wishlistServiceImpl.getAllWishlists();
 		} catch (WishlistException e) {
 			throw new WishlistException(e.getMessage());
 		}

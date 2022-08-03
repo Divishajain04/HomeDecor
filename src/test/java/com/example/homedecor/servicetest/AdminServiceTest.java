@@ -1,7 +1,6 @@
 package com.example.homedecor.servicetest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -29,7 +28,7 @@ import com.example.homedecor.service.AdminService;
 	void addAdminTest() throws AdminException {
 		Admin admin=new Admin(8,"Lucky","luck");
 		assertTrue(adminService.addAdmin(admin));
-		assertNotNull(adminService != null);
+		assertNotNull(adminService);
 	}
 	
 	@Test
@@ -61,6 +60,7 @@ import com.example.homedecor.service.AdminService;
 		Integer id=admi.getAdminID();
 		String pass=admi.getAdminPassword();
 		assertEquals(true,adminService.updatePassword(id,pass,"luck008"));
+	
 	}
 
 }

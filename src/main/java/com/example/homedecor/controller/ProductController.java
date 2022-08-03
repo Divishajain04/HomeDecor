@@ -34,7 +34,7 @@ public class ProductController {
 	
 	@GetMapping("product/{productId}")
 	public Optional<Product> getProductById(@PathVariable ("productId") Integer productId) throws ProductException  {
-		Optional<Product> foundProduct=null;
+		Optional<Product> foundProduct;
 		try {
 			foundProduct= this.productService.getProductById(productId);
 		} catch (ProductException e) {
@@ -45,7 +45,7 @@ public class ProductController {
 	
 	@PatchMapping("product")
 	public Product updateProduct(@RequestBody Product product) throws ProductException {
-		Product foundProduct=null;
+		Product foundProduct;
 		try {
 			foundProduct=this.productService.updateProduct(product);
 		} catch (ProductException e) {
@@ -56,9 +56,9 @@ public class ProductController {
 	
 	@GetMapping("product/")
 	public List<Product> getAllProduct() throws ProductException {
-		List<Product> foundProduct=null;
+		List<Product> foundProduct;
 		try {
-			foundProduct= this.productService.getAllProduct();
+			foundProduct= this.productService.getAllProducts();
 		} catch (ProductException e) {
 			throw new ProductException(e.getMessage());
 		}
@@ -79,9 +79,9 @@ public class ProductController {
 
 	@GetMapping("product/highToLow")
 	public List<Product> findProductHighToLow() throws ProductException {
-		List<Product> foundProduct=null;
+		List<Product> foundProduct;
 		try {
-			foundProduct= this.productService.findAllProductHighToLow();
+			foundProduct= this.productService.findAllProductsHighToLow();
 		} catch (ProductException e) {
 			throw new ProductException(e.getMessage());
 		}
@@ -90,9 +90,9 @@ public class ProductController {
 	
 	@GetMapping("product/lowToHigh")
 	public List<Product> findProductLowToHigh() throws ProductException {
-		List<Product> foundProduct=null;
+		List<Product> foundProduct;
 		try {
-			foundProduct= this.productService.findAllProductLowToHigh();
+			foundProduct= this.productService.findAllProductsLowToHigh();
 		} catch (ProductException e) {
 			throw new ProductException(e.getMessage());
 		}
@@ -101,7 +101,7 @@ public class ProductController {
 	
 	@GetMapping("products/{productName}")
 	public Product findProductByName(@PathVariable("productName") String productName) throws ProductException{
-		Product foundProduct=null;
+		Product foundProduct;
 		try {
 			foundProduct= this.productService.findProductByName(productName);
 		} catch (ProductException e) {

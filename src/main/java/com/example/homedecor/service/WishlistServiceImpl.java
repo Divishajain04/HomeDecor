@@ -21,7 +21,7 @@ public class WishlistServiceImpl implements WishlistService{
 	@Override
 	public Boolean addWishlist(Wishlist wishlist) throws WishlistException {
 		if (wishlist == null) {
-			throw new WishlistException("Wishlist is not added");
+			throw new WishlistException("Wishlist is not added!Please fill the mandatory field.");
 		}
 		Optional<Wishlist> addNewWishlist = this.wishlistRepository.findById(wishlist.getWishlistId());
 		if (addNewWishlist.isPresent()) {
@@ -42,7 +42,7 @@ public class WishlistServiceImpl implements WishlistService{
 	}
 
 	@Override
-	public List<Wishlist> getAllWishlist() throws WishlistException {
+	public List<Wishlist> getAllWishlists() throws WishlistException {
 		List<Wishlist> getList = this.wishlistRepository.findAll();
 		if (getList.isEmpty()) {
 			throw new WishlistException("Wishlist is Empty");
@@ -54,7 +54,7 @@ public class WishlistServiceImpl implements WishlistService{
 	public Boolean deleteWishlistById(Integer wishlistId) throws WishlistException {
 		Optional<Wishlist> findWishlist = this.wishlistRepository.findById(wishlistId);
 		if(findWishlist.isEmpty()) {
-			throw new WishlistException("Id not found");
+			throw new WishlistException("Wishlist Id is not present in the record.");
 		}
 		else {
 			this.wishlistRepository.deleteById(wishlistId);

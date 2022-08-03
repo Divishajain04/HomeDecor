@@ -32,7 +32,7 @@ void deletePaymentByIdTest() throws PaymentException {
 void addPaymentTest() throws PaymentException {
 	Payment payment = new Payment(8,"COD",1000.00,"done");
 	assertTrue(paymentService.addPayment(payment));
-	assertNotNull(payment != null);
+	assertNotNull(payment);
 }
 
 @Test
