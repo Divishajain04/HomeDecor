@@ -68,4 +68,34 @@ import com.homedecor.app.service.CustomerService;
 		assertThrows(CustomerException.class, () -> this.customerService.login(customerIdTest, customerPasswordTest));
 	}
 	
+	
+	@Test
+	void updateCustomerAddress() throws CustomerException{
+		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null);		
+		assertTrue(this.customerService.addCustomer(customer));
+		Customer customer2 = customerService.getCustomerById(4).get();
+		Integer customerIdInteger = customer2.getCustomerId();
+		assertTrue(this.customerService.updateAddress(customerIdInteger, "Neemuch"));
+		assertEquals(true, this.customerService.deleteCustomer(4));
+	}
+	
+	@Test
+	void updateCustomerEmail() throws CustomerException{
+		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null);
+		assertTrue(this.customerService.addCustomer(customer));
+		Customer customer2 = customerService.getCustomerById(4).get();
+		Integer customerIdInteger = customer2.getCustomerId();
+		assertTrue(this.customerService.updateEmail(customerIdInteger, "dibu0404@gmail.com"));
+		assertEquals(true, this.customerService.deleteCustomer(4));
+	}
+	
+	@Test
+	void updateCustomerPhone() throws CustomerException{
+		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null);
+		assertTrue(this.customerService.addCustomer(customer));
+		Customer customer2 = customerService.getCustomerById(4).get();
+		Integer customerInteger = customer2.getCustomerId();
+		assertTrue(this.customerService.updateMobileNo(customerInteger,"7999779211"));
+		assertEquals(true,this.customerService.deleteCustomer(4));
+	}
 }
