@@ -2,9 +2,9 @@ package com.example.homedecor.servicetest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,34 +13,56 @@ import com.example.homedecor.dto.Cart;
 import com.example.homedecor.exception.CartException;
 import com.example.homedecor.service.CartService;
 
-
 @SpringBootTest
- class CartServiceTest {
+class CartServiceTest {
 
-	
-	@Autowired 
+	@Autowired
 	CartService cartService;
 
-	@AfterEach
-	void deleteCartById() throws CartException{
-		assertEquals(true,cartService.deleteCartById(14));
+	@Test
+	void deleteCartByIdTest() throws CartException {
+		Cart cart = new Cart(14, null, null, null);
+		assertTrue(this.cartService.addCart(cart));
+		assertEquals(true, this.cartService.deleteCartById(14));
+		assertThrows(CartException.class, () -> this.cartService.deleteCartById(14));
 	}
 
-	
 	@Test
-	void addCartTest() throws CartException{
-		Cart cart = new Cart(14,null,null,null);
-		assertTrue(cartService.addCart(cart));
-		assertNotNull(cart);	
+	void addCartTest() throws CartException {
+		assertThrows(CartException.class, () -> this.cartService.addCart(null));
+		Cart cart = new Cart(14, null, null, null);
+		assertTrue(this.cartService.addCart(cart));
+		assertNotNull(this.cartService.getCartById(14));
+		assertThrows(CartException.class, () -> this.cartService.addCart(cart));
+		assertEquals(true, this.cartService.deleteCartById(14));
+
 	}
-		
+
 	@Test
-	void getCardByIdTest() throws CartException{
-		Cart cart = new Cart(14,null,null,null);
-		assertTrue(cartService.addCart(cart));
-		Cart cart2 = cartService.getCartById(14).get();
-		Integer idInteger = cart2.getCartId();
-		assertEquals(14,idInteger);
+	void getCartByIdTest() throws CartException {
+		Cart cart = new Cart(14, null, null, null);
+		assertTrue(this.cartService.addCart(cart));
+		assertNotNull(this.cartService.getCartById(14));
+		assertEquals(true, this.cartService.deleteCartById(14));
+		assertThrows(CartException.class, () -> this.cartService.getCartById(14));
 	}
-		
+
+	@Test
+	void getAllCartTest() throws CartException {
+		Cart cart = new Cart(14, null, null, null);
+		assertTrue(this.cartService.addCart(cart));
+		assertNotNull(this.cartService.getAllCarts());
+		assertEquals(true, this.cartService.deleteCartById(14));
+		assertThrows(CartException.class, () -> this.cartService.getAllCarts());
+	}
+
+	@Test
+	void updateCartTest() throws CartException {
+		Cart cart = new Cart(14, null, null, null);
+		assertTrue(this.cartService.addCart(cart));
+		assertNotNull(this.cartService.updateCart(new Cart(14, null, null, null)));
+		assertEquals(true, this.cartService.deleteCartById(14));
+		assertThrows(CartException.class, () -> this.cartService.updateCart(new Cart(14, null, null, null)));
+	}
+
 }

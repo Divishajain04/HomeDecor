@@ -34,8 +34,6 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public Cart updateCart(Cart cart) throws CartException {
-		if (cart == null)
-			throw new CartException("Cart not updated please fill the mandatory details");
 		Optional<Cart> foundCart = this.cartRepository.findById(cart.getCartId());
 		if (foundCart.isEmpty())
 			throw new CartException("Cart does not exist for this id :- "+cart.getCartId());
