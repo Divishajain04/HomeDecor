@@ -115,6 +115,7 @@ public class CustomerServiceImpl implements CustomerService {
 			foundCustomer.getPassword().replaceAll(oldPassword, newPassword);
 			foundCustomer.setPassword(newPassword);
 			customerRepository.save(foundCustomer);
+			isLogin = true;
 		} else {
 			throw new CustomerException("Old password dosen't match");
 		}

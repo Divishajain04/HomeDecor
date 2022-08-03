@@ -1,5 +1,7 @@
 package com.homedecor.app.servicetest;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -54,6 +56,7 @@ import com.homedecor.app.service.CustomerService;
 		assertTrue(this.customerService.addCustomer(customer));
 		assertNotNull(this.customerService.findAllCustomers());
 		assertEquals(true, this.customerService.deleteCustomer(4));
+		assertThrows(CustomerException.class, () -> this.customerService.findAllCustomers());
 	}
 	
 	@Test
@@ -97,5 +100,28 @@ import com.homedecor.app.service.CustomerService;
 		Integer customerInteger = customer2.getCustomerId();
 		assertTrue(this.customerService.updateMobileNo(customerInteger,"7999779211"));
 		assertEquals(true,this.customerService.deleteCustomer(4));
+	}
+	
+	@Test
+	void updatePassword() throws CustomerException{
+		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null);
+		assertTrue(this.customerService.addCustomer(customer));
+		Customer customer2 = customerService.getCustomerById(4).get();
+		Integer customerInteger = customer2.getCustomerId();
+		String customerPassword = customer2.getPassword();
+		assertEquals(true, this.customerService.updatePassword(customerInteger, customerPassword, "Jain08"));
+		assertEquals(true, this.customerService.deleteCustomer(4));
+	}
+	
+	@Test
+	void updateCustomerInformation() throws CustomerException{
+		assertThrows(CustomerException.class, () -> this.customerService.addCustomer(null));
+		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null);
+		assertTrue(this.customerService.addCustomer(customer));
+		assertNotNull(this.customerService.updateCustomer(new Customer(4,"Rubi","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null)));
+		assertThrows(CustomerException.class, () -> this.customerService.updateCustomer(null));
+		assertEquals(true, this.customerService.deleteCustomer(4));
+		assertThrows(CustomerException.class, () -> this.customerService.updateCustomer(customer));
+		
 	}
 }
