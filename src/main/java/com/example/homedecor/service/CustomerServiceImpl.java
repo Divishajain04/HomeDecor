@@ -68,7 +68,9 @@ public class CustomerServiceImpl implements CustomerService {
 		if (allCustomers.isEmpty()) {
 			throw new CustomerException("No customers found");
 		}
-		return allCustomers;
+		else {
+			return allCustomers;
+		}
 	}
 
 	@Override
