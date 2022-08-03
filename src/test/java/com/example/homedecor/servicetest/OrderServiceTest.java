@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.homedecor.dto.OrderByCustomer;
-import com.example.homedecor.exception.OrderException;
-import com.example.homedecor.service.OrderService;
+import com.homedecor.app.dto.OrderByCustomer;
+import com.homedecor.app.exception.OrderException;
+import com.homedecor.app.service.OrderService;
 
 @SpringBootTest
  class OrderServiceTest {

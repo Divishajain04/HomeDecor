@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.homedecor.dto.Product;
-import com.example.homedecor.exception.ProductException;
-import com.example.homedecor.service.ProductService;
+import com.homedecor.app.dto.Product;
+import com.homedecor.app.exception.ProductException;
+import com.homedecor.app.service.ProductService;
 
 @SpringBootTest
  class ProductServiceTest {
@@ -91,7 +91,7 @@ import com.example.homedecor.service.ProductService;
 		assertTrue(this.productService.addProducts(product));
 		assertNotNull(this.productService.findProductByName("Sofa"));
 		assertEquals(true,this.productService.deleteProductById(21));
-		assertThrows(ProductException.class,()->this.productService.findProductByName("Sofa"));
+	assertThrows(ProductException.class,()->this.productService.findProductByName("Sofa"));
 	}
 	
 }

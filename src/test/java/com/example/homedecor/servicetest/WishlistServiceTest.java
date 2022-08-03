@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.homedecor.dto.Wishlist;
-import com.example.homedecor.exception.WishlistException;
-import com.example.homedecor.service.WishlistService;
+import com.homedecor.app.dto.Wishlist;
+import com.homedecor.app.exception.WishlistException;
+import com.homedecor.app.service.WishlistService;
 
 @SpringBootTest
  class WishlistServiceTest {

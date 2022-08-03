@@ -3,11 +3,11 @@ package com.example.homedecor.servicetest;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.homedecor.dto.Admin;
-import com.example.homedecor.dto.Payment;
-import com.example.homedecor.exception.AdminException;
-import com.example.homedecor.exception.PaymentException;
-import com.example.homedecor.service.PaymentService;
+import com.homedecor.app.dto.Admin;
+import com.homedecor.app.dto.Payment;
+import com.homedecor.app.exception.AdminException;
+import com.homedecor.app.exception.PaymentException;
+import com.homedecor.app.service.PaymentService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

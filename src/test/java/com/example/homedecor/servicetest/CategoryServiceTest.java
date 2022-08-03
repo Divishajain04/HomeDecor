@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.homedecor.dto.Category;
-import com.example.homedecor.exception.CategoryException;
-import com.example.homedecor.service.CategoryService;
+import com.homedecor.app.dto.Category;
+import com.homedecor.app.exception.CategoryException;
+import com.homedecor.app.service.CategoryService;
 
 @SpringBootTest
  class CategoryServiceTest {
