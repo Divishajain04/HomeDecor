@@ -17,7 +17,7 @@ public interface CustomerService {
 	
 	public Boolean login(Integer customerId, String password)throws CustomerException;
 	
-	public List<Customer> findAllCustomers()throws CustomerException;
+	public List<Customer> findAllCustomers() throws CustomerException;
 	
 	public Boolean updateAddress(Integer customerId, String newAddress)throws CustomerException;
 	
