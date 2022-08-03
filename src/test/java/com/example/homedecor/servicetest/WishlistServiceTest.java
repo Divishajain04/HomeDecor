@@ -18,7 +18,7 @@ import com.example.homedecor.exception.WishlistException;
 import com.example.homedecor.service.WishlistService;
 
 @SpringBootTest
-public class WishlistServiceTest {
+ class WishlistServiceTest {
 	
 	@Autowired
 	private WishlistService wishlistService;

@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.homedecor.dto.Cart;
-import com.example.homedecor.dto.Product;
 import com.example.homedecor.exception.CartException;
-import com.example.homedecor.exception.ProductException;
-import com.example.homedecor.service.CartService;
 import com.example.homedecor.service.CartServiceImpl;
 
 @RestController

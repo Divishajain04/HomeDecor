@@ -14,7 +14,7 @@ import com.example.homedecor.exception.CategoryException;
 import com.example.homedecor.service.CategoryService;
 
 @SpringBootTest
-public class CategoryServiceTest {
+ class CategoryServiceTest {
 
 	
 	@Autowired

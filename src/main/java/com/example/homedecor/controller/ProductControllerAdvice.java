@@ -12,7 +12,7 @@ public class ProductControllerAdvice {
 
 	@ExceptionHandler(ProductException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public String ProductException(ProductException e) {
+	public String productException(ProductException e) {
 		return e.getMessage();
 	}
 }

@@ -4,9 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.homedecor.dto.Category;
-import com.example.homedecor.dto.Product;
+
 import com.example.homedecor.exception.CategoryException;
-import com.example.homedecor.exception.ProductException;
 
 public interface CategoryService {
 	
@@ -20,6 +19,6 @@ public Boolean addCategory(Category category)throws CategoryException;
 	
 	public List<Category> getAllCategory()throws CategoryException;
 
-	public Category getCategoryByName(String CategoryName)throws CategoryException;
+	public Category getCategoryByName(String categoryName)throws CategoryException;
 
 }

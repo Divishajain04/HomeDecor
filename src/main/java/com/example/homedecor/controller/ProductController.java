@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.homedecor.dto.Category;
 import com.example.homedecor.dto.Product;
 import com.example.homedecor.exception.ProductException;
-import com.example.homedecor.exception.WishlistException;
 import com.example.homedecor.service.ProductService;
 
 @RestController

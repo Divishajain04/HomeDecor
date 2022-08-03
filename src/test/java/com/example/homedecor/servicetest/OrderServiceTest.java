@@ -14,7 +14,7 @@ import com.example.homedecor.exception.OrderException;
 import com.example.homedecor.service.OrderService;
 
 @SpringBootTest
-public class OrderServiceTest {
+ class OrderServiceTest {
 	
 	@Autowired
 	private OrderService orderService;
@@ -38,7 +38,7 @@ public class OrderServiceTest {
 		assertTrue(orderService.addOrder(order));
 		OrderByCustomer getOrder = orderService.getOrderById(8).get();
 		Integer orderId = getOrder.getOrderId();
-		assertEquals(orderId, 8);
+		assertEquals(8,orderId);
 		assertNotNull(orderService.getOrderById(orderId));
 		
 	}

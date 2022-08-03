@@ -7,11 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.homedecor.dao.OrderRepository;
-import com.example.homedecor.dto.Category;
 import com.example.homedecor.dto.OrderByCustomer;
-import com.example.homedecor.exception.CategoryException;
 import com.example.homedecor.exception.OrderException;
-import com.example.homedecor.exception.ProductException;
 
 @Service
 public class OrderServiceImpl implements OrderService {

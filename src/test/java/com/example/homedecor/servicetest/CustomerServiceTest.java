@@ -17,7 +17,7 @@ import com.example.homedecor.exception.CustomerException;
 import com.example.homedecor.service.CustomerServiceImpl;
 
 @SpringBootTest
-public class CustomerServiceTest {
+ class CustomerServiceTest {
 	
 	@Autowired
 	private CustomerServiceImpl customerServiceImpl;
@@ -43,7 +43,7 @@ public class CustomerServiceTest {
 		assertTrue(customerServiceImpl.addCustomer(customer));
 		Customer customer2 = customerServiceImpl.getCustomerById(2).get();
 		Integer id = customer2.getCustomerId();
-		assertEquals(id,2);
+		assertEquals(2,id);
 		assertNotNull(customerServiceImpl.getCustomerById(id));
 	}
 	

@@ -50,14 +50,14 @@ public class CustomerController {
 	}
 	
 	@GetMapping("customer/")
-	public List<Customer> getCustomerById() throws CustomerException  {
-		List<Customer> foundCustomer=null;
+	public List<Customer> getAllCustomers() throws CustomerException  {
+		List<Customer> foundCustomers=null;
 		try {
-			foundCustomer=this.customerService.findAllCustomer();
+			foundCustomers=this.customerService.findAllCustomer();
 		} catch (CustomerException e) {
 			throw new CustomerException(e.getMessage());
 		}
-		return foundCustomer;
+		return foundCustomers;
 		
 	}
 	@PatchMapping("customer")
@@ -71,17 +71,17 @@ public class CustomerController {
 		return updatedCustomer;
 	}
 	
-	@GetMapping("Customer/{loginId}/{password}")
+	@GetMapping("customer/{loginId}/{password}")
 	public String login(@PathVariable("loginId")Integer loginId,@PathVariable("password") String password) throws CustomerException {
 		try {
-			this.customerService.Login(loginId, password);
+			this.customerService.login(loginId, password);
 		} catch (CustomerException e) {
 			throw new CustomerException(e.getMessage());
 		}
 		return "Login Successfully";
 	}
 	
-	@PutMapping("Customers/{loginId}/{oldPassword}/{newPassword}")
+	@PutMapping("customers/{loginId}/{oldPassword}/{newPassword}")
 	public String updatePassword(@PathVariable("loginId")Integer loginId,@PathVariable("oldPassword") String oldPassword,@PathVariable("newPassword") String newPassword) throws CustomerException {
 		try {
 			this.customerService.updatePassword(loginId, oldPassword, newPassword);
@@ -101,7 +101,7 @@ public class CustomerController {
 		return "Email updated Successfully";
 	}
 	
-	@PutMapping("Customerp/{loginId}/{newPhone}")
+	@PutMapping("customer/phone/{loginId}/{newPhone}")
 	public String updatePhone(@PathVariable("loginId")Integer loginId,@PathVariable("newPhone") String newPhone) throws CustomerException {
 		try {
 			this.customerService.updateMobileNo(loginId, newPhone);
@@ -112,7 +112,7 @@ public class CustomerController {
 	}
 	
 	
-	@PutMapping("Customer/{loginId}/{newAddress}/")
+	@PutMapping("customer/address/{loginId}/{newAddress}/")
 	public String updateAddress(@PathVariable("loginId")Integer loginId,@PathVariable("newAddress") String newAddress) throws CustomerException {
 		try {
 			this.customerService.updateAddress(loginId, newAddress);
@@ -123,7 +123,7 @@ public class CustomerController {
 	}
 	
 	@DeleteMapping("customer/{customerId}")
-	public String deleteCustomerByid (@PathVariable("customerId")Integer customerId) throws CustomerException {
+	public String deleteCustomerById (@PathVariable("customerId")Integer customerId) throws CustomerException {
 		try {
 			this.customerService.deleteCustomer(customerId);
 		} catch (CustomerException e) {

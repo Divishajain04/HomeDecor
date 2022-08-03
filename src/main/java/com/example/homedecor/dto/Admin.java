@@ -1,10 +1,9 @@
 package com.example.homedecor.dto;
 
-import java.util.List;
+
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Admin {
@@ -49,9 +48,6 @@ public class Admin {
 		this.adminPassword = adminPassword;
 	}
 
-	/*
-	 * @Override public String toString() { return "Admin [adminID=" + adminID +
-	 * ", adminName=" + adminName + ", adminPassword=" + adminPassword + "]"; }
-	 */
+	
 
 }

@@ -4,11 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
+
 import org.springframework.stereotype.Service;
 
 import com.example.homedecor.dao.WishlistRepository;
-import com.example.homedecor.dto.Product;
 import com.example.homedecor.dto.Wishlist;
 import com.example.homedecor.exception.WishlistException;
 

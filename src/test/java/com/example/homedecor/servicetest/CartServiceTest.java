@@ -15,7 +15,7 @@ import com.example.homedecor.service.CartService;
 
 
 @SpringBootTest
-public class CartServiceTest {
+ class CartServiceTest {
 
 	
 	@Autowired 
@@ -40,7 +40,7 @@ public class CartServiceTest {
 		assertTrue(cartService.addCart(cart));
 		Cart cart2 = cartService.getCartById(14).get();
 		Integer idInteger = cart2.getCartId();
-		assertEquals(idInteger, 14);
+		assertEquals(14,idInteger);
 	}
 		
 }

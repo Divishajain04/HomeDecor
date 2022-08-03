@@ -19,7 +19,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public boolean addCustomer(Customer customer) throws CustomerException {
 		if (customer == null) {
-			throw new CustomerException("Customer not added");
+			throw new CustomerException("Customer not added please fill the mandatory feilds");
 		}
 		Optional<Customer> foundCustomer = this.customerRepositary.findById(customer.getCustomerId());
 		if (foundCustomer.isPresent()) {
@@ -46,7 +46,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Boolean Login(Integer customerId, String password) throws CustomerException {
+	public Boolean login(Integer customerId, String password) throws CustomerException {
 		Boolean isCustomerLogin = false;
 		Optional<Customer> loginCustomer = this.customerRepositary.findByCustomerIdAndPassword(customerId, password);
 		if (loginCustomer.isEmpty()) {
@@ -62,7 +62,7 @@ public class CustomerServiceImpl implements CustomerService {
 	public List<Customer> findAllCustomer() throws CustomerException {
 		List<Customer> allCustomer = this.customerRepositary.findAll();
 		if (allCustomer.isEmpty()) {
-			throw new CustomerException("Record is empty");
+			throw new CustomerException("No customers found");
 		}
 		return allCustomer;
 	}
@@ -82,8 +82,8 @@ public class CustomerServiceImpl implements CustomerService {
 	public Boolean updateMobileNo(Integer customerId, String newMobileNo) throws CustomerException {
 		Customer foundCustomer = this.customerRepositary.findById(customerId).get();
 		if(foundCustomer==null)throw new CustomerException("customer not exist for this Id " + customerId);
-		String SavedPhoneNo=foundCustomer.getCustomerPhoneNo();
-		foundCustomer.getCustomerPhoneNo().replaceAll(SavedPhoneNo, newMobileNo);
+		String savedPhoneNo=foundCustomer.getCustomerPhoneNo();
+		foundCustomer.getCustomerPhoneNo().replaceAll(savedPhoneNo, newMobileNo);
 		foundCustomer.setCustomerPhoneNo(newMobileNo);
 		this.customerRepositary.save(foundCustomer);
 		return true;

@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.example.homedecor.dao.CartRepository;
 import com.example.homedecor.dto.Cart;
-import com.example.homedecor.dto.Category;
+
 import com.example.homedecor.exception.CartException;
-import com.example.homedecor.exception.CategoryException;
+
 
 @Service
 public class CartServiceImpl implements CartService {

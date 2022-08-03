@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.homedecor.dto.Admin;
-import com.example.homedecor.dto.Category;
-import com.example.homedecor.dto.Wishlist;
+
+
 import com.example.homedecor.exception.AdminException;
-import com.example.homedecor.exception.CategoryException;
-import com.example.homedecor.exception.WishlistException;
+
 import com.example.homedecor.service.AdminService;
-import com.example.homedecor.service.CategoryServiceImpl;
+
 
 @RestController
 public class AdminController {

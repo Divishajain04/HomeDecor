@@ -15,7 +15,7 @@ import com.example.homedecor.exception.AdminException;
 import com.example.homedecor.service.AdminService;
 
 @SpringBootTest
-public class AdminServiceTest {
+ class AdminServiceTest {
 
 	@Autowired
 	private AdminService adminService;
@@ -38,7 +38,7 @@ public class AdminServiceTest {
 		assertTrue(adminService.addAdmin(admin));
 		Admin admi=adminService.getAdminById(8).get();
 		Integer id=admi.getAdminID();
-		assertEquals(id,8);
+		assertEquals(8,id);
 		assertNotNull(adminService.getAdminById(id));
 	}
 	

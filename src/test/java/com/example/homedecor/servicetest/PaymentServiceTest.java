@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @SpringBootTest
-public class PaymentServiceTest {
+ class PaymentServiceTest {
 	
 @Autowired
 private PaymentService paymentService;
@@ -41,7 +41,7 @@ void getPaymentByIdTest() throws PaymentException {
 	assertTrue(paymentService.addPayment(payment));
 	Payment payment2 = paymentService.getPaymentById(8).get();
 	Integer id=payment2.getPaymentId();
-	assertEquals(id,8);
+	assertEquals(8,id);
 	assertNotNull(paymentService.getPaymentById(id));
 }
 

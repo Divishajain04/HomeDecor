@@ -58,8 +58,8 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Category getCategoryByName(String CategoryName) throws CategoryException {
-		Category foundCategory=this.categoryRepositary.findByCategoryNameStartingWith(CategoryName);
+	public Category getCategoryByName(String categoryName) throws CategoryException {
+		Category foundCategory=this.categoryRepositary.findByCategoryNameStartingWith(categoryName);
 		if(foundCategory==null)throw new CategoryException("No Category avilable by this name");
 		return foundCategory;
 	}

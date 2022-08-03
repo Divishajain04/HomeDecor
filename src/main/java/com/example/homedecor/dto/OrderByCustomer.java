@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToOne;
 
 @Entity
@@ -16,8 +16,6 @@ public class OrderByCustomer {
 	private String status;
 	private LocalDate orderDate;
 	
-//	@ManyToOne
-//	private Customer customer;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Payment payment;

@@ -14,7 +14,7 @@ import com.example.homedecor.exception.ProductException;
 import com.example.homedecor.service.ProductService;
 
 @SpringBootTest
-public class ProductServiceTest {
+ class ProductServiceTest {
 	
 	@Autowired
 	private ProductService productService;
