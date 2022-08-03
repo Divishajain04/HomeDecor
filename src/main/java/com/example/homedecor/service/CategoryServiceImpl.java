@@ -36,7 +36,6 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public Category updateCategory(Category category) throws CategoryException {
-		if(category==null)throw new CategoryException("Category not updated");
      	Optional<Category> foundCategory=this.categoryRepositary.findById(category.getCategoryId());
 		if(foundCategory.isEmpty())throw new CategoryException("Category not found can't update");
 		return this.categoryRepositary.save(category);

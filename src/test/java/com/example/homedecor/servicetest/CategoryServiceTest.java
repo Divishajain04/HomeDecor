@@ -2,9 +2,9 @@ package com.example.homedecor.servicetest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,16 +20,22 @@ import com.example.homedecor.service.CategoryService;
 	@Autowired
 	private CategoryService categoryService;
 	
-	@AfterEach
+	@Test
 	void deleteCategoryByIdTest() throws CategoryException {
+		Category addCategory=new Category(4,"Furniture",null);
+		assertTrue(this.categoryService.addCategory(addCategory));
 		assertEquals(true,this.categoryService.deleteCategoryById(4));
+		assertThrows(CategoryException.class,()->this.categoryService.deleteCategoryById(4));
 	}
 	
 	@Test
 	void addCategoryTest() throws CategoryException {
+		assertThrows(CategoryException.class,()->this.categoryService.addCategory(null));
 		Category addCategory=new Category(4,"Furniture",null);
 		assertTrue(this.categoryService.addCategory(addCategory));
-		assertNotNull(addCategory);
+		assertThrows(CategoryException.class,()->this.categoryService.addCategory(new Category(4,"Furniture",null)));
+		assertEquals(true,this.categoryService.deleteCategoryById(4));
+		
 		
 	}
 	
@@ -38,6 +44,9 @@ import com.example.homedecor.service.CategoryService;
 		Category addCategory=new Category(4,"Furniture",null);
 		assertTrue(this.categoryService.addCategory(addCategory));
 		assertNotNull(this.categoryService.getCategoryById(4));
+		assertEquals(true,this.categoryService.deleteCategoryById(4));
+		assertThrows(CategoryException.class,()->this.categoryService.getCategoryById(4));
+
 	}
 	
 	@Test
@@ -45,6 +54,9 @@ import com.example.homedecor.service.CategoryService;
 		Category addCategory=new Category(4,"Furniture",null);
 		assertTrue(this.categoryService.addCategory(addCategory));
 		assertNotNull(this.categoryService.getAllCategories());
+		assertEquals(true,this.categoryService.deleteCategoryById(4));
+		assertThrows(CategoryException.class,()->this.categoryService.getAllCategories());
+
 	}
 	
 	@Test
@@ -52,6 +64,9 @@ import com.example.homedecor.service.CategoryService;
 		Category addCategory=new Category(4,"Furniture",null);
 		assertTrue(this.categoryService.addCategory(addCategory));
 		assertNotNull(this.categoryService.getCategoryByName("Furniture"));
+		assertEquals(true,this.categoryService.deleteCategoryById(4));
+		assertThrows(CategoryException.class,()->this.categoryService.getCategoryByName("Furniture"));
+
 	}
 	
 	@Test
@@ -59,6 +74,9 @@ import com.example.homedecor.service.CategoryService;
 		Category addCategory=new Category(4,"Furniture",null);
 		assertTrue(this.categoryService.addCategory(addCategory));
 		assertNotNull(this.categoryService.updateCategory(new Category(4,"furniture",null)));
+		assertEquals(true,this.categoryService.deleteCategoryById(4));
+		assertThrows(CategoryException.class,()->this.categoryService.updateCategory(new Category(4,"Furni",null)));
+		
 	}
 
 
