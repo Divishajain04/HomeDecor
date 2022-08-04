@@ -23,8 +23,15 @@ public class Cart {
 	@ManyToMany
 	private List<Product> product;
 
+	
+	
 	public Cart() {
 		super();
+	}
+
+	public Cart(Integer cartId) {
+		super();
+		this.cartId = cartId;
 	}
 
 	public Cart(Integer cartId, Wishlist wishlist, OrderByCustomer orderByCustomer, List<Product> product) {

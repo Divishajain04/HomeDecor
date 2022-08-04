@@ -6,8 +6,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.homedecor.app.dao.CartRepository;
 import com.homedecor.app.dao.CustomerRepository;
+import com.homedecor.app.dao.WishlistRepository;
+import com.homedecor.app.dto.Cart;
 import com.homedecor.app.dto.Customer;
+import com.homedecor.app.dto.Wishlist;
 import com.homedecor.app.exception.CustomerException;
 
 @Service
@@ -15,6 +19,11 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	private CustomerRepository customerRepository;
+	@Autowired
+	private CartRepository cartRepository;
+	
+	@Autowired
+	private WishlistRepository wishlistRepository;
 
 	@Override
 	public boolean addCustomer(Customer customer) throws CustomerException {
@@ -25,6 +34,10 @@ public class CustomerServiceImpl implements CustomerService {
 		if (foundCustomer.isPresent()) {
 			throw new CustomerException("Customer already exist");
 		} else {
+			Cart cart =	this.cartRepository.save(new Cart(customer.getCustomerId()));
+			Wishlist wishlist =	this.wishlistRepository.save(new Wishlist(customer.getCustomerId()));
+			customer.setCart(cart);
+			customer.setWishlist(wishlist);
 			this.customerRepository.save(customer);
 		}
 		return true;

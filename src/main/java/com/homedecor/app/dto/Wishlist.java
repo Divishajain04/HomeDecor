@@ -20,6 +20,13 @@ public class Wishlist {
 		super();
 	}
 	
+	
+
+
+	public Wishlist(Integer wishlistId) {
+		super();
+		this.wishlistId = wishlistId;
+	}
 
 
 	public Wishlist(Integer wishlistId, List<Product> product) {

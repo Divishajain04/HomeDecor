@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 
 
@@ -25,7 +26,7 @@ public class Customer {
 	
 	@OneToOne
 	private Cart cart;
-
+		
 	@OneToMany
 	private List<OrderByCustomer> orderByCustomer;
 

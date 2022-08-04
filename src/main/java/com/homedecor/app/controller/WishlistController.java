@@ -48,14 +48,13 @@ public class WishlistController {
 	
 	
 	@PatchMapping("wishlist")
-	public Wishlist updateWishlist(@RequestBody Wishlist wishlist) throws WishlistException {
-		 Wishlist foundWishlist=null;
+	public String updateWishlist(@RequestBody Wishlist wishlist) throws WishlistException {
 		try {
 			this.wishlistServiceImpl.updateWishlist(wishlist);
 		} catch (WishlistException e) {
 			throw new WishlistException(e.getMessage());
 		}
-		return foundWishlist;
+		return "Wishlist Updated Successfully";
 	}
 	
 	@GetMapping("wishlist/")
