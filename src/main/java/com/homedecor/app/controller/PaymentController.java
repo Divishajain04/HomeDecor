@@ -13,65 +13,66 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.homedecor.app.dto.Payment;
-import com.homedecor.app.exception.OrderException;
 import com.homedecor.app.exception.PaymentException;
+import com.homedecor.app.exception.PaymentException;
+import com.homedecor.app.service.PaymentService;
 import com.homedecor.app.service.PaymentServiceImpl;
 
 @RestController
 public class PaymentController {
 
 	@Autowired
-	private PaymentServiceImpl paymentServiceImpl;
+	private PaymentService paymentService;
 
 	@PostMapping("payment")
-	public String addPayment(@RequestBody Payment payment) throws OrderException {
+	public String addPayment(@RequestBody Payment payment) throws PaymentException {
 		try {
-			this.paymentServiceImpl.addPayment(payment);
+			this.paymentService.addPayment(payment);
 		} catch (PaymentException e) {
-			throw new OrderException(e.getMessage());
+			throw new PaymentException(e.getMessage());
 		}
 		return "payment added successfully";
 	}
 
 	@GetMapping("payment/{paymentId}")
-	public Optional<Payment> getPaymentById(@PathVariable("paymentId") Integer paymentId) throws OrderException {
+	public Optional<Payment> getPaymentById(@PathVariable("paymentId") Integer paymentId) throws PaymentException {
 		Optional<Payment> foundPayment;
 		try {
-			foundPayment = this.paymentServiceImpl.getPaymentById(paymentId);
+			foundPayment = this.paymentService.getPaymentById(paymentId);
 		} catch (PaymentException e) {
-			throw new OrderException(e.getMessage());
+			throw new PaymentException(e.getMessage());
 		}
 		return foundPayment;
 	}
 
 	@PatchMapping("payment")
-	public Payment updatePayment(@RequestBody Payment payment) throws OrderException {
+	public Payment updatePayment(@RequestBody Payment payment) throws PaymentException {
 		Payment foundPayment = null;
 		try {
-			foundPayment = this.paymentServiceImpl.updatePayment(payment);
+			foundPayment = this.paymentService.updatePayment(payment);
 		} catch (PaymentException e) {
-			throw new OrderException(e.getMessage());
+			throw new PaymentException(e.getMessage());
 		}
 		return foundPayment;
 	}
 
 	@GetMapping("payment/")
-	public List<Payment> getAllPayment() throws OrderException {
+	public List<Payment> getAllPayment() throws PaymentException {
 		List<Payment> foundPayment = null;
 		try {
-			foundPayment = this.paymentServiceImpl.getAllPayments();
+			foundPayment = this.paymentService.getAllPayments();
 		} catch (PaymentException e) {
-			throw new OrderException(e.getMessage());
+			throw new PaymentException(e.getMessage());
 		}
 		return foundPayment;
 	}
 
 	@DeleteMapping("payment/{paymentId}")
-	public String deletePaymentById(@PathVariable("paymentId") Integer paymentId) throws OrderException {
+	public String deletePaymentById(@PathVariable("paymentId") Integer paymentId) throws PaymentException {
 		try {
-			this.paymentServiceImpl.deletePaymentById(paymentId);
+			this.paymentService.deletePaymentById(paymentId);
 		} catch (PaymentException e) {
-			throw new OrderException(e.getMessage());
+			throw new PaymentException(e.getMessage());
 		}
 		return "payment deleted successfully";
 	}
