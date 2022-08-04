@@ -54,15 +54,15 @@ public class ProductController {
 		return foundProduct;
 	}
 	
-	@GetMapping("product/")
+	@GetMapping("product/allProduct")
 	public List<Product> getAllProduct() throws ProductException {
-		List<Product> foundProduct;
+		List<Product> foundProducts;
 		try {
-			foundProduct= this.productService.getAllProducts();
+			foundProducts= this.productService.getAllProducts();
 		} catch (ProductException e) {
 			throw new ProductException(e.getMessage());
 		}
-		return foundProduct;
+		return foundProducts;
 	}
 	
 	@DeleteMapping("product/{productId}")
@@ -77,29 +77,29 @@ public class ProductController {
 	
 	
 
-	@GetMapping("product/highToLow")
+	@GetMapping("product/sortedHighToLow")
 	public List<Product> findProductHighToLow() throws ProductException {
-		List<Product> foundProduct;
+		List<Product> foundProducts;
 		try {
-			foundProduct= this.productService.findAllProductsHighToLow();
+			foundProducts= this.productService.findAllProductsHighToLow();
 		} catch (ProductException e) {
 			throw new ProductException(e.getMessage());
 		}
-	return foundProduct;
+	return foundProducts;
 	}
 	
-	@GetMapping("product/lowToHigh")
+	@GetMapping("product/SortedLowToHigh")
 	public List<Product> findProductLowToHigh() throws ProductException {
-		List<Product> foundProduct;
+		List<Product> foundProducts;
 		try {
-			foundProduct= this.productService.findAllProductsLowToHigh();
+			foundProducts= this.productService.findAllProductsLowToHigh();
 		} catch (ProductException e) {
 			throw new ProductException(e.getMessage());
 		}
-	return foundProduct;
+	return foundProducts;
 	}
 	
-	@GetMapping("products/{productName}")
+	@GetMapping("product/productByName/{productName}")
 	public Product findProductByName(@PathVariable("productName") String productName) throws ProductException{
 		Product foundProduct;
 		try {

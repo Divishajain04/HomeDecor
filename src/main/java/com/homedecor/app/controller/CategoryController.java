@@ -34,7 +34,7 @@ public class CategoryController {
 
 	@PatchMapping("category")
 	public Category updateCategory(@RequestBody Category category) throws CategoryException {
-		Category categoryUpdated=null;
+		Category categoryUpdated;
 		 try {
 			categoryUpdated=this.categoryService.updateCategory(category);
 		} catch (CategoryException e) {
@@ -54,9 +54,9 @@ public class CategoryController {
 		 return foundCategory;
 	}
 	
-	@GetMapping("category/")
+	@GetMapping("category/allCategory")
 	public List<Category> getAllCategory() throws CategoryException {
-		List<Category> foundAllCategory=null;
+		List<Category> foundAllCategory;
 		 try {
 			foundAllCategory=this.categoryService.getAllCategories();
 		} catch (CategoryException e) {
@@ -77,7 +77,7 @@ public class CategoryController {
 	
 	@GetMapping("category/name/{categoryName}")
 	public Category getCategoryByName(@PathVariable ("categoryName") String categoryName) throws CategoryException  {
-		Category foundCategory=null;
+		Category foundCategory;
 		 try {
 			foundCategory=this.categoryService.getCategoryByName(categoryName);
 		} catch (CategoryException e) {

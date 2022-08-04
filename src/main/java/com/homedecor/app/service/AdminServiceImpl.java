@@ -35,7 +35,7 @@ public class AdminServiceImpl implements AdminService {
 	public Optional<Admin> getAdminById(Integer adminId) throws AdminException {
 		Optional<Admin> foundAdminById = this.adminRepositary.findById(adminId);
 		if (foundAdminById.isEmpty()) {
-			throw new AdminException("Admin ID is not present in the record");
+			throw new AdminException(adminId+" Admin ID is not present in the record");
 		}
 		return foundAdminById;
 	}
@@ -54,8 +54,9 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Boolean updatePassword(Integer adminId, String oldPassword, String newPassword) throws AdminException {
-		Admin foundAdmin  = this.adminRepositary.findById(adminId).get();
-		
+		Optional<Admin> getAdmin=this.adminRepositary.findById(adminId);
+		if(getAdmin.isEmpty())throw new AdminException(adminId+" Admin ID is not present in the record");
+		Admin foundAdmin  = getAdmin.get();
 		String savedPassword = foundAdmin.getAdminPassword();
 		Boolean isLogin = false;
 		if (savedPassword.compareTo(oldPassword) == 0) {

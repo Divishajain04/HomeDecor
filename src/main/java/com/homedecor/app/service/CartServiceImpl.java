@@ -1,10 +1,9 @@
 package com.homedecor.app.service;
 
-import java.util.Iterator;
+
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,19 +77,20 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public Optional<Double> totalAmountOfCustomerCartById(Integer cartId) throws CartException {
-		Cart foundCart=this.cartRepository.findById(cartId).get();
+		Optional<Cart> getCart=this.cartRepository.findById(cartId);
+		if(getCart.isEmpty())throw new CartException("Cart does not exist for this id " + cartId);
+		Cart foundCart=getCart.get();
 		List<Product> products =	foundCart.getProduct();
-		Optional<Double> totalAmount =  products.stream().map(i-> i.getProductPrice()).reduce((e1,e2)-> e1+e2);
-		
-			return  totalAmount;
+			return  products.stream().map(i-> i.getProductPrice()).reduce((e1,e2)-> e1+e2);
 	}
 
 	@Override
 	public Long totalProductInCustomerCartById(Integer cartId) throws CartException {
-		Cart foundCart=this.cartRepository.findById(cartId).get();
+		Optional<Cart> getCart=this.cartRepository.findById(cartId);
+		if(getCart.isEmpty())throw new CartException("Cart does not exist for this id " + cartId);
+		Cart foundCart=getCart.get();
 		List<Product> products =	foundCart.getProduct();
-		long totalProduct=products.stream().map(i->i.getProductId()).count();
-		return totalProduct;
+		return products.stream().map(i->i.getProductId()).count();
 	}
 
 }

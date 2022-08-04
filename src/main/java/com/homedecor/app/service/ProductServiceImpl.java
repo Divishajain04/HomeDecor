@@ -62,7 +62,7 @@ public class ProductServiceImpl implements ProductService {
 	public Product updateProduct(Product product) throws ProductException {
 		Optional<Product> foundProduct = this.productRepository.findById(product.getProductId());
 		if (foundProduct.isEmpty()) {
-			throw new ProductException("Invalid Product Id");
+			throw new ProductException("Product Id not exist");
 		}
 		return this.productRepository.save(product);
 	}

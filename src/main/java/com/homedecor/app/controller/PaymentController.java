@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.homedecor.app.dto.Payment;
 import com.homedecor.app.exception.PaymentException;
-import com.homedecor.app.exception.PaymentException;
 import com.homedecor.app.service.PaymentService;
-import com.homedecor.app.service.PaymentServiceImpl;
+
 
 @RestController
 public class PaymentController {

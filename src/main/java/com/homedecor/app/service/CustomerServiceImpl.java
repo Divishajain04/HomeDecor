@@ -88,7 +88,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Boolean updateAddress(Integer customerId, String newAddress) throws CustomerException {
-		Customer foundCustomer = this.customerRepository.findById(customerId).get();
+		Optional<Customer> getCustomer=this.customerRepository.findById(customerId);
+		if(getCustomer.isEmpty())throw new CustomerException("This customer is not present in record");
+		Customer foundCustomer = getCustomer.get();
 		if(foundCustomer==null)throw new CustomerException("Customer not exist for this Id " + customerId);
 		String savedAddress=foundCustomer.getCustomerAddress();
 		foundCustomer.getCustomerAddress().replaceAll(savedAddress, newAddress);
@@ -99,7 +101,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Boolean updateMobileNo(Integer customerId, String newMobileNo) throws CustomerException {
-		Customer foundCustomer = this.customerRepository.findById(customerId).get();
+		Optional<Customer> getCustomer=this.customerRepository.findById(customerId);
+		if(getCustomer.isEmpty())throw new CustomerException("This customer is not present in record");
+		Customer foundCustomer = getCustomer.get();
 		if(foundCustomer==null)throw new CustomerException("Customer not exist for this Id " + customerId);
 		String savedPhoneNo=foundCustomer.getCustomerPhoneNo();
 		foundCustomer.getCustomerPhoneNo().replaceAll(savedPhoneNo, newMobileNo);
@@ -110,7 +114,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Boolean updateEmail(Integer customerId, String newEmail) throws CustomerException {
-		Customer foundCustomer = this.customerRepository.findById(customerId).get();
+		Optional<Customer> getCustomer=this.customerRepository.findById(customerId);
+		if(getCustomer.isEmpty())throw new CustomerException("This customer is not present in record");
+		Customer foundCustomer = getCustomer.get();
 		if(foundCustomer==null)throw new CustomerException("Customer not exist for this Id " + customerId);
 		String savedAddress=foundCustomer.getCustomerEmail();
 		foundCustomer.getCustomerEmail().replaceAll(savedAddress, newEmail);
@@ -121,7 +127,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Boolean updatePassword(Integer customerId, String oldPassword, String newPassword) throws CustomerException {
-		Customer foundCustomer = this.customerRepository.findById(customerId).get();
+		Optional<Customer> getCustomer=this.customerRepository.findById(customerId);
+		if(getCustomer.isEmpty())throw new CustomerException("This customer is not present in record");
+		Customer foundCustomer = getCustomer.get();
 		String savedPassword = foundCustomer.getPassword();
 		Boolean isLogin = false;
 		if (savedPassword.compareTo(oldPassword) == 0) {
