@@ -17,5 +17,9 @@ public interface CartService {
 	public Boolean deleteCartById(Integer cartId)throws CartException;
 	
 	public Cart updateCart(Cart cart)throws CartException;
+	
+	public Optional<Double> totalAmountOfCustomerCartById(Integer cartId)throws CartException;
+	
+	public Long totalProductInCustomerCartById(Integer cartId)throws CartException;
 
 }

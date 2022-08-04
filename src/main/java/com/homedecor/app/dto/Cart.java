@@ -13,6 +13,18 @@ public class Cart {
 
 	@Id
 	private Integer cartId;
+	
+//	private Long totalProduct;
+//	private Double totalCost;
+
+
+//	public Double getTotalCost() {
+//		return totalCost;
+//	}
+//
+//	public void setTotalCost(Double totalCost) {
+//		this.totalCost = totalCost;
+//	}
 
 	@OneToOne
 	private Wishlist wishlist;
@@ -22,7 +34,8 @@ public class Cart {
 
 	@ManyToMany
 	private List<Product> product;
-
+	
+   
 	
 	
 	public Cart() {
@@ -42,7 +55,15 @@ public class Cart {
 		this.product = product;
 	}
 
+	
 
+//	public Long getTotalProduct() {
+//		return totalProduct;
+//	}
+//
+//	public void setTotalProduct(Long totalProduct) {
+//		this.totalProduct = totalProduct;
+//	}
 
 	public Integer getCartId() {
 		return cartId;
@@ -75,7 +96,5 @@ public class Cart {
 	public void setProduct(List<Product> product) {
 		this.product = product;
 	}
-
-
-
+	
 }

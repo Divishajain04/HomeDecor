@@ -75,7 +75,7 @@ public class CategoryController {
 		return "Category deleted Successfully";
 	}
 	
-	@GetMapping("categories/{categoryName}")
+	@GetMapping("category/name/{categoryName}")
 	public Category getCategoryByName(@PathVariable ("categoryName") String categoryName) throws CategoryException  {
 		Category foundCategory=null;
 		 try {

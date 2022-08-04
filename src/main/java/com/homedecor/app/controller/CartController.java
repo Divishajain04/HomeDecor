@@ -75,6 +75,26 @@ public class CartController {
 		return "Cart deleted successfully";
 	}
 	
+	@GetMapping("cart/customer/totalAmount/{cartId}")
+	public String getTotalAmountOfCartById(@PathVariable ("cartId") Integer cartId) throws CartException {
+		Optional<Double> totalBalance;
+		try {
+			totalBalance=this.cartService.totalAmountOfCustomerCartById(cartId);
+		} catch (CartException e) {
+			throw new CartException(e.getMessage());
+		}
+		return "Total amount of "+cartId+" Id is :- "+totalBalance;
+	}
+	@GetMapping("cart/customer/totalProduct/{cartId}")
+	public String countAllProductInCartById(@PathVariable ("cartId") Integer cartId) throws CartException {
+		Long totalProduct;
+		try {
+			totalProduct=this.cartService.totalProductInCustomerCartById(cartId);
+		} catch (CartException e) {
+			throw new CartException(e.getMessage());
+		}
+		return "Total amount of "+cartId+" Id is :- "+totalProduct;
+	}
 	
 
 

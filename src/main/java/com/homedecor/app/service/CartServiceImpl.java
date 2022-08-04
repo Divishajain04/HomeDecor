@@ -1,13 +1,17 @@
 package com.homedecor.app.service;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.homedecor.app.dao.CartRepository;
 import com.homedecor.app.dto.Cart;
+import com.homedecor.app.dto.Product;
 import com.homedecor.app.exception.CartException;
 
 
@@ -44,6 +48,14 @@ public class CartServiceImpl implements CartService {
 		Optional<Cart> foundCart = this.cartRepository.findById(cartId);
 		if (foundCart.isEmpty())
 			throw new CartException("Cart does not exist for this id" + cartId);
+//		Cart getCart=foundCart.get();
+//		List<Product> products =	getCart.getProduct();
+//		long totalProduct=products.stream().map(i->i.getProductId()).count();
+//		getCart.setTotalProduct(totalProduct);
+//		Optional<Double> productPrice =  products.stream().map(i-> i.getProductPrice()).reduce((e1,e2)-> e1+e2);
+//		Double totalProductPrice=productPrice.get();
+//		getCart.setTotalCost(totalProductPrice);
+//		this.cartRepository.save(getCart);
 		return foundCart;
 	}
 
@@ -62,6 +74,23 @@ public class CartServiceImpl implements CartService {
 			throw new CartException("Cart does not exist for this id " + cartId);
 		this.cartRepository.deleteById(cartId);
 		return true;
+	}
+
+	@Override
+	public Optional<Double> totalAmountOfCustomerCartById(Integer cartId) throws CartException {
+		Cart foundCart=this.cartRepository.findById(cartId).get();
+		List<Product> products =	foundCart.getProduct();
+		Optional<Double> totalAmount =  products.stream().map(i-> i.getProductPrice()).reduce((e1,e2)-> e1+e2);
+		
+			return  totalAmount;
+	}
+
+	@Override
+	public Long totalProductInCustomerCartById(Integer cartId) throws CartException {
+		Cart foundCart=this.cartRepository.findById(cartId).get();
+		List<Product> products =	foundCart.getProduct();
+		long totalProduct=products.stream().map(i->i.getProductId()).count();
+		return totalProduct;
 	}
 
 }
