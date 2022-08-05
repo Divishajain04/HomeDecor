@@ -1,6 +1,7 @@
 package com.homedecor.app.service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,9 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.homedecor.app.dao.CartRepository;
+import com.homedecor.app.dao.CustomerRepository;
+import com.homedecor.app.dao.ProductRepository;
 import com.homedecor.app.dto.Cart;
+import com.homedecor.app.dto.Customer;
 import com.homedecor.app.dto.Product;
 import com.homedecor.app.exception.CartException;
+import com.homedecor.app.exception.CustomerException;
+import com.homedecor.app.exception.ProductException;
 
 
 @Service
@@ -19,6 +25,12 @@ public class CartServiceImpl implements CartService {
 
 	@Autowired
 	private CartRepository cartRepository;
+	
+	@Autowired
+	private CustomerRepository customerRepository;
+	
+	@Autowired
+	private ProductRepository productRepository;
 
 	@Override
 	public Boolean addCart(Cart cart) throws CartException {
@@ -47,14 +59,6 @@ public class CartServiceImpl implements CartService {
 		Optional<Cart> foundCart = this.cartRepository.findById(cartId);
 		if (foundCart.isEmpty())
 			throw new CartException("Cart does not exist for this id" + cartId);
-//		Cart getCart=foundCart.get();
-//		List<Product> products =	getCart.getProduct();
-//		long totalProduct=products.stream().map(i->i.getProductId()).count();
-//		getCart.setTotalProduct(totalProduct);
-//		Optional<Double> productPrice =  products.stream().map(i-> i.getProductPrice()).reduce((e1,e2)-> e1+e2);
-//		Double totalProductPrice=productPrice.get();
-//		getCart.setTotalCost(totalProductPrice);
-//		this.cartRepository.save(getCart);
 		return foundCart;
 	}
 
@@ -92,5 +96,28 @@ public class CartServiceImpl implements CartService {
 		List<Product> products =	foundCart.getProduct();
 		return products.stream().map(i->i.getProductId()).count();
 	}
+
+	@Override
+	public Boolean addProductTocart(Integer customerId, Integer productId, Integer quantity) throws ProductException, CustomerException {
+		Optional<Customer> foundCustomer=this.customerRepository.findById(customerId);
+		if (foundCustomer.isEmpty()) throw new CustomerException("Invalid Customer Id");
+		Optional<Product> foundProduct=this.productRepository.findById(productId);
+		if (foundProduct.isEmpty()) 
+			throw new ProductException("Invalid Product Id");
+		Customer getCustomer=foundCustomer.get();
+		Product getProduct=foundProduct.get();
+		List<Product> allProducts=new ArrayList<>();
+		for(int i=0;i<quantity;i++) {
+			allProducts.add(getProduct);
+		}
+		Cart getCart=getCustomer.getCart();
+		getCart.setProduct(allProducts);
+		this.cartRepository.save(getCart);
+		return true;
+	}
+	
+	
+	
+	
 
 }

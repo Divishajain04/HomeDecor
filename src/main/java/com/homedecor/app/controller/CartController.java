@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.homedecor.app.dto.Cart;
 import com.homedecor.app.exception.CartException;
+import com.homedecor.app.exception.CustomerException;
+import com.homedecor.app.exception.ProductException;
 import com.homedecor.app.service.CartServiceImpl;
 
 @RestController
@@ -94,6 +97,20 @@ public class CartController {
 			throw new CartException(e.getMessage());
 		}
 		return "Total amount of "+cartId+" Id is :- "+totalProduct;
+	}
+	
+	@PutMapping("cart/addProduct/{customerId}/{productId}/{quantity}")
+	public String addProductInCartByProductId(@PathVariable ("customerId")Integer customerId,@PathVariable ("productId") Integer productId,@PathVariable ("quantity") Integer quantity) throws ProductException, CustomerException {
+		try {
+			this.cartService.addProductTocart(customerId, productId, quantity);
+		} catch (ProductException e) {
+			throw new ProductException(e.getMessage());	
+		}
+		catch(CustomerException e)
+		{
+			throw new CustomerException(e.getMessage());
+		}
+		return "Product added in cart Successfully";
 	}
 	
 

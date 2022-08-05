@@ -6,15 +6,37 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.homedecor.app.dao.CartRepository;
+import com.homedecor.app.dao.CustomerRepository;
 import com.homedecor.app.dao.OrderRepository;
+import com.homedecor.app.dao.PaymentRepository;
+import com.homedecor.app.dto.Cart;
+import com.homedecor.app.dto.Customer;
 import com.homedecor.app.dto.OrderByCustomer;
+import com.homedecor.app.dto.Payment;
+import com.homedecor.app.dto.Product;
+import com.homedecor.app.exception.CartException;
+import com.homedecor.app.exception.CustomerException;
 import com.homedecor.app.exception.OrderException;
+import com.homedecor.app.exception.PaymentException;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private OrderRepository orderRepository;
+
+	@Autowired
+	private CustomerRepository customerRepository;
+
+	@Autowired
+	private CartRepository cartRepository;
+
+	@Autowired
+	private CartService cartService;
+
+	@Autowired
+	private PaymentRepository paymentRepository;
 
 	@Override
 	public Boolean addOrder(OrderByCustomer orderByCustomer) throws OrderException {
@@ -64,6 +86,38 @@ public class OrderServiceImpl implements OrderService {
 		if (foundOrder.isEmpty()) {
 			throw new OrderException("Order not exist for this id");
 		}
-		return 	this.orderRepository.save(orderByCustomer);	
+		return this.orderRepository.save(orderByCustomer);
+	}
+
+	@Override
+	public Boolean placeOrderStatus(Integer CustomerId, Integer orderId, Integer paymentId)
+			throws OrderException, PaymentException, CartException, CustomerException {
+		Optional<Customer> getCustomer=this.customerRepository.findById(CustomerId);
+		if (getCustomer.isEmpty()) throw new CustomerException("Customer ID is not present in record");
+		
+		Customer foundCustomer = getCustomer.get();
+		Optional<Cart> getCart=this.cartRepository.findById(foundCustomer.getCustomerId());
+		if (getCart.isEmpty())
+			throw new CartException("Cart ID is not present in record");
+		Cart foundCart = getCart.get();
+		Optional<Payment> getPayment=this.paymentRepository.findById(paymentId);
+		if (getPayment.isEmpty()) {
+			throw new PaymentException("Payment ID is not present in record");
+		}
+		Payment foundPayment = getPayment.get();
+		Double amount = 0.0;
+		amount = this.cartService.totalAmountOfCustomerCartById(foundCart.getCartId()).get();
+		Double avilableBalance = foundPayment.getPaymentAmount();
+		if (amount <= avilableBalance) {
+			Double newBalance = avilableBalance - amount;
+			foundPayment.setPaymentAmount(newBalance);
+			this.paymentRepository.save(foundPayment);
+			foundCart.getProduct().removeAll(foundCart.getProduct());
+			this.cartRepository.save(foundCart);
+			this.customerRepository.save(foundCustomer);
+		} else {
+			throw new PaymentException("Not having sufficent Balance to place Order");
+		}
+		return true;
 	}
 }

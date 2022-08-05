@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import com.homedecor.app.dto.Cart;
 import com.homedecor.app.exception.CartException;
+import com.homedecor.app.exception.CustomerException;
+import com.homedecor.app.exception.ProductException;
 
 public interface CartService {
 
@@ -21,5 +23,7 @@ public interface CartService {
 	public Optional<Double> totalAmountOfCustomerCartById(Integer cartId)throws CartException;
 	
 	public Long totalProductInCustomerCartById(Integer cartId)throws CartException;
+	
+	public Boolean addProductTocart(Integer customerId, Integer productId, Integer quantity) throws ProductException, CustomerException;
 
 }

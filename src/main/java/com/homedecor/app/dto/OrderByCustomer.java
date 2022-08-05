@@ -19,11 +19,20 @@ public class OrderByCustomer {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Payment payment;
-
 	public OrderByCustomer() {
 		super();
 		this.orderDate = LocalDate.now();
 	}
+	
+	
+
+	public OrderByCustomer(Integer orderId) {
+		super();
+		this.orderId = orderId;
+		this.orderDate = LocalDate.now();
+	}
+
+
 
 	public OrderByCustomer(Integer orderId, String status, Payment payment) {
 		super();

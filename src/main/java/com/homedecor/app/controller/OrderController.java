@@ -13,19 +13,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.homedecor.app.dto.OrderByCustomer;
+import com.homedecor.app.exception.CartException;
+import com.homedecor.app.exception.CustomerException;
 import com.homedecor.app.exception.OrderException;
-import com.homedecor.app.service.OrderServiceImpl;
+import com.homedecor.app.exception.PaymentException;
+import com.homedecor.app.service.OrderService;
+
 
 @RestController
 public class OrderController {
 	
 	@Autowired
-	private OrderServiceImpl orderServiceImpl;
+	private OrderService orderService;
 	
 	@PostMapping("order")
 	public Boolean addOrder(@RequestBody OrderByCustomer orderByCustomer) throws OrderException {
 		try {
-			this.orderServiceImpl.addOrder(orderByCustomer);
+			this.orderService.addOrder(orderByCustomer);
 		} catch (OrderException e) {
 			throw new OrderException(e.getMessage());
 		}
@@ -37,7 +41,7 @@ public class OrderController {
 	public Optional<OrderByCustomer> getOrderById(@PathVariable ("orderId") Integer orderId) throws OrderException  {
 		Optional<OrderByCustomer> foundOrder;
 		try {
-			foundOrder= this.orderServiceImpl.getOrderById(orderId);
+			foundOrder= this.orderService.getOrderById(orderId);
 		} catch (OrderException e) {
 			throw new OrderException(e.getMessage());
 		}
@@ -47,35 +51,55 @@ public class OrderController {
 	
 	@PatchMapping("order")
 	public OrderByCustomer updateOrder(@RequestBody OrderByCustomer order) throws OrderException {
-		OrderByCustomer foundOrder=null;
+		OrderByCustomer foundOrder;
 		 try {
-			foundOrder= this.orderServiceImpl.updateOrder(order);
+			foundOrder= this.orderService.updateOrder(order);
 		} catch (OrderException e) {
 			throw new OrderException(e.getMessage());
 		}
 		 return foundOrder;
 	}
 	
-	@GetMapping("order/")
+	@GetMapping("orders")
 	public List<OrderByCustomer> getAllOrders() throws OrderException {
-		List<OrderByCustomer> foundOrder=null;
+		List<OrderByCustomer> foundOrders;
 		 try {
-			foundOrder= this.orderServiceImpl.getAllOrders();
+			foundOrders= this.orderService.getAllOrders();
 		} catch (OrderException e) {
 			throw new OrderException(e.getMessage());
 		}
-		 return foundOrder;
+		 return foundOrders;
 		
 	}
 	
 	@DeleteMapping("order/{orderId}")
 	public Boolean deleteOrderById(@PathVariable("orderId") Integer orderId) throws OrderException {
 		try {
-			this.orderServiceImpl.deleteOrderById(orderId);
+			this.orderService.deleteOrderById(orderId);
 		} catch (OrderException e) {
 			throw new OrderException(e.getMessage());
 		}
 		return true;
+	}
+	
+	@PatchMapping("order/placeOrder/{customerId}/{orderId}/{paymentId}")
+	public String placeOrder(@PathVariable("customerId") Integer customerId, @PathVariable("orderId") Integer orderId,
+			@PathVariable("paymentId") Integer paymentId)
+			throws OrderException, PaymentException, CartException, CustomerException {
+		try {
+			try {
+				this.orderService.placeOrderStatus(customerId, orderId, paymentId);
+			} catch (PaymentException e) {
+				throw new PaymentException(e.getMessage());
+			} catch (CartException e) {
+				throw new CartException(e.getMessage());
+			} catch (CustomerException e) {
+				throw new CustomerException(e.getMessage());
+			}
+		} catch (OrderException e) {
+			throw new OrderException(e.getMessage());
+		}
+		return "Order Placed Successfully";
 	}
 
 }
