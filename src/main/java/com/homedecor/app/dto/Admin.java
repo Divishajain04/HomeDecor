@@ -4,15 +4,6 @@ package com.homedecor.app.dto;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
-import org.springframework.beans.factory.annotation.Value;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import org.springframework.beans.factory.annotation.Value;
 
@@ -23,21 +14,10 @@ public class Admin {
 
 	@Id
 	private Integer adminID;
-	
-	@NotNull(message="Please provide name")
-	@Size(min = 3 , max = 30)
-	@Pattern(regexp="[A-Za-z ]*",message="Special characters and digits are not allowed.")
 	private String adminName;
-<<<<<<< HEAD
 	//@EncryptedValue("${adminPassword.secret}")
 	//@Value("${db.adminPassword}")
 	//@Parameter(schema=@Schema(type="string",format="password"))
-=======
-	
-	@NotNull(message = "Please provide password")
-	@Size(min = 8 , max = 20 ,message = "Password must be minimum 8 and maximum 20 characters")
-	@JsonProperty(access = Access.WRITE_ONLY)
->>>>>>> 3a9ad49e8ef0ec7690cdc221a15ac734fbab76eb
 	private String adminPassword;
 
 	public Admin() {
@@ -67,12 +47,10 @@ public class Admin {
 		this.adminName = adminName;
 	}
 
-	
 	public String getAdminPassword() {
 		return adminPassword;
 	}
 
-	
 	public void setAdminPassword(String adminPassword) {
 		this.adminPassword = adminPassword;
 	}
