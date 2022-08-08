@@ -3,8 +3,6 @@ package com.homedecor.app.controller;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +27,7 @@ public class OrderController {
 	private OrderService orderService;
 	
 	@PostMapping("order")
-	public Boolean addOrder(@Valid @RequestBody OrderByCustomer orderByCustomer) throws OrderException {
+	public Boolean addOrder(@RequestBody OrderByCustomer orderByCustomer) throws OrderException {
 		try {
 			this.orderService.addOrder(orderByCustomer);
 		} catch (OrderException e) {
@@ -52,7 +50,7 @@ public class OrderController {
 	
 	
 	@PatchMapping("order")
-	public OrderByCustomer updateOrder(@Valid @RequestBody OrderByCustomer order) throws OrderException {
+	public OrderByCustomer updateOrder(@RequestBody OrderByCustomer order) throws OrderException {
 		OrderByCustomer foundOrder;
 		 try {
 			foundOrder= this.orderService.updateOrder(order);

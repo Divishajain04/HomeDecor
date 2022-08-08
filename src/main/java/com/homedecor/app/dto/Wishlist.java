@@ -19,6 +19,9 @@ public class Wishlist {
 	public Wishlist() {
 		super();
 	}
+	
+	
+
 
 	public Wishlist(Integer wishlistId) {
 		super();
