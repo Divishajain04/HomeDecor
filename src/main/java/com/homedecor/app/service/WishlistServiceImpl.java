@@ -1,7 +1,7 @@
 package com.homedecor.app.service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+
+
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +17,6 @@ import com.homedecor.app.dto.Cart;
 import com.homedecor.app.dto.Customer;
 import com.homedecor.app.dto.Product;
 import com.homedecor.app.dto.Wishlist;
-import com.homedecor.app.exception.CartException;
 import com.homedecor.app.exception.CustomerException;
 import com.homedecor.app.exception.ProductException;
 import com.homedecor.app.exception.WishlistException;
