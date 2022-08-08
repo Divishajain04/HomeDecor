@@ -8,11 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.homedecor.app.dao.CartRepository;
 import com.homedecor.app.dao.CustomerRepository;
-import com.homedecor.app.dao.OrderRepository;
 import com.homedecor.app.dao.WishlistRepository;
 import com.homedecor.app.dto.Cart;
 import com.homedecor.app.dto.Customer;
-import com.homedecor.app.dto.OrderByCustomer;
 import com.homedecor.app.dto.Wishlist;
 import com.homedecor.app.exception.CustomerException;
 
@@ -27,8 +25,6 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	private WishlistRepository wishlistRepository;
 	
-//	@Autowired
-//	private OrderRepository orderRepository;
 
 	@Override
 	public boolean addCustomer(Customer customer) throws CustomerException {
@@ -41,11 +37,8 @@ public class CustomerServiceImpl implements CustomerService {
 		} else {
 			Cart cart =	this.cartRepository.save(new Cart(customer.getCustomerId()));
 			Wishlist wishlist =	this.wishlistRepository.save(new Wishlist(customer.getCustomerId()));
-			//OrderByCustomer orderByCustomer=this.orderRepository.save(new OrderByCustomer(cart.getCartId()));
 			customer.setCart(cart);
 			customer.setWishlist(wishlist);
-		//	cart.setOrderByCustomer(orderByCustomer);
-	//		this.cartRepository.save(cart);
 			this.customerRepository.save(customer);
 		}
 		return true;

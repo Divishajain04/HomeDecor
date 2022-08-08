@@ -95,4 +95,13 @@ public class ProductServiceImpl implements ProductService {
 		return foundProduct;
 	}
 
+	@Override
+	public long countAllVaritiesOfProduct() throws ProductException {
+		Long totalVarietyProduct = this.productRepository.count();
+		if (totalVarietyProduct == 0) {
+			throw new ProductException("No Product is listed in the record");
+		}
+		return totalVarietyProduct;
+	}
+
 }

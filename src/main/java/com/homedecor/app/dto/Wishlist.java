@@ -56,6 +56,14 @@ public class Wishlist {
 		this.product = product;
 	}
 
+
+
+
+	@Override
+	public String toString() {
+		return "Wishlist [wishlistId=" + wishlistId + ", product=" + product + "]";
+	}
+
 	
 
 }

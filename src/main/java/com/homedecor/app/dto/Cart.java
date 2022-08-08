@@ -14,21 +14,6 @@ public class Cart {
 	@Id
 	private Integer cartId;
 	
-//	private Long totalProduct;
-//	private Double totalCost;
-
-
-//	public Double getTotalCost() {
-//		return totalCost;
-//	}
-//
-//	public void setTotalCost(Double totalCost) {
-//		this.totalCost = totalCost;
-//	}
-
-	@OneToOne
-	private Wishlist wishlist;
-
 	@OneToOne
 	private OrderByCustomer orderByCustomer;
 
@@ -46,24 +31,16 @@ public class Cart {
 		super();
 		this.cartId = cartId;
 	}
+	
+	
 
-	public Cart(Integer cartId, Wishlist wishlist, OrderByCustomer orderByCustomer, List<Product> product) {
+	public Cart(Integer cartId, OrderByCustomer orderByCustomer, List<Product> product) {
 		super();
 		this.cartId = cartId;
-		this.wishlist = wishlist;
 		this.orderByCustomer = orderByCustomer;
 		this.product = product;
 	}
 
-	
-
-//	public Long getTotalProduct() {
-//		return totalProduct;
-//	}
-//
-//	public void setTotalProduct(Long totalProduct) {
-//		this.totalProduct = totalProduct;
-//	}
 
 	public Integer getCartId() {
 		return cartId;
@@ -73,13 +50,6 @@ public class Cart {
 		this.cartId = cartId;
 	}
 
-	public Wishlist getWishlist() {
-		return wishlist;
-	}
-
-	public void setWishlist(Wishlist wishlist) {
-		this.wishlist = wishlist;
-	}
 
 	public OrderByCustomer getOrderByCustomer() {
 		return orderByCustomer;
@@ -96,5 +66,5 @@ public class Cart {
 	public void setProduct(List<Product> product) {
 		this.product = product;
 	}
-	
+
 }

@@ -111,4 +111,9 @@ public class ProductController {
 		}
 		return foundProduct;
 	}
+	
+	@GetMapping("varietiesOfProduct")
+	public Long countAllVaritiesOfProducts() throws ProductException{
+		return this.productService.countAllVaritiesOfProduct();
+	} 
 }

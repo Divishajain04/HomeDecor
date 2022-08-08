@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.homedecor.app.dto.Wishlist;
+import com.homedecor.app.exception.CartException;
+import com.homedecor.app.exception.CustomerException;
+import com.homedecor.app.exception.ProductException;
 import com.homedecor.app.exception.WishlistException;
 import com.homedecor.app.service.WishlistServiceImpl;
 
@@ -77,4 +80,12 @@ public class WishlistController {
 		}
 		return true;
 	}	
+	
+	
+	@PatchMapping("wishlist/addProductToCart/{customerId}")
+	public Boolean addProductToCart(@PathVariable ("customerId") Integer customerId) throws CustomerException,ProductException {
+		this.wishlistServiceImpl.addWishlistProductTocart(customerId);
+		return true;
+	}
+	
 }
