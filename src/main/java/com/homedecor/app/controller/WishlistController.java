@@ -3,7 +3,6 @@ package com.homedecor.app.controller;
 import java.util.List;
 import java.util.Optional;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,67 +24,45 @@ public class WishlistController {
 
 	@Autowired
 	WishlistServiceImpl wishlistServiceImpl;
-	
-	
+
 	@PostMapping("wishlist")
 	public Boolean addProductInWishlist(@RequestBody Wishlist wishlist) throws WishlistException {
-		try {
-			this.wishlistServiceImpl.addWishlist(wishlist);
-		} catch (WishlistException e) {
-			throw new WishlistException(e.getMessage());
-		}
+		this.wishlistServiceImpl.addWishlist(wishlist);
 		return true;
 	}
-	
-	
+
 	@GetMapping("wishlist/{wishlistId}")
-	public Optional<Wishlist> getWishlistById(@PathVariable ("wishlistId") Integer wishlistId) throws WishlistException {
-		Optional<Wishlist> foundWishlist;
-		try {
-			foundWishlist=this.wishlistServiceImpl.getWishlistById(wishlistId);
-		} catch (WishlistException e) {
-			throw new WishlistException(e.getMessage());
-		}
+	public Optional<Wishlist> getWishlistById(@PathVariable("wishlistId") Integer wishlistId) throws WishlistException {
+		Optional<Wishlist> foundWishlist = this.wishlistServiceImpl.getWishlistById(wishlistId);
+
 		return foundWishlist;
 	}
-	
-	
+
 	@PatchMapping("wishlist")
 	public String updateWishlist(@RequestBody Wishlist wishlist) throws WishlistException {
-		try {
-			this.wishlistServiceImpl.updateWishlist(wishlist);
-		} catch (WishlistException e) {
-			throw new WishlistException(e.getMessage());
-		}
+
+		this.wishlistServiceImpl.updateWishlist(wishlist);
+
 		return "Wishlist Updated Successfully";
 	}
-	
+
 	@GetMapping("wishlist/")
 	public List<Wishlist> getAllWishlist() throws WishlistException {
-		List<Wishlist> foundAllWishlist ;
-		try {
-			foundAllWishlist=this.wishlistServiceImpl.getAllWishlists();
-		} catch (WishlistException e) {
-			throw new WishlistException(e.getMessage());
-		}
+		List<Wishlist> foundAllWishlist = this.wishlistServiceImpl.getAllWishlists();
 		return foundAllWishlist;
 	}
-	
+
 	@DeleteMapping("wishlist/{wishlistId}")
-	public Boolean deleteWishlistById(@PathVariable ("wishlistId") Integer wishlistId) throws WishlistException {
-		try {
-			this.wishlistServiceImpl.deleteWishlistById(wishlistId);
-		} catch (WishlistException e) {
-			throw new WishlistException(e.getMessage());
-		}
+	public Boolean deleteWishlistById(@PathVariable("wishlistId") Integer wishlistId) throws WishlistException {
+		this.wishlistServiceImpl.deleteWishlistById(wishlistId);
 		return true;
-	}	
-	
-	
+	}
+
 	@PatchMapping("wishlist/addProductToCart/{customerId}")
-	public Boolean addProductToCart(@PathVariable ("customerId") Integer customerId) throws CustomerException,ProductException {
+	public Boolean addProductToCart(@PathVariable("customerId") Integer customerId)
+			throws CustomerException, ProductException {
 		this.wishlistServiceImpl.addWishlistProductTocart(customerId);
 		return true;
 	}
-	
+
 }

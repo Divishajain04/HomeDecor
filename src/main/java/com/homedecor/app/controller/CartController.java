@@ -24,95 +24,54 @@ public class CartController {
 
 	@Autowired
 	private CartServiceImpl cartService;
-	
+
 	@PostMapping("cart")
-	public String addCart(@RequestBody Cart cart) throws CartException  {
-		try {
-			this.cartService.addCart(cart);
-		} catch (CartException e) {
-			throw new CartException(e.getMessage());
-		}
+	public String addCart(@RequestBody Cart cart) throws CartException {
+		this.cartService.addCart(cart);
 		return "Cart added Successfully";
 	}
-	
+
 	@GetMapping("cart/{cartId}")
-	public Optional<Cart> getCartById(@PathVariable ("cartId") Integer cartId) throws CartException  {
-		Optional<Cart> foundCart;
-		 try {
-			foundCart=this.cartService.getCartById(cartId);
-		} catch (CartException e) {
-			throw new CartException(e.getMessage());
-		}
-		 return foundCart;
+	public Optional<Cart> getCartById(@PathVariable("cartId") Integer cartId) throws CartException {
+		Optional<Cart> foundCart = this.cartService.getCartById(cartId);
+		return foundCart;
 	}
-	
+
 	@PatchMapping("cart")
 	public Cart updateCart(@RequestBody Cart cart) throws CartException {
-		Cart cartUpdated=null;
-		 try {
-			cartUpdated=this.cartService.updateCart(cart);
-		} catch (CartException e) {
-			throw new CartException(e.getMessage());
-		}
-		 return cartUpdated;
+		Cart cartUpdated = this.cartService.updateCart(cart);
+		return cartUpdated;
 	}
-	
+
 	@GetMapping("cart/")
 	public List<Cart> getAllCart() throws CartException {
-		List<Cart> foundAllCart=null;
-		try {
-			foundAllCart=this.cartService.getAllCarts();
-		} catch (CartException e) {
-			throw new CartException(e.getMessage());
-		}
+		List<Cart> foundAllCart = this.cartService.getAllCarts();
 		return foundAllCart;
 	}
-	
+
 	@DeleteMapping("cart/{cartId}")
-	public String deleteCartById(@PathVariable ("cartId") Integer cartId) throws CartException  {
-		try {
-			this.cartService.deleteCartById(cartId);
-		} catch (CartException e) {
-			throw new CartException(e.getMessage());
-		}
+	public String deleteCartById(@PathVariable("cartId") Integer cartId) throws CartException {
+		this.cartService.deleteCartById(cartId);
 		return "Cart deleted successfully";
 	}
-	
+
 	@GetMapping("cart/customer/totalAmount/{cartId}")
-	public String getTotalAmountOfCartById(@PathVariable ("cartId") Integer cartId) throws CartException {
-		Optional<Double> totalBalance;
-		try {
-			totalBalance=this.cartService.totalAmountOfCustomerCartById(cartId);
-		} catch (CartException e) {
-			throw new CartException(e.getMessage());
-		}
-		return "Total amount of "+cartId+" Id is :- "+totalBalance;
+	public String getTotalAmountOfCartById(@PathVariable("cartId") Integer cartId) throws CartException {
+		Optional<Double> totalBalance = this.cartService.totalAmountOfCustomerCartById(cartId);
+		return "Total amount of " + cartId + " Id is :- " + totalBalance;
 	}
+
 	@GetMapping("cart/customer/totalProduct/{cartId}")
-	public String countAllProductInCartById(@PathVariable ("cartId") Integer cartId) throws CartException {
-		Long totalProduct;
-		try {
-			totalProduct=this.cartService.totalProductInCustomerCartById(cartId);
-		} catch (CartException e) {
-			throw new CartException(e.getMessage());
-		}
-		return "Total amount of "+cartId+" Id is :- "+totalProduct;
+	public String countAllProductInCartById(@PathVariable("cartId") Integer cartId) throws CartException {
+		Long totalProduct = this.cartService.totalProductInCustomerCartById(cartId);
+		return "Total amount of " + cartId + " Id is :- " + totalProduct;
 	}
-	
+
 	@PutMapping("cart/addProduct/{customerId}/{productId}/{quantity}")
-	public String addProductInCartByProductId(@PathVariable ("customerId")Integer customerId,@PathVariable ("productId") Integer productId,@PathVariable ("quantity") Integer quantity) throws ProductException, CustomerException {
-		try {
-			this.cartService.addProductTocart(customerId, productId, quantity);
-		} catch (ProductException e) {
-			throw new ProductException(e.getMessage());	
-		}
-		catch(CustomerException e)
-		{
-			throw new CustomerException(e.getMessage());
-		}
+	public String addProductInCartByProductId(@PathVariable("customerId") Integer customerId,
+			@PathVariable("productId") Integer productId, @PathVariable("quantity") Integer quantity)
+			throws ProductException, CustomerException {
+		this.cartService.addProductTocart(customerId, productId, quantity);
 		return "Product added in cart Successfully";
 	}
-	
-
-
 }

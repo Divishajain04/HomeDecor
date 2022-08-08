@@ -24,65 +24,37 @@ public class CategoryController {
 	
 	@PostMapping("category")
 	public String addCategory(@RequestBody Category category) throws CategoryException  {
-		try {
 			this.categoryService.addCategory(category);
-		} catch (CategoryException e) {
-			throw new CategoryException(e.getMessage());
-		}
 		return "Category added Successfully";
 	}
 
 	@PatchMapping("category")
 	public Category updateCategory(@RequestBody Category category) throws CategoryException {
-		Category categoryUpdated;
-		 try {
-			categoryUpdated=this.categoryService.updateCategory(category);
-		} catch (CategoryException e) {
-			throw new CategoryException(e.getMessage());
-		}
+		Category categoryUpdated = this.categoryService.updateCategory(category);
 		 return categoryUpdated;
 	}
 
 	@GetMapping("category/{categoryId}")
 	public Optional<Category> getCategoryById(@PathVariable ("categoryId") Integer categoryId) throws CategoryException  {
-		Optional<Category> foundCategory;
-		 try {
-			foundCategory=this.categoryService.getCategoryById(categoryId);
-		} catch (CategoryException e) {
-			throw new CategoryException(e.getMessage());
-		}
+		Optional<Category> foundCategory=this.categoryService.getCategoryById(categoryId);
 		 return foundCategory;
 	}
 	
 	@GetMapping("category/allCategory")
 	public List<Category> getAllCategory() throws CategoryException {
-		List<Category> foundAllCategory;
-		 try {
-			foundAllCategory=this.categoryService.getAllCategories();
-		} catch (CategoryException e) {
-			throw new CategoryException(e.getMessage());
-		}
+		List<Category> foundAllCategory=this.categoryService.getAllCategories();
 		 return foundAllCategory;
 	}
 	
 	@DeleteMapping("category/{categoryId}")
 	public String deleteCategoryById(@PathVariable ("categoryId") Integer categoryId) throws CategoryException {
-		try {
 			this.categoryService.deleteCategoryById(categoryId);
-		} catch (CategoryException e) {
-			throw new CategoryException(e.getMessage());
-		}
 		return "Category deleted Successfully";
 	}
 	
 	@GetMapping("category/name/{categoryName}")
 	public Category getCategoryByName(@PathVariable ("categoryName") String categoryName) throws CategoryException  {
-		Category foundCategory;
-		 try {
-			foundCategory=this.categoryService.getCategoryByName(categoryName);
-		} catch (CategoryException e) {
-			throw new CategoryException(e.getMessage());
-		}
+		Category foundCategory=this.categoryService.getCategoryByName(categoryName);
 		 return foundCategory;
 	}
 

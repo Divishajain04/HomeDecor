@@ -23,97 +23,58 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
-	
+
 	@PostMapping("product")
 	public String addProduct(@Valid @RequestBody Product product) throws ProductException {
-		try {
-			this.productService.addProducts(product);
-		} catch (ProductException e) {
-			throw new ProductException(e.getMessage());
-		}
+		this.productService.addProducts(product);
+
 		return "product added successfully";
 	}
-	
+
 	@GetMapping("product/{productId}")
-	public Optional<Product> getProductById(@PathVariable ("productId") Integer productId) throws ProductException  {
-		Optional<Product> foundProduct;
-		try {
-			foundProduct= this.productService.getProductById(productId);
-		} catch (ProductException e) {
-			throw new ProductException(e.getMessage());
-		}
+	public Optional<Product> getProductById(@PathVariable("productId") Integer productId) throws ProductException {
+		Optional<Product> foundProduct = this.productService.getProductById(productId);
 		return foundProduct;
 	}
-	
+
 	@PatchMapping("product")
 	public Product updateProduct(@Valid @RequestBody Product product) throws ProductException {
-		Product foundProduct;
-		try {
-			foundProduct=this.productService.updateProduct(product);
-		} catch (ProductException e) {
-			throw new ProductException(e.getMessage());
-		}
+		Product foundProduct = this.productService.updateProduct(product);
 		return foundProduct;
 	}
-	
+
 	@GetMapping("product/allProduct")
 	public List<Product> getAllProduct() throws ProductException {
-		List<Product> foundProducts;
-		try {
-			foundProducts= this.productService.getAllProducts();
-		} catch (ProductException e) {
-			throw new ProductException(e.getMessage());
-		}
+		List<Product> foundProducts = this.productService.getAllProducts();
 		return foundProducts;
 	}
-	
+
 	@DeleteMapping("product/{productId}")
-	public String deleteProductById(@PathVariable ("productId") Integer productId) throws ProductException {
-		try {
-			this.productService.deleteProductById(productId);
-		} catch (ProductException e) {
-			throw new ProductException(e.getMessage());
-		}
+	public String deleteProductById(@PathVariable("productId") Integer productId) throws ProductException {
+		this.productService.deleteProductById(productId);
 		return "product deleted successfully";
 	}
-	
-	
 
 	@GetMapping("product/sortedHighToLow")
 	public List<Product> findProductHighToLow() throws ProductException {
-		List<Product> foundProducts;
-		try {
-			foundProducts= this.productService.findAllProductsHighToLow();
-		} catch (ProductException e) {
-			throw new ProductException(e.getMessage());
-		}
-	return foundProducts;
+		List<Product> foundProducts = this.productService.findAllProductsHighToLow();
+		return foundProducts;
 	}
-	
+
 	@GetMapping("product/SortedLowToHigh")
 	public List<Product> findProductLowToHigh() throws ProductException {
-		List<Product> foundProducts;
-		try {
-			foundProducts= this.productService.findAllProductsLowToHigh();
-		} catch (ProductException e) {
-			throw new ProductException(e.getMessage());
-		}
-	return foundProducts;
+		List<Product> foundProducts = this.productService.findAllProductsLowToHigh();
+		return foundProducts;
 	}
-	
+
 	@GetMapping("product/productByName/{productName}")
-	public Product findProductByName(@PathVariable("productName") String productName) throws ProductException{
-		Product foundProduct;
-		try {
-			foundProduct= this.productService.findProductByName(productName);
-		} catch (ProductException e) {
-			throw new ProductException(e.getMessage());
-		}
+	public Product findProductByName(@PathVariable("productName") String productName) throws ProductException {
+		Product foundProduct = this.productService.findProductByName(productName);
 		return foundProduct;
 	}
-	
+
 	@GetMapping("varietiesOfProduct")
-	public Long countAllVaritiesOfProducts() throws ProductException{
+	public Long countAllVaritiesOfProducts() throws ProductException {
 		return this.productService.countAllVaritiesOfProduct();
-	} 
+	}
 }
