@@ -1,6 +1,10 @@
 package com.homedecor.app.controller;
 
 import java.util.Optional;
+import java.util.Scanner;
+
+import javax.validation.Valid;
+import javax.validation.constraints.AssertFalse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +18,8 @@ import com.homedecor.app.dto.Admin;
 import com.homedecor.app.exception.AdminException;
 import com.homedecor.app.service.AdminService;
 
+import io.swagger.v3.oas.annotations.Parameter;
+
 
 @RestController
 public class AdminController {
@@ -22,7 +28,7 @@ public class AdminController {
 	private AdminService adminService;
 
 	@PostMapping("admin")
-	public String addAdmin(@RequestBody Admin admin) throws AdminException {
+	public String addAdmin(@Valid @RequestBody Admin admin) throws AdminException {
 		try {
 			this.adminService.addAdmin(admin);
 		} catch (AdminException e) {
@@ -42,12 +48,12 @@ public class AdminController {
 		return foundAdmin;
 	}
 
-	@GetMapping("admin/{adminId}/{password}/")
-	public Boolean adminLogin(@PathVariable("adminId") Integer adminId, @PathVariable("password") String password)
+	@GetMapping("adminLogin/{adminId}/{adminPassword}")
+	public Boolean adminLogin(@PathVariable Integer adminId,@PathVariable String adminPassword)
 			throws AdminException {
 		Boolean isLogin = false;
 		try {
-			isLogin = this.adminService.login(adminId, password);
+			isLogin = this.adminService.login(adminId, adminPassword);
 		} catch (AdminException e) {
 			throw new AdminException(e.getMessage());
 		}

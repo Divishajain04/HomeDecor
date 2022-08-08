@@ -3,6 +3,8 @@ package com.homedecor.app.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +31,7 @@ public class CustomerController {
 	}
 	
 	@PostMapping("customer")
-	public String addCustomer(@RequestBody Customer customer) throws CustomerException  {
+	public String addCustomer(@Valid @RequestBody Customer customer) throws CustomerException  {
 		try {
 			this.customerService.addCustomer(customer);
 		} catch (CustomerException e) {
@@ -61,7 +63,7 @@ public class CustomerController {
 		
 	}
 	@PatchMapping("customer")
-	public Customer updateCustomer(@RequestBody Customer customer) throws CustomerException{
+	public Customer updateCustomer(@Valid @RequestBody Customer customer) throws CustomerException{
 		Customer updatedCustomer=null;
 		try {
 		     updatedCustomer=this.customerService.updateCustomer(customer);
