@@ -3,6 +3,8 @@ package com.homedecor.app.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +25,7 @@ public class ProductController {
 	private ProductService productService;
 	
 	@PostMapping("product")
-	public String addProduct(@RequestBody Product product) throws ProductException {
+	public String addProduct(@Valid @RequestBody Product product) throws ProductException {
 		try {
 			this.productService.addProducts(product);
 		} catch (ProductException e) {
@@ -44,7 +46,7 @@ public class ProductController {
 	}
 	
 	@PatchMapping("product")
-	public Product updateProduct(@RequestBody Product product) throws ProductException {
+	public Product updateProduct(@Valid @RequestBody Product product) throws ProductException {
 		Product foundProduct;
 		try {
 			foundProduct=this.productService.updateProduct(product);

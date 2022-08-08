@@ -7,6 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 
 
@@ -16,11 +20,27 @@ public class Customer {
 
 	@Id
 	private Integer customerId;
+	
+	@NotNull(message="Please provide name")
+	@Size(min = 3 , max = 30)
+	@Pattern(regexp="[A-Za-z ]*",message="Special characters and digits are not allowed.")
 	private String customerName;
+
+	@NotNull(message="Please provide email")
+	@Email
 	private String customerEmail;
+	
+	@NotNull(message = "Please provide password")
+	@Size(min = 8 , max = 20 ,message = "Password must be minimum 8 and maximum 20 characters")
 	private String password;
+	
+	@NotNull(message = "Please provide phone number")
+	@Pattern(regexp="[0-9]{10}",message="Phone munber must be 10 digits[0-9].")
 	private String customerPhoneNo;
+	
+	@NotNull(message = "Please provide address")
 	private String customerAddress;
+	
 	private LocalDate creationDate;
 
 	
