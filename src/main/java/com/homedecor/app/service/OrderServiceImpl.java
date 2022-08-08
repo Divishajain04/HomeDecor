@@ -14,7 +14,6 @@ import com.homedecor.app.dto.Cart;
 import com.homedecor.app.dto.Customer;
 import com.homedecor.app.dto.OrderByCustomer;
 import com.homedecor.app.dto.Payment;
-import com.homedecor.app.dto.Product;
 import com.homedecor.app.exception.CartException;
 import com.homedecor.app.exception.CustomerException;
 import com.homedecor.app.exception.OrderException;
@@ -92,30 +91,52 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Boolean placeOrderStatus(Integer CustomerId, Integer orderId, Integer paymentId)
 			throws OrderException, PaymentException, CartException, CustomerException {
-		Optional<Customer> getCustomer=this.customerRepository.findById(CustomerId);
-		if (getCustomer.isEmpty()) throw new CustomerException("Customer ID is not present in record");
-		
+		Optional<Customer> getCustomer = this.customerRepository.findById(CustomerId);
+		if (getCustomer.isEmpty())
+			throw new CustomerException("Customer ID is not present in record");
 		Customer foundCustomer = getCustomer.get();
-		Optional<Cart> getCart=this.cartRepository.findById(foundCustomer.getCustomerId());
+
+		Optional<Cart> getCart = this.cartRepository.findById(foundCustomer.getCustomerId());
 		if (getCart.isEmpty())
 			throw new CartException("Cart ID is not present in record");
 		Cart foundCart = getCart.get();
-		Optional<Payment> getPayment=this.paymentRepository.findById(paymentId);
-		if (getPayment.isEmpty()) {
+
+		Optional<Payment> getPayment = this.paymentRepository.findById(paymentId);
+		if (getPayment.isEmpty())
 			throw new PaymentException("Payment ID is not present in record");
-		}
 		Payment foundPayment = getPayment.get();
-		Double amount = 0.0;
-		amount = this.cartService.totalAmountOfCustomerCartById(foundCart.getCartId()).get();
+
+		OrderByCustomer order = this.orderRepository.findById(orderId).get();
+		String savedStatus = order.getStatus();
+		String savedStatusOfPayment = foundPayment.getPaymentStatus();
+		Double cartTotalAmount = this.cartService.totalAmountOfCustomerCartById(foundCart.getCartId()).get();
 		Double avilableBalance = foundPayment.getPaymentAmount();
-		if (amount <= avilableBalance) {
-			Double newBalance = avilableBalance - amount;
+		if (cartTotalAmount <= avilableBalance) {
+			Double newBalance = avilableBalance - cartTotalAmount;
 			foundPayment.setPaymentAmount(newBalance);
+			this.paymentRepository.save(foundPayment);
+			String newStatusOfPayment = foundPayment.getPaymentStatus().replaceAll(savedStatusOfPayment,
+					"Payment done Successfully");
+			foundPayment.setPaymentStatus(newStatusOfPayment);
 			this.paymentRepository.save(foundPayment);
 			foundCart.getProduct().removeAll(foundCart.getProduct());
 			this.cartRepository.save(foundCart);
+			String newStatus = order.getStatus().replaceAll(savedStatus, "Order Placed Successfully");
+			order.setStatus(newStatus);
+			this.orderRepository.save(order);
+			order.setPayment(foundPayment);
+			this.orderRepository.save(order);
 			this.customerRepository.save(foundCustomer);
 		} else {
+			String newStatusOfPayment = foundPayment.getPaymentStatus().replaceAll(savedStatusOfPayment,
+					"Payment done Successfully");
+			foundPayment.setPaymentStatus(newStatusOfPayment);
+			this.paymentRepository.save(foundPayment);
+			String newStatus = order.getStatus().replaceAll(savedStatus, "Order Not Placed");
+			order.setStatus(newStatus);
+			this.orderRepository.save(order);
+			order.setPayment(foundPayment);
+			this.orderRepository.save(order);
 			throw new PaymentException("Not having sufficent Balance to place Order");
 		}
 		return true;

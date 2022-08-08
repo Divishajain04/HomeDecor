@@ -3,6 +3,8 @@ package com.homedecor.app.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +28,7 @@ public class CartController {
 	private CartServiceImpl cartService;
 	
 	@PostMapping("cart")
-	public String addCart(@RequestBody Cart cart) throws CartException  {
+	public String addCart(@Valid @RequestBody Cart cart) throws CartException  {
 		try {
 			this.cartService.addCart(cart);
 		} catch (CartException e) {
@@ -47,7 +49,7 @@ public class CartController {
 	}
 	
 	@PatchMapping("cart")
-	public Cart updateCart(@RequestBody Cart cart) throws CartException {
+	public Cart updateCart(@Valid @RequestBody Cart cart) throws CartException {
 		Cart cartUpdated=null;
 		 try {
 			cartUpdated=this.cartService.updateCart(cart);
@@ -112,7 +114,6 @@ public class CartController {
 		}
 		return "Product added in cart Successfully";
 	}
-	
 
 
 }

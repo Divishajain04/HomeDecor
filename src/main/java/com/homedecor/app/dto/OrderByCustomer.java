@@ -13,7 +13,9 @@ public class OrderByCustomer {
 
 	@Id
 	private Integer orderId;
+	
 	private String status;
+	
 	private LocalDate orderDate;
 	
 

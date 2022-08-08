@@ -24,7 +24,7 @@ public class AdminServiceImpl implements AdminService {
 		}
 		Optional<Admin> addAdmin = this.adminRepositary.findById(admin.getAdminID());
 		if (addAdmin.isPresent()) {
-			throw new AdminException(" This Admin Id is already present! Try with new");
+			throw new AdminException("This Admin Id is already present! Try with new");
 		} else {
 			this.adminRepositary.save(admin);
 		}
@@ -35,7 +35,7 @@ public class AdminServiceImpl implements AdminService {
 	public Optional<Admin> getAdminById(Integer adminId) throws AdminException {
 		Optional<Admin> foundAdminById = this.adminRepositary.findById(adminId);
 		if (foundAdminById.isEmpty()) {
-			throw new AdminException(adminId+" Admin ID is not present in the record");
+			throw new AdminException(adminId+" Admin Id is not present in the record");
 		}
 		return foundAdminById;
 	}

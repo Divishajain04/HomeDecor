@@ -8,13 +8,14 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.homedecor.app.dao.CartRepository;
 import com.homedecor.app.dao.CustomerRepository;
 import com.homedecor.app.dao.ProductRepository;
+import com.homedecor.app.dao.WishlistRepository;
 import com.homedecor.app.dto.Cart;
 import com.homedecor.app.dto.Customer;
 import com.homedecor.app.dto.Product;
+import com.homedecor.app.dto.Wishlist;
 import com.homedecor.app.exception.CartException;
 import com.homedecor.app.exception.CustomerException;
 import com.homedecor.app.exception.ProductException;
@@ -31,6 +32,9 @@ public class CartServiceImpl implements CartService {
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private WishlistRepository wishlistRepository;
 
 	@Override
 	public Boolean addCart(Cart cart) throws CartException {
@@ -115,6 +119,10 @@ public class CartServiceImpl implements CartService {
 		this.cartRepository.save(getCart);
 		return true;
 	}
+
+	
+
+	
 	
 	
 	

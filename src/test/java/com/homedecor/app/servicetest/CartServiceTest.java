@@ -21,7 +21,7 @@ class CartServiceTest {
 
 	@Test
 	void deleteCartByIdTest() throws CartException {
-		Cart cart = new Cart(14, null, null, null);
+		Cart cart = new Cart(14, null, null);
 		assertTrue(this.cartService.addCart(cart));
 		assertEquals(true, this.cartService.deleteCartById(14));
 		assertThrows(CartException.class, () -> this.cartService.deleteCartById(14));
@@ -30,7 +30,7 @@ class CartServiceTest {
 	@Test
 	void addCartTest() throws CartException {
 		assertThrows(CartException.class, () -> this.cartService.addCart(null));
-		Cart cart = new Cart(14, null, null, null);
+		Cart cart = new Cart(14, null, null);
 		assertTrue(this.cartService.addCart(cart));
 		assertNotNull(this.cartService.getCartById(14));
 		assertThrows(CartException.class, () -> this.cartService.addCart(cart));
@@ -40,7 +40,7 @@ class CartServiceTest {
 
 	@Test
 	void getCartByIdTest() throws CartException {
-		Cart cart = new Cart(14, null, null, null);
+		Cart cart = new Cart(14, null, null);
 		assertTrue(this.cartService.addCart(cart));
 		assertNotNull(this.cartService.getCartById(14));
 		assertEquals(true, this.cartService.deleteCartById(14));
@@ -49,20 +49,19 @@ class CartServiceTest {
 
 	@Test
 	void getAllCartTest() throws CartException {
-		Cart cart = new Cart(14, null, null, null);
+		Cart cart = new Cart(14, null, null);
 		assertTrue(this.cartService.addCart(cart));
 		assertNotNull(this.cartService.getAllCarts());
 		assertEquals(true, this.cartService.deleteCartById(14));
-	//	assertThrows(CartException.class, () -> this.cartService.getAllCarts());
 	}
 
 	@Test
 	void updateCartTest() throws CartException {
-		Cart cart = new Cart(14, null, null, null);
+		Cart cart = new Cart(14, null, null);
 		assertTrue(this.cartService.addCart(cart));
-		assertNotNull(this.cartService.updateCart(new Cart(14, null, null, null)));
+		assertNotNull(this.cartService.updateCart(new Cart(14, null, null)));
 		assertEquals(true, this.cartService.deleteCartById(14));
-		assertThrows(CartException.class, () -> this.cartService.updateCart(new Cart(14, null, null, null)));
+		assertThrows(CartException.class, () -> this.cartService.updateCart(new Cart(14, null, null)));
 	}
 
 }
