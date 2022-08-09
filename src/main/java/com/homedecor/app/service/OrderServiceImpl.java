@@ -10,6 +10,7 @@ import com.homedecor.app.dao.CartRepository;
 import com.homedecor.app.dao.CustomerRepository;
 import com.homedecor.app.dao.OrderRepository;
 import com.homedecor.app.dao.PaymentRepository;
+import com.homedecor.app.dao.ProductRepository;
 import com.homedecor.app.dto.Cart;
 import com.homedecor.app.dto.Customer;
 import com.homedecor.app.dto.OrderByCustomer;
@@ -37,6 +38,9 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private PaymentRepository paymentRepository;
+	
+	@Autowired
+	private ProductRepository productRepository;
 
 	@Override
 	public Boolean addOrder(OrderByCustomer orderByCustomer) throws OrderException {
@@ -112,6 +116,20 @@ public class OrderServiceImpl implements OrderService {
 		String savedStatusOfPayment = foundPayment.getPaymentStatus();
 		Double cartTotalAmount = this.cartService.totalAmountOfCustomerCartById(foundCart.getCartId()).get();
 		Double avilableBalance = foundPayment.getPaymentAmount();
+		
+		List<Product> cartProduct = foundCart.getProduct();
+	
+		List<Product> allProduct = productRepository.findAll();
+	
+		cartProduct.forEach(r -> {
+			final Optional<Product> existProduct = allProduct.stream()
+					.filter(d -> d.getProductId().equals(r.getProductId())).findFirst();
+	        Integer productAvailability=existProduct.get().getQuantity();
+	        System.out.println(productAvailability);
+			Integer newQuantity=existProduct.get().getQuantity()-1;
+			existProduct.get().setQuantity(newQuantity);
+			this.productRepository.saveAll(allProduct);
+		});
 			if (cartTotalAmount <= avilableBalance) {
 				Double newBalance1 = avilableBalance - cartTotalAmount;
 				foundPayment.setPaymentAmount(newBalance1);

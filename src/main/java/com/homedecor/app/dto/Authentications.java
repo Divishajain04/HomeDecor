@@ -1,21 +1,22 @@
 package com.homedecor.app.dto;
 
-public class Authentication {
+public class Authentications {
 
 	private Integer userId;
 	private String userPassword;
 
-	public Authentication() {
+	public Authentications() {
 		super();
 	}
 
-	public Authentication(Integer userId, String userPassword) {
+	public Authentications(Integer userId, String userPassword) {
 		super();
 		this.userId = userId;
 		this.userPassword = userPassword;
 	}
 
 	public Integer getUserId() {
+		System.out.println(userId);
 		return userId;
 	}
 
@@ -24,6 +25,7 @@ public class Authentication {
 	}
 
 	public String getUserPassword() {
+		System.out.println(userPassword);
 		return userPassword;
 	}
 
