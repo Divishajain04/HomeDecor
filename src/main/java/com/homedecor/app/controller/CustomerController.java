@@ -54,13 +54,14 @@ public class CustomerController {
 		return updatedCustomer;
 	}
 
+/*	
 	@GetMapping("customer/{loginId}/{password}")
 	public String login(@PathVariable("loginId") Integer loginId, @PathVariable("password") String password)
 			throws CustomerException {
 		this.customerService.login(loginId, password);
 		return "Login Successfully";
 	}
-
+*/
 	@PutMapping("customers/{loginId}/{oldPassword}/{newPassword}")
 	public String updatePassword(@PathVariable("loginId") Integer loginId,
 			@PathVariable("oldPassword") String oldPassword, @PathVariable("newPassword") String newPassword)
