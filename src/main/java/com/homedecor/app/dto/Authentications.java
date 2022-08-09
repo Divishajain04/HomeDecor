@@ -16,7 +16,6 @@ public class Authentications {
 	}
 
 	public Integer getUserId() {
-		System.out.println(userId);
 		return userId;
 	}
 
@@ -25,17 +24,10 @@ public class Authentications {
 	}
 
 	public String getUserPassword() {
-		System.out.println(userPassword);
 		return userPassword;
 	}
 
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
-
-	@Override
-	public String toString() {
-		return "Authentication [userId=" + userId + ", userPassword=" + userPassword + "]";
-	}
-
 }

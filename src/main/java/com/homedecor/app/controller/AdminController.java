@@ -33,13 +33,13 @@ public class AdminController {
 		Optional<Admin> foundAdmin = this.adminService.getAdminById(adminId);
 		return foundAdmin;
 	}
-
+/*
 	@GetMapping("adminLogin/{adminId}/{adminPassword}")
 	public Boolean adminLogin(@PathVariable Integer adminId, @PathVariable String adminPassword) throws AdminException {
 		Boolean isLogin = this.adminService.login(adminId, adminPassword);
 		return isLogin;
 	}
-
+*/
 	@GetMapping("admin/{adminId}/{oldPassword}/{newPassword}")
 	public String updatePassword(@PathVariable("adminId") Integer adminId,
 			@PathVariable("oldPassword") String oldPassword, @PathVariable("newPassword") String newPassword)
