@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 
 
@@ -30,6 +32,7 @@ public class Customer {
 	@Email
 	private String customerEmail;
 	
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@NotNull(message = "Please provide password")
 	@Size(min = 8 , max = 20 ,message = "Password must be minimum 8 and maximum 20 characters")
 	private String password;

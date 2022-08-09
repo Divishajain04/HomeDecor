@@ -5,12 +5,16 @@ package com.homedecor.app.dto;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class Admin {
 
 	@Id
 	private Integer adminID;
 	private String adminName;
+	
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String adminPassword;
 
 	public Admin() {
