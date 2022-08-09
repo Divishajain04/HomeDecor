@@ -154,4 +154,9 @@ public class CustomerServiceImpl implements CustomerService {
 		return this.customerRepository.save(customer);
 	}
 
+	@Override
+	public Long totalRegisteredCustomer() throws CustomerException {
+		return this.customerRepository.count();
+	}
+
 }

@@ -42,7 +42,7 @@ public class CustomerController {
 		return foundCustomer;
 	}
 
-	@GetMapping("customer/")
+	@GetMapping("allCustomers/")
 	public List<Customer> getAllCustomers() throws CustomerException {
 		List<Customer> foundCustomers = this.customerService.findAllCustomers();
 		return foundCustomers;
@@ -94,5 +94,10 @@ public class CustomerController {
 	public String deleteCustomerById(@PathVariable("customerId") Integer customerId) throws CustomerException {
 		this.customerService.deleteCustomer(customerId);
 		return "Customer deleted Successfully";
+	}
+	
+	@GetMapping("countRegisteredNumberOfUser")
+	public long countRegisteredCustomer() throws CustomerException{
+		return this.customerService.totalRegisteredCustomer();
 	}
 }
