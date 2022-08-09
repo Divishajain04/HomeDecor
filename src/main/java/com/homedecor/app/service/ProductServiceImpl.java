@@ -104,4 +104,14 @@ public class ProductServiceImpl implements ProductService {
 		return totalVarietyProduct;
 	}
 
+	@Override
+	public Integer countTotalStock() throws ProductException {
+	List<Product> products =	this.productRepository.findAll();
+	Integer totalQuantity =  0;
+		for (Product product : products) {
+			totalQuantity =totalQuantity + product.getQuantity();
+		}
+		return totalQuantity;
+	}
+
 }

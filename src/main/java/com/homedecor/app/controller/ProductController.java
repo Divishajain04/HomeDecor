@@ -77,4 +77,10 @@ public class ProductController {
 	public Long countAllVaritiesOfProducts() throws ProductException {
 		return this.productService.countAllVaritiesOfProduct();
 	}
+	
+	@GetMapping("countOfProductByQuantity")
+	public Integer countOfProductByQuantity() throws ProductException{
+		return this.productService.countTotalStock();
+	}
+	
 }

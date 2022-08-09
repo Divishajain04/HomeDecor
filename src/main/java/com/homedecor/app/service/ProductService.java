@@ -25,4 +25,6 @@ public interface ProductService {
 	public Product findProductByName(String productName) throws ProductException;
 	 
 	public long countAllVaritiesOfProduct() throws ProductException;
+	
+	public Integer countTotalStock() throws ProductException;
 }
