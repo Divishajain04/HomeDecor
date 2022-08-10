@@ -4,15 +4,25 @@ public class Authentications {
 
 	private Integer userId;
 	private String userPassword;
+	private String updatePassword;
 
 	public Authentications() {
 		super();
 	}
 
-	public Authentications(Integer userId, String userPassword) {
+	public Authentications(Integer userId, String userPassword, String updatePassword) {
 		super();
 		this.userId = userId;
 		this.userPassword = userPassword;
+		this.updatePassword = updatePassword;
+	}
+
+	public String getUpdatePassword() {
+		return updatePassword;
+	}
+
+	public void setUpdatePassword(String updatePassword) {
+		this.updatePassword = updatePassword;
 	}
 
 	public Integer getUserId() {

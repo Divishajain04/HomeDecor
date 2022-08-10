@@ -50,7 +50,10 @@ public class CustomerServiceImpl implements CustomerService {
 		if (foundCustomer.isEmpty()) {
 			throw new CustomerException("This customer is not present in record");
 		}
+		
 		this.customerRepository.deleteById(customerId);
+		this.cartRepository.deleteById(customerId);
+		this.wishlistRepository.deleteById(customerId);
 		return true;
 	}
 

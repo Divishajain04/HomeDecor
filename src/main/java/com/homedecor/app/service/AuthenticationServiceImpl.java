@@ -32,4 +32,22 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 		return true;
 	}
 
+	@Override
+	public Boolean updateAdminPassword(Authentications authentication) throws AdminException {
+		Integer adminId = authentication.getUserId();
+		String adminPassword = authentication.getUserPassword();
+		String newPassword=authentication.getUpdatePassword();
+		this.adminService.updatePassword(adminId, adminPassword, newPassword);
+		return true;
+	}
+
+	@Override
+	public Boolean updateCustomerPassword(Authentications authentication) throws CustomerException {
+		Integer customerId = authentication.getUserId();
+		String customerPassword = authentication.getUserPassword();
+		String newPassword=authentication.getUpdatePassword();
+		this.customerService.updatePassword(customerId, customerPassword, newPassword);
+		return true;
+	}
+
 }

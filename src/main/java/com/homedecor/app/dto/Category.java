@@ -14,7 +14,7 @@ public class Category {
 	private Integer categoryId;
 	private String categoryName;
 
-	@OneToMany(mappedBy="category",cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Product> product;
 
 	public Category() {

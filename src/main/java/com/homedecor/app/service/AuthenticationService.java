@@ -10,4 +10,8 @@ public interface AuthenticationService {
 	public Boolean adminAuthentication(Authentications authentication) throws AdminException;
 	
 	public Boolean customerAuthentication(Authentications authentication) throws CustomerException;
+	
+	public Boolean updateAdminPassword(Authentications authentication) throws AdminException;
+	
+	public Boolean updateCustomerPassword(Authentications authentication) throws CustomerException;
 }
