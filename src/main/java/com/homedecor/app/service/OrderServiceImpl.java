@@ -43,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private ProductRepository productRepository;
 
-	Integer newOrderId;
+	
 	@Override
 	public Boolean addOrder(OrderByCustomer orderByCustomer) throws OrderException {
 		if (orderByCustomer == null) {
@@ -53,7 +53,7 @@ public class OrderServiceImpl implements OrderService {
 		if (addOrderResult.isPresent()) {
 			throw new OrderException("Order Id is already present in the record");
 		} else {
-			newOrderId=orderByCustomer.getOrderId();
+			orderByCustomer.getOrderId();
 			this.orderRepository.save(orderByCustomer);
 		}
 		return true;
@@ -97,7 +97,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Boolean placeOrderStatus(Integer CustomerId,  Integer paymentId)
+	public Boolean placeOrderStatus(Integer CustomerId,Integer orderId,  Integer paymentId)
 			throws OrderException, PaymentException, CartException, CustomerException {
 		Optional<Customer> getCustomer = this.customerRepository.findById(CustomerId);
 		if (getCustomer.isEmpty())
@@ -114,7 +114,7 @@ public class OrderServiceImpl implements OrderService {
 				throw new PaymentException("Payment ID is not present in record");
 		Payment foundPayment = getPayment.get();
 		
-		OrderByCustomer order = this.orderRepository.findById(newOrderId).get();
+		OrderByCustomer order = this.orderRepository.findById(orderId).get();
 		String savedStatus = order.getStatus();
 		String savedStatusOfPayment = foundPayment.getPaymentStatus();
 		Double cartTotalAmount = this.cartService.totalAmountOfCustomerCartById(foundCart.getCartId()).get();

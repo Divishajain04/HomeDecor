@@ -16,8 +16,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class OrderByCustomer {
 
 	@Id
-	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+//	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer orderId;
 	private String status;
 	private LocalDate orderDate;
