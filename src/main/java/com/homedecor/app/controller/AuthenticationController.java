@@ -29,4 +29,16 @@ public class AuthenticationController {
 		this.authenticationService.customerAuthentication(authentication);
 		return "Login Successfully";
 	}
+	
+	@PostMapping("authentication/updateAdminPassword")
+	public String updateAdminPassword(@RequestBody Authentications authentication) throws AdminException {
+		this.authenticationService.updateAdminPassword(authentication);
+		return "Password Updated Successfully";
+	}
+	
+	@PostMapping("authentication/updateCustomerPassword")
+	public String updateCustomerPassword(@RequestBody Authentications authentication) throws CustomerException {
+		this.authenticationService.updateCustomerPassword(authentication);
+		return "Password Updated Successfully";
+	}
 }
