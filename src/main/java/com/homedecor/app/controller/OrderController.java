@@ -60,11 +60,11 @@ public class OrderController {
 		return true;
 	}
 	
-	@PatchMapping("order/placeOrder/{customerId}/{orderId}/{paymentId}")
-	public String placeOrder(@PathVariable("customerId") Integer customerId, @PathVariable("orderId") Integer orderId,
+	@PatchMapping("order/placeOrder/{customerId}/{paymentId}")
+	public String placeOrder(@PathVariable("customerId") Integer customerId,
 			@PathVariable("paymentId") Integer paymentId)
 			throws OrderException, PaymentException, CartException, CustomerException {
-				this.orderService.placeOrderStatus(customerId, orderId, paymentId);
+				this.orderService.placeOrderStatus(customerId, paymentId);
 		return "Order Placed Successfully";
 	}
 

@@ -25,6 +25,6 @@ public interface OrderService {
 	// paymentId)throws OrderException,PaymentException,CartException,
 	// CustomerException;
 
-	public Boolean placeOrderStatus(Integer CustomerId, Integer orderId, Integer paymentId)
+	public Boolean placeOrderStatus(Integer CustomerId, Integer paymentId)
 			throws OrderException, PaymentException, CartException, CustomerException;
 }

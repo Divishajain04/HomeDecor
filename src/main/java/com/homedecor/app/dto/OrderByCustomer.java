@@ -10,11 +10,14 @@ import javax.persistence.Id;
 
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class OrderByCustomer {
 
 	@Id
-	//@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer orderId;
 	private String status;
 	private LocalDate orderDate;

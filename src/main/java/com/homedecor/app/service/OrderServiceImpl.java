@@ -21,6 +21,7 @@ import com.homedecor.app.exception.CustomerException;
 import com.homedecor.app.exception.OrderException;
 import com.homedecor.app.exception.PaymentException;
 
+
 @Service
 public class OrderServiceImpl implements OrderService {
 
@@ -42,6 +43,7 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private ProductRepository productRepository;
 
+	Integer newOrderId;
 	@Override
 	public Boolean addOrder(OrderByCustomer orderByCustomer) throws OrderException {
 		if (orderByCustomer == null) {
@@ -51,6 +53,7 @@ public class OrderServiceImpl implements OrderService {
 		if (addOrderResult.isPresent()) {
 			throw new OrderException("Order Id is already present in the record");
 		} else {
+			newOrderId=orderByCustomer.getOrderId();
 			this.orderRepository.save(orderByCustomer);
 		}
 		return true;
@@ -94,7 +97,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Boolean placeOrderStatus(Integer CustomerId, Integer orderId, Integer paymentId)
+	public Boolean placeOrderStatus(Integer CustomerId,  Integer paymentId)
 			throws OrderException, PaymentException, CartException, CustomerException {
 		Optional<Customer> getCustomer = this.customerRepository.findById(CustomerId);
 		if (getCustomer.isEmpty())
@@ -111,7 +114,7 @@ public class OrderServiceImpl implements OrderService {
 				throw new PaymentException("Payment ID is not present in record");
 		Payment foundPayment = getPayment.get();
 		
-		OrderByCustomer order = this.orderRepository.findById(orderId).get();
+		OrderByCustomer order = this.orderRepository.findById(newOrderId).get();
 		String savedStatus = order.getStatus();
 		String savedStatusOfPayment = foundPayment.getPaymentStatus();
 		Double cartTotalAmount = this.cartService.totalAmountOfCustomerCartById(foundCart.getCartId()).get();
@@ -120,15 +123,16 @@ public class OrderServiceImpl implements OrderService {
 		List<Product> cartProduct = foundCart.getProduct();
 	
 		List<Product> allProduct = productRepository.findAll();
-	
 		cartProduct.forEach(r -> {
 			final Optional<Product> existProduct = allProduct.stream()
 					.filter(d -> d.getProductId().equals(r.getProductId())).findFirst();
-	        Integer productAvailability=existProduct.get().getQuantity();
-	        System.out.println(productAvailability);
 			Integer newQuantity=existProduct.get().getQuantity()-1;
-			existProduct.get().setQuantity(newQuantity);
-			this.productRepository.saveAll(allProduct);
+			if(newQuantity<0) {
+				existProduct.get().setQuantity(newQuantity);
+				this.productRepository.saveAll(allProduct);
+			}
+			
+			
 		});
 			if (cartTotalAmount <= avilableBalance) {
 				Double newBalance1 = avilableBalance - cartTotalAmount;
@@ -145,6 +149,7 @@ public class OrderServiceImpl implements OrderService {
 				this.orderRepository.save(order);
 				order.setPayment(foundPayment);
 				this.orderRepository.save(order);
+				foundCustomer.setOrderByCustomer(getAllOrders());
 				this.customerRepository.save(foundCustomer);
 			} else {
 				String newStatusOfPayment = foundPayment.getPaymentStatus().replaceAll(savedStatusOfPayment,
