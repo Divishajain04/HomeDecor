@@ -1,9 +1,11 @@
 package com.homedecor.app.dto;
 
 
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -11,9 +13,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Admin {
 
 	@Id
-	private Integer adminID;
+	private Integer adminId;
+	
+	@NotNull(message="Please provide admin name")
+	@Size(min = 3 , max = 30)
+	@Pattern(regexp="[A-Za-z ]*",message="Special characters and digits are not allowed.")
 	private String adminName;
 	
+	@NotNull(message = "Please provide password")
+	@Size(min = 8 , max = 20 ,message = "Password must be minimum 8 and maximum 20 characters")
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String adminPassword;
 
@@ -21,19 +29,19 @@ public class Admin {
 		super();
 	}
 
-	public Admin(Integer adminID, String adminName, String adminPassword) {
+	public Admin(Integer adminId, String adminName, String adminPassword) {
 		super();
-		this.adminID = adminID;
+		this.adminId = adminId;
 		this.adminName = adminName;
 		this.adminPassword = adminPassword;
 	}
 
-	public Integer getAdminID() {
-		return adminID;
+	public Integer getAdminId() {
+		return adminId;
 	}
 
-	public void setAdminID(Integer adminID) {
-		this.adminID = adminID;
+	public void setAdminId(Integer adminId) {
+		this.adminId = adminId;
 	}
 
 	public String getAdminName() {

@@ -3,6 +3,7 @@ package com.homedecor.app.service;
 
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import com.homedecor.app.dao.CartRepository;
 import com.homedecor.app.dao.CustomerRepository;
-import com.homedecor.app.dao.ProductRepository;
 import com.homedecor.app.dao.WishlistRepository;
 import com.homedecor.app.dto.Cart;
 import com.homedecor.app.dto.Customer;
@@ -26,10 +26,7 @@ public class WishlistServiceImpl implements WishlistService{
 
 	@Autowired
 	private WishlistRepository wishlistRepository;
-	
-	@Autowired
-	private ProductRepository productRepository;
-	
+		
 	@Autowired
 	private CartRepository cartRepository;
 	

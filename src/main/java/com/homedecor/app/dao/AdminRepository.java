@@ -9,6 +9,6 @@ import com.homedecor.app.dto.Admin;
 
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, Integer>{
-    Optional<Admin> findByAdminIDAndAdminPassword(Integer adminId, String password);
+    Optional<Admin> findByAdminIdAndAdminPassword(Integer adminId, String password);
 
 }

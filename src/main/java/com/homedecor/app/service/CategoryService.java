@@ -8,7 +8,7 @@ import com.homedecor.app.exception.CategoryException;
 
 public interface CategoryService {
 	
-public Boolean addCategory(Category category)throws CategoryException;
+	public Boolean addCategory(Category category)throws CategoryException;
 	
 	public Optional<Category> getCategoryById(Integer categoryId)throws CategoryException;
 	

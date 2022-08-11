@@ -25,15 +25,10 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 
-	@GetMapping("/")
-	public String greet() {
-		return "Hello Gl!";
-	}
-
 	@PostMapping("customer")
 	public String addCustomer(@Valid @RequestBody Customer customer) throws CustomerException {
 		this.customerService.addCustomer(customer);
-		return "Customer added SuccessFully";
+		return "Customer added Successfully";
 	}
 
 	@GetMapping("customer/{customerId}")
@@ -54,7 +49,7 @@ public class CustomerController {
 		return updatedCustomer;
 	}
 
-	@PutMapping("Customer/{loginId}/{newEmail}")
+	@PutMapping("customer/{loginId}/{newEmail}")
 	public String updateEmail(@PathVariable("loginId") Integer loginId, @PathVariable("newEmail") String newEmail)
 			throws CustomerException {
 		this.customerService.updateEmail(loginId, newEmail);

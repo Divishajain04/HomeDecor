@@ -1,6 +1,7 @@
 package com.homedecor.app.service;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	private CustomerRepository customerRepository;
+	
 	@Autowired
 	private CartRepository cartRepository;
 	
@@ -95,7 +97,6 @@ public class CustomerServiceImpl implements CustomerService {
 		Optional<Customer> getCustomer=this.customerRepository.findById(customerId);
 		if(getCustomer.isEmpty())throw new CustomerException("This customer is not present in record");
 		Customer foundCustomer = getCustomer.get();
-		if(foundCustomer==null)throw new CustomerException("Customer not exist for this Id " + customerId);
 		String savedAddress=foundCustomer.getCustomerAddress();
 		foundCustomer.getCustomerAddress().replaceAll(savedAddress, newAddress);
 		foundCustomer.setCustomerAddress(newAddress);
@@ -108,7 +109,6 @@ public class CustomerServiceImpl implements CustomerService {
 		Optional<Customer> getCustomer=this.customerRepository.findById(customerId);
 		if(getCustomer.isEmpty())throw new CustomerException("This customer is not present in record");
 		Customer foundCustomer = getCustomer.get();
-		if(foundCustomer==null)throw new CustomerException("Customer not exist for this Id " + customerId);
 		String savedPhoneNo=foundCustomer.getCustomerPhoneNo();
 		foundCustomer.getCustomerPhoneNo().replaceAll(savedPhoneNo, newMobileNo);
 		foundCustomer.setCustomerPhoneNo(newMobileNo);
@@ -121,7 +121,6 @@ public class CustomerServiceImpl implements CustomerService {
 		Optional<Customer> getCustomer=this.customerRepository.findById(customerId);
 		if(getCustomer.isEmpty())throw new CustomerException("This customer is not present in record");
 		Customer foundCustomer = getCustomer.get();
-		if(foundCustomer==null)throw new CustomerException("Customer not exist for this Id " + customerId);
 		String savedAddress=foundCustomer.getCustomerEmail();
 		foundCustomer.getCustomerEmail().replaceAll(savedAddress, newEmail);
 		foundCustomer.setCustomerEmail(newEmail);

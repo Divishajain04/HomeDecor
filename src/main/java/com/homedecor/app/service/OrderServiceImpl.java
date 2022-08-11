@@ -97,21 +97,21 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Boolean placeOrderStatus(Integer CustomerId,Integer orderId,  Integer paymentId)
+	public Boolean placeOrderStatus(Integer customerId,Integer orderId,  Integer paymentId)
 			throws OrderException, PaymentException, CartException, CustomerException {
-		Optional<Customer> getCustomer = this.customerRepository.findById(CustomerId);
+		Optional<Customer> getCustomer = this.customerRepository.findById(customerId);
 		if (getCustomer.isEmpty())
-			throw new CustomerException("Customer ID is not present in record");
+			throw new CustomerException("Customer Id is not present in record");
 		Customer foundCustomer = getCustomer.get();
 		
 		Optional<Cart> getCart = this.cartRepository.findById(foundCustomer.getCustomerId());
 		if (getCart.isEmpty())
-			throw new CartException("Cart ID is not present in record");
+			throw new CartException("Cart Id is not present in record");
 		Cart foundCart = getCart.get();
 		
 		Optional<Payment> getPayment = this.paymentRepository.findById(paymentId);
 		if (getPayment.isEmpty()) 
-				throw new PaymentException("Payment ID is not present in record");
+				throw new PaymentException("Payment Id is not present in record");
 		Payment foundPayment = getPayment.get();
 		
 		OrderByCustomer order = this.orderRepository.findById(orderId).get();
