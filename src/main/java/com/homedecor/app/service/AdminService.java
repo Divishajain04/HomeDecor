@@ -13,9 +13,9 @@ public interface AdminService {
 
 	public Optional<Admin> getAdminById(Integer adminId) throws AdminException;
 
-	public Boolean login(Integer adminId, String password) throws AdminException;
+	public Boolean login(String adminEmailId, String password) throws AdminException;
 
-	Boolean updatePassword(Integer adminId, String oldPassword, String newPassword) throws AdminException;
+	Boolean updatePassword(String adminEmailId, String oldPassword, String newPassword) throws AdminException;
 	
 	public Boolean deleteAdminById(Integer adminId)throws AdminException;
 

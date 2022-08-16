@@ -1,7 +1,5 @@
 package com.homedecor.app.dto;
 
-
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -9,28 +7,27 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-
 @Entity
 public class Product {
 
 	@Id
 	private Integer productId;
-	
-	@NotNull(message="Please provide product name")
-	@Size(min = 3 , max = 30)
-	@Pattern(regexp="[A-Za-z0-9 ]*",message="Special characters are not allowed.")
+
+	@NotNull(message = "Please provide product name")
+	@Size(min = 3, max = 30)
+	@Pattern(regexp = "[A-Za-z0-9 ]*", message = "Special characters are not allowed.")
 	private String productName;
-	
+
 	@NotNull(message = "Please provide product description")
 	@Size(max = 500)
 	private String productDescription;
-	
+
 	@NotNull(message = "Please provide product price")
 	private Double productPrice;
-	
+
 	@NotNull(message = "Please provide product quantity")
 	private Integer quantity;
-	
+
 	@ManyToOne
 	private Category category;
 
@@ -47,8 +44,6 @@ public class Product {
 		this.productPrice = productPrice;
 		this.quantity = quantity;
 	}
-	
-	
 
 	public Integer getProductId() {
 		return productId;
@@ -89,14 +84,5 @@ public class Product {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-
-	@Override
-	public String toString() {
-		return "Product [productId=" + productId + ", productName=" + productName + ", productDescription="
-				+ productDescription + ", productPrice=" + productPrice + ", quantity=" + quantity + ", category="
-				+ category + "]";
-	}
-
-	
 
 }

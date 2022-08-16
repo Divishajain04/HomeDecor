@@ -22,12 +22,7 @@ public class AdminServiceImpl implements AdminService {
 		if (admin == null) {
 			throw new AdminException("Admin not added please fill the mandatory feilds");
 		}
-		Optional<Admin> addAdmin = this.adminRepository.findById(admin.getAdminId());
-		if (addAdmin.isPresent()) {
-			throw new AdminException(" This Admin Id is already present! Try with new");
-		} else {
 			this.adminRepository.save(admin);
-		}
 		return true;
 	}
 
@@ -41,9 +36,9 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Boolean login(Integer adminId, String password) throws AdminException {
+	public Boolean login(String adminEmailId, String password) throws AdminException {
 		Boolean isLoginBoolean = false;
-		Optional<Admin> foundAdmin = this.adminRepository.findByAdminIdAndAdminPassword(adminId, password);
+		Optional<Admin> foundAdmin = this.adminRepository.findByAdminEmailIdAndAdminPassword(adminEmailId, password);
 		if (foundAdmin.isEmpty()) {
 			throw new AdminException("Invalid Id or password");
 		} else {
@@ -53,21 +48,15 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Boolean updatePassword(Integer adminId, String oldPassword, String newPassword) throws AdminException {
-		Optional<Admin> getAdmin=this.adminRepository.findById(adminId);
-		if(getAdmin.isEmpty())throw new AdminException(adminId+" Admin Id is not present in the record");
+	public Boolean updatePassword(String adminEmailId, String oldPassword, String newPassword) throws AdminException {
+		Optional<Admin> getAdmin=this.adminRepository.findByAdminEmailIdAndAdminPassword(adminEmailId, oldPassword);
+		if(getAdmin.isEmpty())throw new AdminException("Invalid admin email id or password");
 		Admin foundAdmin  = getAdmin.get();
-		String savedPassword = foundAdmin.getAdminPassword();
-		Boolean isLogin = false;
-		if (savedPassword.compareTo(oldPassword) == 0) {
 			foundAdmin.getAdminPassword().replaceAll(oldPassword, newPassword);
 			foundAdmin.setAdminPassword(newPassword);
 			adminRepository.save(foundAdmin);
-			isLogin=true;
-		} else {
-			throw new AdminException("Old password dosen't match");
-		}
-		return isLogin;
+			
+		return true;
 	}
 
 	@Override

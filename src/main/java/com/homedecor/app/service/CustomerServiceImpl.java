@@ -69,9 +69,9 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Boolean login(Integer customerId, String password) throws CustomerException {
+	public Boolean login(String customerEmail, String password) throws CustomerException {
 		Boolean isCustomerLogin = false;
-		Optional<Customer> loginCustomer = this.customerRepository.findByCustomerIdAndPassword(customerId, password);
+		Optional<Customer> loginCustomer = this.customerRepository.findByCustomerEmailAndPassword(customerEmail, password);
 		if (loginCustomer.isEmpty()) {
 			throw new CustomerException("Invalid Id or Password");
 		}
@@ -129,21 +129,14 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Boolean updatePassword(Integer customerId, String oldPassword, String newPassword) throws CustomerException {
-		Optional<Customer> getCustomer=this.customerRepository.findById(customerId);
-		if(getCustomer.isEmpty())throw new CustomerException("This customer is not present in record");
+	public Boolean updatePassword(String customerEmail, String oldPassword, String newPassword) throws CustomerException {
+		Optional<Customer> getCustomer=this.customerRepository.findByCustomerEmailAndPassword(customerEmail, oldPassword);
+		if(getCustomer.isEmpty())throw new CustomerException("Invalid emailId or Password");
 		Customer foundCustomer = getCustomer.get();
-		String savedPassword = foundCustomer.getPassword();
-		Boolean isLogin = false;
-		if (savedPassword.compareTo(oldPassword) == 0) {
 			foundCustomer.getPassword().replaceAll(oldPassword, newPassword);
 			foundCustomer.setPassword(newPassword);
 			customerRepository.save(foundCustomer);
-			isLogin = true;
-		} else {
-			throw new CustomerException("Old password dosen't match");
-		}
-		return isLogin;
+		return true;
 	}
 
 	@Override
