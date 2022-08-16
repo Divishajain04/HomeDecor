@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Admin {
 
 	@Id
-	
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer adminId;
 	
