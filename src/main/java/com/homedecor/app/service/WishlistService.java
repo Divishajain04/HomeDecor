@@ -3,8 +3,8 @@ package com.homedecor.app.service;
 import java.util.List;
 import java.util.Optional;
 import com.homedecor.app.dto.Wishlist;
+import com.homedecor.app.exception.CartException;
 import com.homedecor.app.exception.CustomerException;
-import com.homedecor.app.exception.ProductException;
 import com.homedecor.app.exception.WishlistException;
 
 public interface WishlistService {
@@ -19,6 +19,6 @@ public interface WishlistService {
 	
 	public Wishlist updateWishlist(Wishlist wishlist)throws WishlistException;
 
-	public Boolean addWishlistProductTocart(Integer customerId) throws CustomerException, ProductException;
+	public Boolean addWishlistProductToCart(Integer customerId) throws CustomerException, WishlistException, CartException;
 
 }
