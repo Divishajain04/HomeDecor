@@ -128,7 +128,7 @@ public class AdminServiceImpl implements AdminService {
      * Description: To delete an existing admin by AdminId
      * 
      * @param AdminId              - admin's Id
-	 * @returns Boolean            - isdeleted, if admin is present in our database otherwise throws AdminException
+	 * @returns Boolean            - true, if admin is present in our database otherwise throws AdminException
 	 * @throws AdminException      - It is raised if admin Id is not present or we provide an invalid admin Id                                                   
      * Created By                  - Lucky Rathore
      * Created Date                - 16-AUG-2022                           
