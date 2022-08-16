@@ -91,7 +91,7 @@ public class CustomerServiceImpl implements CustomerService {
 	 * Method:                       -	getCustomerById
 	 * Description: 				 -	To get the detail of particular customer by customer Id.
 	 * @param customerId  			 -	CustomerId
-	 * @returns Optional  			 -	present, if detail exist otherwise throws Customer Exception
+	 * @returns Optional  			 -	Present, if detail exist otherwise throws Customer Exception
 	 * @throws CustomerException  	 -	It is raised due to invalid customer Id.
 	 * Created By  					 -	Divisha Jain
 	 ************************************************************************************/
