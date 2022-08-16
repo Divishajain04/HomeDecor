@@ -1,6 +1,5 @@
 package com.homedecor.app.dto;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,28 +16,26 @@ public class Admin {
 
 	@Id
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer adminId;
-	
-	@NotNull(message="Please provide admin name")
-	@Size(min = 3 , max = 30)
-	@Pattern(regexp="[A-Za-z ]*",message="Special characters and digits are not allowed.")
+
+	@NotNull(message = "Please provide admin name")
+	@Size(min = 3, max = 30)
+	@Pattern(regexp = "[A-Za-z ]*", message = "Special characters and digits are not allowed.")
 	private String adminName;
-	
-	@NotNull(message="Please provide email")
+
+	@NotNull(message = "Please provide email")
 	@Email
 	private String adminEmailId;
-	
+
 	@NotNull(message = "Please provide password")
-	@Size(min = 8 , max = 20 ,message = "Password must be minimum 8 and maximum 20 characters")
+	@Size(min = 8, max = 20, message = "Password must be minimum 8 and maximum 20 characters")
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String adminPassword;
 
 	public Admin() {
 		super();
 	}
-
-	
 
 	public Admin(Integer adminId,
 			@NotNull(message = "Please provide admin name") @Size(min = 3, max = 30) @Pattern(regexp = "[A-Za-z ]*", message = "Special characters and digits are not allowed.") String adminName,
@@ -51,19 +48,13 @@ public class Admin {
 		this.adminPassword = adminPassword;
 	}
 
-
-
 	public String getAdminEmailId() {
 		return adminEmailId;
 	}
 
-
-
 	public void setAdminEmailId(String adminEmailId) {
 		this.adminEmailId = adminEmailId;
 	}
-
-
 
 	public Integer getAdminId() {
 		return adminId;
@@ -88,7 +79,5 @@ public class Admin {
 	public void setAdminPassword(String adminPassword) {
 		this.adminPassword = adminPassword;
 	}
-
-	
 
 }

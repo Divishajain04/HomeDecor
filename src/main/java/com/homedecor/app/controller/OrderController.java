@@ -64,7 +64,7 @@ public class OrderController {
 	public String placeOrder(@PathVariable("customerId") Integer customerId,@PathVariable("orderId") Integer orderId,
 			@PathVariable("paymentId") Integer paymentId)
 			throws OrderException, PaymentException, CartException, CustomerException {
-				this.orderService.placeOrderStatus(customerId,orderId, paymentId);
+				this.orderService.placeOrder(customerId,orderId, paymentId);
 		return "Order Placed Successfully";
 	}
 
