@@ -64,11 +64,11 @@ import com.homedecor.app.service.CustomerService;
 		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null);		
 		assertTrue(this.customerService.addCustomer(customer));
 		Customer customer2 = customerService.getCustomerById(4).get();
-		Integer customerIdTest = customer2.getCustomerId();
+		String customerEmailId=customer2.getCustomerEmail();
 		String customerPasswordTest = customer2.getPassword();
-		assertEquals(true, this.customerService.login(customerIdTest, customerPasswordTest));
+		assertEquals(true, this.customerService.login(customerEmailId, customerPasswordTest));
 		assertEquals(true,this.customerService.deleteCustomer(4));
-		assertThrows(CustomerException.class, () -> this.customerService.login(customerIdTest, customerPasswordTest));
+		assertThrows(CustomerException.class, () -> this.customerService.login(customerEmailId, customerPasswordTest));
 	}
 	
 	
@@ -107,9 +107,9 @@ import com.homedecor.app.service.CustomerService;
 		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null);
 		assertTrue(this.customerService.addCustomer(customer));
 		Customer customer2 = customerService.getCustomerById(4).get();
-		Integer customerInteger = customer2.getCustomerId();
+		String customerEmailId = customer2.getCustomerEmail();
 		String customerPassword = customer2.getPassword();
-		assertEquals(true, this.customerService.updatePassword(customerInteger, customerPassword, "Jain08"));
+		assertEquals(true, this.customerService.updatePassword(customerEmailId, customerPassword, "Jain08"));
 		assertEquals(true, this.customerService.deleteCustomer(4));
 	}
 	

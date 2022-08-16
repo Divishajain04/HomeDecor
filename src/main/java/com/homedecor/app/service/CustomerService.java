@@ -15,7 +15,7 @@ public interface CustomerService {
 	
 	public Optional<Customer> getCustomerById(Integer customerId)throws CustomerException;
 	
-	public Boolean login(Integer customerId, String password)throws CustomerException;
+	public Boolean login(String customerEmail, String password)throws CustomerException;
 	
 	public List<Customer> findAllCustomers() throws CustomerException;
 	
@@ -25,7 +25,7 @@ public interface CustomerService {
 	
 	public Boolean updateEmail(Integer customerId, String newEmail)throws CustomerException;
 	
-	public Boolean updatePassword(Integer customerId, String oldPassword, String newPassword)throws CustomerException;
+	public Boolean updatePassword(String customerEmail, String oldPassword, String newPassword)throws CustomerException;
 	
 	public Customer updateCustomer(Customer customer)throws CustomerException;
 	

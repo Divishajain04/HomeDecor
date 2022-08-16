@@ -2,6 +2,7 @@ package com.homedecor.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,13 +31,13 @@ public class AuthenticationController {
 		return "Login Successfully";
 	}
 	
-	@PostMapping("authentication/updateAdminPassword")
+	@PutMapping("authentication/admin")
 	public String updateAdminPassword(@RequestBody Authentications authentication) throws AdminException {
 		this.authenticationService.updateAdminPassword(authentication);
 		return "Password Updated Successfully";
 	}
 	
-	@PostMapping("authentication/updateCustomerPassword")
+	@PutMapping("authentication/customer")
 	public String updateCustomerPassword(@RequestBody Authentications authentication) throws CustomerException {
 		this.authenticationService.updateCustomerPassword(authentication);
 		return "Password Updated Successfully";

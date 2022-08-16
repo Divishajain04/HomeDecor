@@ -18,35 +18,35 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 	@Override
 	public Boolean adminAuthentication(Authentications authentication) throws AdminException {
-		Integer adminId = authentication.getUserId();
+		String adminEmailId=authentication.getUserEmail();
 		String adminPassword = authentication.getUserPassword();
-		this.adminService.login(adminId, adminPassword);
+		this.adminService.login(adminEmailId, adminPassword);
 		return true;
 	}
 
 	@Override
 	public Boolean customerAuthentication(Authentications authentication) throws CustomerException {
-		Integer customerId = authentication.getUserId();
+		String customerEmailId=authentication.getUserEmail();
 		String customerPassword = authentication.getUserPassword();
-		this.customerService.login(customerId, customerPassword);
+		this.customerService.login(customerEmailId, customerPassword);
 		return true;
 	}
 
 	@Override
 	public Boolean updateAdminPassword(Authentications authentication) throws AdminException {
-		Integer adminId = authentication.getUserId();
+		String adminEmailId=authentication.getUserEmail();
 		String adminPassword = authentication.getUserPassword();
 		String newPassword=authentication.getUpdatePassword();
-		this.adminService.updatePassword(adminId, adminPassword, newPassword);
+		this.adminService.updatePassword(adminEmailId, adminPassword, newPassword);
 		return true;
 	}
 
 	@Override
 	public Boolean updateCustomerPassword(Authentications authentication) throws CustomerException {
-		Integer customerId = authentication.getUserId();
+		String customerEmailId=authentication.getUserEmail();
 		String customerPassword = authentication.getUserPassword();
 		String newPassword=authentication.getUpdatePassword();
-		this.customerService.updatePassword(customerId, customerPassword, newPassword);
+		this.customerService.updatePassword(customerEmailId, customerPassword, newPassword);
 		return true;
 	}
 

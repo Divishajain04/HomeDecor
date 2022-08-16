@@ -11,7 +11,7 @@ import com.homedecor.app.dto.Customer;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer>{
 	
-	Optional<Customer> findByCustomerIdAndPassword(Integer customerId, String password);
+	Optional<Customer> findByCustomerEmailAndPassword(String customerEmail, String password);
 	
 
 }
