@@ -31,7 +31,7 @@ public class AdminServiceImpl implements AdminService {
      * Description: To register a new admin account in our app
      * @Object admin                 - adding admin by providing mandatory admin details
 	 * @returns Boolean              - true, if admin added successfully otherwise throws AdminException
-	 * @throws AdminException      - It is raised if admin Id is already registered in the app
+	 * @throws AdminException        - It is raised if admin Id is already registered in the app
      * Created By                    - Lucky Rathore
      * Created Date                  - 16-AUG-2022                           
 	 
@@ -52,7 +52,7 @@ public class AdminServiceImpl implements AdminService {
      * 
      * @param AdminId              - admin's Id
 	 * @returns Boolean            - isPresent, if admin is already present on the given Id in our database otherwise throws AdminException
-	 * @throws AdminException    - It is raised if admin Id is not present or we provide an invalid admin Id                                                   
+	 * @throws AdminException      - It is raised if admin Id is not present or we provide an invalid admin Id                                                   
      * Created By                  - Lucky Rathore
      * Created Date                - 16-AUG-2022                           
 	 
@@ -72,10 +72,10 @@ public class AdminServiceImpl implements AdminService {
 	 * Method: Login
      * Description: To login into an existing admin account
      * 
-	 * @param adminId              - admin's Email 
+	 * @param adminEmailId         - admin's Email 
 	 * @param password             - admin's password
 	 * @returns Boolean            - true, if Admin logged in successfully otherwise throws AdminException 
-	 * @throws AdminException    - It is raised due to incorrect Admin Id or password                                                      
+	 * @throws AdminException      - It is raised due to incorrect Admin Id or password                                                      
      * Created By                  - Lucky Rathore
      * Created Date                - 16-AUG-2022                         
 	 
@@ -98,7 +98,7 @@ public class AdminServiceImpl implements AdminService {
 	 * Method: updatePassword
      * Description: To update an admin account password
      * 
-	 * @param adminId           - Admin's Email
+	 * @param adminEmailId      - Admin's EmailId
 	 * @param oldPassword       - old adminPassword
 	 * @param newPassword       - new password to be updated
 	 * @returns Boolean         - true, if password for that adminId updated successfully otherwise throws AccountException
@@ -129,7 +129,7 @@ public class AdminServiceImpl implements AdminService {
      * 
      * @param AdminId              - admin's Id
 	 * @returns Boolean            - isdeleted, if admin is present in our database otherwise throws AdminException
-	 * @throws AdminException    -   It is raised if admin Id is not present or we provide an invalid admin Id                                                   
+	 * @throws AdminException      - It is raised if admin Id is not present or we provide an invalid admin Id                                                   
      * Created By                  - Lucky Rathore
      * Created Date                - 16-AUG-2022                           
 	 
