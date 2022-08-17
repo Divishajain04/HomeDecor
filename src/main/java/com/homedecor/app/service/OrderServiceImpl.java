@@ -1,5 +1,6 @@
 package com.homedecor.app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -221,6 +222,24 @@ public class OrderServiceImpl implements OrderService {
 			this.orderRepository.save(order);
 			// foundCustomer.setOrderByCustomer();
 			this.customerRepository.save(foundCustomer);
+			//this.customerRepository.save(foundCustomer);
+			if (order.getCustomerId().equals(customerId)) {
+				List<OrderByCustomer> getAllOrders = new ArrayList<>();
+				getAllOrders.addAll(foundCustomer.getOrderByCustomer());
+				getAllOrders.add(order);
+				foundCustomer.setOrderByCustomer(getAllOrders);
+				this.orderRepository.save(order);
+				this.customerRepository.save(foundCustomer);		
+			}
+			else {
+				order.setCustomerId(customerId);
+				List<OrderByCustomer> getAllOrders = new ArrayList<>();
+				getAllOrders.addAll(foundCustomer.getOrderByCustomer());
+				getAllOrders.add(order);
+				foundCustomer.setOrderByCustomer(getAllOrders);
+				this.orderRepository.save(order);
+				this.customerRepository.save(foundCustomer);
+			}
 		} else {
 			String newStatusOfPayment = foundPayment.getPaymentStatus().replaceAll(savedStatusOfPayment,
 					"Payment unSuccessfull");

@@ -30,19 +30,22 @@ public class Product {
 
 	@ManyToOne
 	private Category category;
+	
+	private Integer categoryId;
 
 	public Product() {
 		super();
 	}
 
 	public Product(Integer productId, String productName, String productDescription, Double productPrice,
-			Integer quantity) {
+			Integer quantity, Integer categoryId) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
 		this.productDescription = productDescription;
 		this.productPrice = productPrice;
 		this.quantity = quantity;
+		this.categoryId = categoryId;
 	}
 
 	public Integer getProductId() {
@@ -85,4 +88,13 @@ public class Product {
 		this.quantity = quantity;
 	}
 
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	
 }

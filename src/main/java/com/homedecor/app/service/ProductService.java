@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import com.homedecor.app.dto.Product;
+import com.homedecor.app.exception.CategoryException;
 import com.homedecor.app.exception.ProductException;
 
 public interface ProductService {
 	
-	public Boolean addProducts(Product product)throws ProductException; 
+	public Boolean addProducts(Product product)throws ProductException, CategoryException; 
 	
 	public Optional<Product> getProductById(Integer productId)throws ProductException;
 	

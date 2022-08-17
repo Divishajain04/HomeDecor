@@ -1,13 +1,17 @@
 package com.homedecor.app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.homedecor.app.dao.CategoryRepository;
 import com.homedecor.app.dao.ProductRepository;
+import com.homedecor.app.dto.Category;
 import com.homedecor.app.dto.Product;
+import com.homedecor.app.exception.CategoryException;
 import com.homedecor.app.exception.ProductException;
 
 @Service
@@ -16,8 +20,14 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductRepository productRepository;
 
+	@Autowired 
+	private CategoryService categoryService;
+	
+	@Autowired
+	private CategoryRepository categoryRepository;
+	
 	@Override
-	public Boolean addProducts(Product product) throws ProductException {
+	public Boolean addProducts(Product product) throws ProductException , CategoryException {
 		if (product == null) {
 			throw new ProductException("Product not added! Please fill the mandatory field.");
 		}
@@ -25,7 +35,20 @@ public class ProductServiceImpl implements ProductService {
 		if (addProductResult.isPresent()) {
 			throw new ProductException("Product Id is already present in the record! Try with new Id.");
 		} else {
-			this.productRepository.save(product);
+			Integer categoryId = 	product.getCategoryId();
+			Optional<Category> foundCategory = this.categoryRepository.findById(categoryId);
+			Category getCategory = foundCategory.get();
+			List<Product> products = new ArrayList<>();
+			if (foundCategory.isPresent()) {
+				products.addAll(getCategory.getProduct());
+				products.add(product);
+				getCategory.setProduct(products);
+				this.categoryService.updateCategory(getCategory);
+				this.productRepository.save(product);
+				
+			}
+				
+			
 		}
 		return true;
 	}

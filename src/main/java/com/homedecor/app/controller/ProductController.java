@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.homedecor.app.dto.Product;
+import com.homedecor.app.exception.CategoryException;
 import com.homedecor.app.exception.ProductException;
 import com.homedecor.app.service.ProductService;
 
@@ -25,7 +26,7 @@ public class ProductController {
 	private ProductService productService;
 
 	@PostMapping("product")
-	public String addProduct(@Valid @RequestBody Product product) throws ProductException {
+	public String addProduct(@Valid @RequestBody Product product) throws ProductException , CategoryException{
 		this.productService.addProducts(product);
 
 		return "product added successfully";
