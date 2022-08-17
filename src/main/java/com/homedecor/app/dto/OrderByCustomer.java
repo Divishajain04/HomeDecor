@@ -26,12 +26,11 @@ public class OrderByCustomer {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Payment payment;
+
 	public OrderByCustomer() {
 		super();
 		this.orderDate = LocalDate.now();
 	}
-	
-	
 
 	public OrderByCustomer(Integer orderId) {
 		super();
@@ -39,9 +38,7 @@ public class OrderByCustomer {
 		this.orderDate = LocalDate.now();
 	}
 
-
-
-	public OrderByCustomer(Integer orderId, String status, Payment payment,Integer customerId) {
+	public OrderByCustomer(Integer orderId, String status, Payment payment, Integer customerId) {
 		super();
 		this.orderId = orderId;
 		this.status = status;
@@ -78,18 +75,12 @@ public class OrderByCustomer {
 		this.payment = payment;
 	}
 
-
-
 	public Integer getCustomerId() {
 		return customerId;
 	}
 
-
-
 	public void setCustomerId(Integer customerId) {
 		this.customerId = customerId;
 	}
-
-	
 
 }

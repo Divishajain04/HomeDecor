@@ -206,23 +206,6 @@ public class OrderServiceImpl implements OrderService {
 
 		});
 		if (cartTotalAmount <= avilableBalance) {
-			Double newBalance1 = avilableBalance - cartTotalAmount;
-			foundPayment.setPaymentAmount(newBalance1);
-			this.paymentRepository.save(foundPayment);
-			String newStatusOfPayment = foundPayment.getPaymentStatus().replaceAll(savedStatusOfPayment,
-					"Payment done Successfully");
-			foundPayment.setPaymentStatus(newStatusOfPayment);
-			this.paymentRepository.save(foundPayment);
-			foundCart.getProduct().removeAll(foundCart.getProduct());
-			this.cartRepository.save(foundCart);
-			String newStatus = order.getStatus().replaceAll(savedStatus, "Order Placed Successfully");
-			order.setStatus(newStatus);
-			this.orderRepository.save(order);
-			order.setPayment(foundPayment);
-			this.orderRepository.save(order);
-			// foundCustomer.setOrderByCustomer();
-			this.customerRepository.save(foundCustomer);
-			//this.customerRepository.save(foundCustomer);
 			if (order.getCustomerId().equals(customerId)) {
 				List<OrderByCustomer> getAllOrders = new ArrayList<>();
 				getAllOrders.addAll(foundCustomer.getOrderByCustomer());
@@ -240,6 +223,22 @@ public class OrderServiceImpl implements OrderService {
 				this.orderRepository.save(order);
 				this.customerRepository.save(foundCustomer);
 			}
+			Double newBalance1 = avilableBalance - cartTotalAmount;
+			foundPayment.setPaymentAmount(newBalance1);
+			this.paymentRepository.save(foundPayment);
+			String newStatusOfPayment = foundPayment.getPaymentStatus().replaceAll(savedStatusOfPayment,
+					"Payment done Successfully");
+			foundPayment.setPaymentStatus(newStatusOfPayment);
+			this.paymentRepository.save(foundPayment);
+			foundCart.getProduct().removeAll(foundCart.getProduct());
+			this.cartRepository.save(foundCart);
+			String newStatus = order.getStatus().replaceAll(savedStatus, "Order Placed Successfully");
+			order.setStatus(newStatus);
+			this.orderRepository.save(order);
+			order.setPayment(foundPayment);
+			this.orderRepository.save(order);
+			this.customerRepository.save(foundCustomer);
+			
 		} else {
 			String newStatusOfPayment = foundPayment.getPaymentStatus().replaceAll(savedStatusOfPayment,
 					"Payment unSuccessfull");
