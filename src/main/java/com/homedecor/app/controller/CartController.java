@@ -70,8 +70,16 @@ public class CartController {
 	@PutMapping("cart/addProduct/{customerId}/{productId}/{quantity}")
 	public String addProductInCartByProductId(@PathVariable("customerId") Integer customerId,
 			@PathVariable("productId") Integer productId, @PathVariable("quantity") Integer quantity)
-			throws ProductException, CustomerException {
-		this.cartService.addProductTocart(customerId, productId, quantity);
+			throws ProductException, CustomerException, CartException {
+		this.cartService.addProductToCart(customerId, productId, quantity);
 		return "Product added in cart Successfully";
+	}
+	
+	@PutMapping("cart/removeProduct/{customerId}/{productId}/{quantity}")
+	public String removeProductInCartByProductId(@PathVariable("customerId") Integer customerId,
+			@PathVariable("productId") Integer productId, @PathVariable("quantity") Integer quantity)
+			throws ProductException, CustomerException, CartException {
+		this.cartService.removeProductFromCart(customerId, productId, quantity);
+		return "Product removed from cart Successfully";
 	}
 }

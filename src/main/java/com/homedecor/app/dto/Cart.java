@@ -13,16 +13,13 @@ public class Cart {
 
 	@Id
 	private Integer cartId;
-	
+
 	@OneToOne
 	private OrderByCustomer orderByCustomer;
 
 	@ManyToMany
 	private List<Product> product;
-	
-   
-	
-	
+
 	public Cart() {
 		super();
 	}
@@ -31,8 +28,6 @@ public class Cart {
 		super();
 		this.cartId = cartId;
 	}
-	
-	
 
 	public Cart(Integer cartId, OrderByCustomer orderByCustomer, List<Product> product) {
 		super();
@@ -41,7 +36,6 @@ public class Cart {
 		this.product = product;
 	}
 
-
 	public Integer getCartId() {
 		return cartId;
 	}
@@ -49,7 +43,6 @@ public class Cart {
 	public void setCartId(Integer cartId) {
 		this.cartId = cartId;
 	}
-
 
 	public OrderByCustomer getOrderByCustomer() {
 		return orderByCustomer;

@@ -24,6 +24,7 @@ public interface CartService {
 	
 	public Long totalProductInCustomerCartById(Integer cartId)throws CartException;
 	
-	public Boolean addProductTocart(Integer customerId, Integer productId, Integer quantity) throws ProductException, CustomerException;
+	public Boolean addProductToCart(Integer customerId, Integer productId, Integer quantity) throws ProductException, CustomerException, CartException;
 
+	public Boolean removeProductFromCart(Integer customerId, Integer productId, Integer quantity) throws ProductException, CustomerException, CartException;
 }

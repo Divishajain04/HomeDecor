@@ -182,14 +182,16 @@ public class CartServiceImpl implements CartService {
 	 * @param customerId        - Customer's Id
 	 * @param productId         - Product's Id
 	 * @param quantity          - Total no of products
-	 * @returns Boolean         - true, if products added to the cart otherwise throws CartException
-	 * @throws CartException    - It is raised due to Invalid customer's Id or Invalid product's Id
+	 * @returns Boolean         - true, if products added to the cart otherwise throws CartException. CartException, CustomerException
+	 * @throws CustomerException- It is raised due to Invalid customer's Id
+	 * @throws CartException    - It is raised due to Cart not present in the record
+	 * @throws ProductException - It is raised due to Invalid product's Id
      * Created By               - Prince Verma
      * Created Date             - 16-AUG-2022                           
 	 
 	 ************************************************************************************/
 	@Override
-	public Boolean addProductTocart(Integer customerId, Integer productId, Integer quantity) throws ProductException, CustomerException {
+	public Boolean addProductToCart(Integer customerId, Integer productId, Integer quantity) throws ProductException, CustomerException, CartException {
 		Optional<Customer> foundCustomer=this.customerRepository.findById(customerId);
 		if (foundCustomer.isEmpty()) throw new CustomerException("Invalid Customer Id");
 		Optional<Product> foundProduct=this.productRepository.findById(productId);
@@ -197,14 +199,56 @@ public class CartServiceImpl implements CartService {
 			throw new ProductException("Invalid Product Id");
 		Customer getCustomer=foundCustomer.get();
 		Product getProduct=foundProduct.get();
+		Cart getCart=getCustomer.getCart();
+		if(getCart==null)throw new CartException("Cart not present in the record");
 		List<Product> allProducts=new ArrayList<>();
+		allProducts.addAll(getCart.getProduct());
 		for(int i=0;i<quantity;i++) {
 			allProducts.add(getProduct);
 		}
-		Cart getCart=getCustomer.getCart();
 		getCart.setProduct(allProducts);
 		this.cartRepository.save(getCart);
 		return true;
+	}
+
+	/************************************************************************************
+	 * Method:                  - removeProductTocart
+     * Description:             - Remove products to customers's cart
+	 * @param customerId        - Customer's Id
+	 * @param productId         - Product's Id
+	 * @param quantity          - Total no of products
+	 * @returns Boolean         - true, if products removed from the cart otherwise throws CartException, CustomerException, ProductException
+	 * @throws CustomerException- It is raised due to Invalid customer's Id
+	 * @throws CartException    - It is raised due to Cart not present in the record
+	 * @throws ProductException - It is raised due to Invalid product's Id or product availability 
+	                              in cart of given product Id is less then the quantity
+     * Created By               - Prince Verma
+     * Created Date             - 16-AUG-2022                           
+	 
+	 ************************************************************************************/
+	@Override
+	public Boolean removeProductFromCart(Integer customerId, Integer productId, Integer quantity)
+			throws ProductException, CustomerException, CartException {
+		Optional<Customer> foundCustomer=this.customerRepository.findById(customerId);
+		if (foundCustomer.isEmpty()) throw new CustomerException("Invalid Customer Id");
+		Optional<Product> foundProduct=this.productRepository.findById(productId);
+		if (foundProduct.isEmpty()) 
+			throw new ProductException("Invalid Product Id");
+		Customer getCustomer=foundCustomer.get();
+		Product getProduct=foundProduct.get();
+		Cart getCart=getCustomer.getCart();
+		if(getCart==null)throw new CartException("Cart not present in the record");
+		List<Product> allProducts=new ArrayList<>();
+		allProducts.addAll(getCart.getProduct());
+		Boolean isremove=false;
+		for(int i=0;i<quantity;i++) {
+		 isremove=allProducts.remove(getProduct);
+		}
+		if(isremove==false)throw new ProductException(quantity+" product are not avilable in cart for product id "+productId);
+		getCart.setProduct(allProducts);
+		this.cartRepository.save(getCart);
+		return true;
+
 	}
 	
 }
