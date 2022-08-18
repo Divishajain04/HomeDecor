@@ -3,11 +3,13 @@ package com.homedecor.app.dto;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Payment {
 
 	@Id
+    @JsonIgnore
 	private Integer paymentId;
 	private String paymentMode;
 	private Double paymentAmount;
@@ -56,7 +58,5 @@ public class Payment {
 	public void setPaymentStatus(String paymentStatus) {
 		this.paymentStatus = paymentStatus;
 	}
-
-	
 
 }

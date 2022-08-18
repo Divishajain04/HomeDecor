@@ -21,6 +21,6 @@ public interface OrderService {
 
 	public OrderByCustomer updateOrder(OrderByCustomer orderByCustomer) throws OrderException;
 
-	public Boolean placeOrder(Integer CustomerId,Integer orderId, Integer paymentId)
+	public Boolean placeOrder(Integer CustomerId,Integer orderId)
 			throws OrderException, PaymentException, CartException, CustomerException;
 }

@@ -15,43 +15,42 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
-
-
 @Entity
 public class Customer {
 
 	@Id
-	//@GeneratedValue(strategy=GenerationType.AUTO)
+	// @GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer customerId;
-	
-	@NotNull(message="Please provide name")
-	@Size(min = 3 , max = 30)
-	@Pattern(regexp="[A-Za-z ]*",message="Special characters and digits are not allowed.")
+
+	@NotNull(message = "Please provide name")
+	@Size(min = 3, max = 30)
+	@Pattern(regexp = "[A-Za-z ]*", message = "Special characters and digits are not allowed.")
 	private String customerName;
 
-	@NotNull(message="Please provide email")
+	@NotNull(message = "Please provide email")
 	@Email
 	private String customerEmail;
-	
+
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@NotNull(message = "Please provide password")
-	@Size(min = 8 , max = 20 ,message = "Password must be minimum 8 and maximum 20 characters")
+	@Size(min = 8, max = 20, message = "Password must be minimum 8 and maximum 20 characters")
 	private String password;
-	
+
 	@NotNull(message = "Please provide phone number")
-	@Pattern(regexp="[0-9]{10}",message="Phone munber must be 10 digits[0-9].")
+	@Pattern(regexp = "[0-9]{10}", message = "Phone munber must be 10 digits[0-9].")
 	private String customerPhoneNo;
-	
+
 	@NotNull(message = "Please provide address")
 	private String customerAddress;
-	
+
 	private LocalDate creationDate;
 
-	
+	@OneToOne
+	private Wallet wallet;
+
 	@OneToOne
 	private Cart cart;
-		
+
 	@OneToMany
 	private List<OrderByCustomer> orderByCustomer;
 
@@ -62,12 +61,10 @@ public class Customer {
 		super();
 		this.creationDate = LocalDate.now();
 	}
-	
-	
 
 	public Customer(Integer customerId, String customerName, String customerEmail, String password,
 			String customerPhoneNo, String customerAddress, Cart cart, List<OrderByCustomer> orderByCustomer,
-			Wishlist wishlist) {
+			Wishlist wishlist, Wallet wallet) {
 		super();
 		this.customerId = customerId;
 		this.customerName = customerName;
@@ -79,8 +76,8 @@ public class Customer {
 		this.cart = cart;
 		this.orderByCustomer = orderByCustomer;
 		this.wishlist = wishlist;
+		this.wallet = wallet;
 	}
-
 
 	public Integer getCustomerId() {
 		return customerId;
@@ -126,7 +123,6 @@ public class Customer {
 		return creationDate;
 	}
 
-	
 	public String getPassword() {
 		return password;
 	}
@@ -134,7 +130,6 @@ public class Customer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 
 	public Cart getCart() {
 		return cart;
@@ -160,17 +155,12 @@ public class Customer {
 		this.wishlist = wishlist;
 	}
 
-
-
-	@Override
-	public String toString() {
-		return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", customerEmail="
-				+ customerEmail + ", password=" + password + ", customerPhoneNo=" + customerPhoneNo
-				+ ", customerAddress=" + customerAddress + ", creationDate=" + creationDate + ", cart=" + cart
-				+ ", orderByCustomer=" + orderByCustomer + ", wishlist=" + wishlist + "]";
+	public Wallet getWallet() {
+		return wallet;
 	}
 
-	
-
+	public void setWallet(Wallet wallet) {
+		this.wallet = wallet;
+	}
 
 }

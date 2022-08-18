@@ -1,7 +1,6 @@
 package com.homedecor.app.servicetest;
 
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
-import static org.hamcrest.CoreMatchers.nullValue;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -24,7 +23,7 @@ import com.homedecor.app.service.CustomerService;
 	
 	@Test
 	void deleteCustomerByIdTest() throws CustomerException {
-		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null);
+		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null,null);
 		assertTrue(this.customerService.addCustomer(customer));
 		assertEquals(true, this.customerService.deleteCustomer(4));
 		assertThrows(CustomerException.class, () -> this.customerService.deleteCustomer(4));
@@ -33,7 +32,7 @@ import com.homedecor.app.service.CustomerService;
 	@Test
 	void addCustomerTest() throws CustomerException {
 		assertThrows(CustomerException.class, () -> this.customerService.addCustomer(null));
-		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null);
+		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null,null);
 		assertTrue(this.customerService.addCustomer(customer));
 		assertNotNull(this.customerService.getCustomerById(4));
 		assertThrows(CustomerException.class, () -> this.customerService.addCustomer(customer));
@@ -43,7 +42,7 @@ import com.homedecor.app.service.CustomerService;
 
 	@Test
 	void getCustomerByIdTest() throws CustomerException {
-		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null);
+		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null,null);
 		assertTrue(this.customerService.addCustomer(customer));
 		assertNotNull(this.customerService.getCustomerById(4));
 		assertEquals(true, this.customerService.deleteCustomer(4));
@@ -52,7 +51,7 @@ import com.homedecor.app.service.CustomerService;
 
 	@Test
 	void getAllCustomerTest() throws CustomerException {
-		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null);		
+		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null,null);		
 		assertTrue(this.customerService.addCustomer(customer));
 		assertNotNull(this.customerService.findAllCustomers());
 		assertEquals(true, this.customerService.deleteCustomer(4));
@@ -61,7 +60,7 @@ import com.homedecor.app.service.CustomerService;
 	
 	@Test
 	void customerLoginTest() throws CustomerException {
-		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null);		
+		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null,null);		
 		assertTrue(this.customerService.addCustomer(customer));
 		Customer customer2 = customerService.getCustomerById(4).get();
 		String customerEmailId=customer2.getCustomerEmail();
@@ -74,7 +73,7 @@ import com.homedecor.app.service.CustomerService;
 	
 	@Test
 	void updateCustomerAddress() throws CustomerException{
-		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null);		
+		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null,null);		
 		assertTrue(this.customerService.addCustomer(customer));
 		Customer customer2 = customerService.getCustomerById(4).get();
 		Integer customerIdInteger = customer2.getCustomerId();
@@ -84,7 +83,7 @@ import com.homedecor.app.service.CustomerService;
 	
 	@Test
 	void updateCustomerEmail() throws CustomerException{
-		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null);
+		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null,null);
 		assertTrue(this.customerService.addCustomer(customer));
 		Customer customer2 = customerService.getCustomerById(4).get();
 		Integer customerIdInteger = customer2.getCustomerId();
@@ -94,7 +93,7 @@ import com.homedecor.app.service.CustomerService;
 	
 	@Test
 	void updateCustomerPhone() throws CustomerException{
-		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null);
+		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null,null);
 		assertTrue(this.customerService.addCustomer(customer));
 		Customer customer2 = customerService.getCustomerById(4).get();
 		Integer customerInteger = customer2.getCustomerId();
@@ -104,7 +103,7 @@ import com.homedecor.app.service.CustomerService;
 	
 	@Test
 	void updatePassword() throws CustomerException{
-		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null);
+		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null,null);
 		assertTrue(this.customerService.addCustomer(customer));
 		Customer customer2 = customerService.getCustomerById(4).get();
 		String customerEmailId = customer2.getCustomerEmail();
@@ -116,9 +115,9 @@ import com.homedecor.app.service.CustomerService;
 	@Test
 	void updateCustomerInformation() throws CustomerException{
 		assertThrows(CustomerException.class, () -> this.customerService.addCustomer(null));
-		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null);
+		Customer customer = new Customer(4,"Divisha","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null,null);
 		assertTrue(this.customerService.addCustomer(customer));
-		assertNotNull(this.customerService.updateCustomer(new Customer(4,"Rubi","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null)));
+		assertNotNull(this.customerService.updateCustomer(new Customer(4,"Rubi","divisha123@gmail.com","Dibu04","9424499512","Jawad",null,null,null,null)));
 		assertThrows(CustomerException.class, () -> this.customerService.updateCustomer(null));
 		assertEquals(true, this.customerService.deleteCustomer(4));
 		assertThrows(CustomerException.class, () -> this.customerService.updateCustomer(customer));

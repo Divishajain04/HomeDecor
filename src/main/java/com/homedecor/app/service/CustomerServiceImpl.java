@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.homedecor.app.dao.CartRepository;
 import com.homedecor.app.dao.CustomerRepository;
+import com.homedecor.app.dao.WalletRepository;
 import com.homedecor.app.dao.WishlistRepository;
 import com.homedecor.app.dto.Cart;
 import com.homedecor.app.dto.Customer;
+import com.homedecor.app.dto.Wallet;
 import com.homedecor.app.dto.Wishlist;
 import com.homedecor.app.exception.CustomerException;
 
@@ -32,6 +34,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	private CartRepository cartRepository;
+	
+	@Autowired
+	private WalletRepository walletRepository;
 
 	@Autowired
 	private WishlistRepository wishlistRepository;
@@ -57,6 +62,8 @@ public class CustomerServiceImpl implements CustomerService {
 		} else {
 			Cart cart = this.cartRepository.save(new Cart(customer.getCustomerId()));
 			Wishlist wishlist = this.wishlistRepository.save(new Wishlist(customer.getCustomerId()));
+			Wallet wallet=this.walletRepository.save(new Wallet(customer.getCustomerId()));
+			customer.setWallet(wallet);
 			customer.setCart(cart);
 			customer.setWishlist(wishlist);
 			this.customerRepository.save(customer);
