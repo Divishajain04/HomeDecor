@@ -101,7 +101,7 @@ public class AdminServiceImpl implements AdminService {
 	 * @param adminEmailId      - Admin's EmailId
 	 * @param oldPassword       - old adminPassword
 	 * @param newPassword       - new password to be updated
-	 * @returns Boolean         - true, if password for that adminId updated successfully otherwise throws AccountException
+	 * @returns Boolean         - true, if password for that adminId updated successfully otherwise throws AdminException
 	 * @throws AdminException   - It is raised if we provide invalid adminId or password                                                        
      * Created By               - Lucky Rathore
      * Created Date             - 16-AUG-2022                           
