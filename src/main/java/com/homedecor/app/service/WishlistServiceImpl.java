@@ -22,8 +22,8 @@ import com.homedecor.app.exception.WishlistException;
 /************************************************************************************
  * @author      Nikhil Narwat 
  * Description: It is a service class that provides the
- *              services for adding, deleting, updating, get all wishlist's and get
- *              wishlist by id. 
+ *              services for adding, deleting, updating, get all wishlists and get
+ *              wishlist's by id. 
  * Version      1.0 
  * Created Date 16-08-2022
  ************************************************************************************/
@@ -46,7 +46,7 @@ public class WishlistServiceImpl implements WishlistService {
 	 * 
 	 * @object wishlist          - Adding wishlist by providing proper wishlist details.
 	 * @returns Boolean          - true, if wishlist is added otherwise throws WishlistException
-	 * @throws WishlistException - It is raised if the wishlist id is already present.
+	 * @throws WishlistException - It is raised if mandatory details are not provided or if the wishlist's id is already present.
 	 * By                        - Nikhil Narwat 
 	 * Created Date              - 16-08-2022
 	 ************************************************************************************/
@@ -69,9 +69,9 @@ public class WishlistServiceImpl implements WishlistService {
 	 * Method: getWishlistById 
 	 * Description: To fetch a wishlist by it's id.
 	 * 
-	 * @param wishlistId         - wishlistId
+	 * @param wishlistId         - wishlist's id
 	 * @returns Optional         - present, if wishlist is already present in the database otherwise throws WishlistException
-	 * @throws WishlistException - It is raised if the wishlist id is not present or if we provide invalid wishlistId.
+	 * @throws WishlistException - It is raised if the wishlist's id is not present.
 	 * By                        - Nikhil Narwat 
 	 * Created Date              - 16-08-2022
 	 ************************************************************************************/
@@ -89,7 +89,7 @@ public class WishlistServiceImpl implements WishlistService {
 	 * Method: getAllWishlists
 	 * Description: To fetch every wishlist from the record.
 	 * 
-	 * @returns List             - wishlists list, if wishlist is already present in the database otherwise throws WishlistException
+	 * @returns List             - list of wishlist, if wishlist is already present in the database otherwise throws WishlistException
 	 * @throws WishlistException - It is raised if the wishlist table is empty.
 	 * By                        - Nikhil Narwat 
 	 * Created Date              - 16-08-2022
@@ -105,11 +105,11 @@ public class WishlistServiceImpl implements WishlistService {
 	}
 
 	/************************************************************************************
-	 * Method: getAllWishlists
-	 * Description: To fetch every wishlist from the record.
+	 * Method: deleteWishlistById
+	 * Description: To delete a wishlist by it's id.
 	 * 
-	 * @returns List             - wishlists list, if wishlist is already present in the database otherwise throws WishlistException
-	 * @throws WishlistException - It is raised if the wishlist table is empty.
+	 * @returns Boolean          - true, delete the wishlist if the wishlist's id exist otherwise throws WishlistException
+	 * @throws WishlistException - It is raised if the wishlist's id is not exist in our database.
 	 * By                        - Nikhil Narwat 
 	 * Created Date              - 16-08-2022
 	 ************************************************************************************/
@@ -125,6 +125,16 @@ public class WishlistServiceImpl implements WishlistService {
 		return true;
 	}
 
+	/************************************************************************************
+	 * Method: updateWishlist
+	 * Description: To update a wishlist by it's id.
+	 * 
+	 * @returns Wishlist         - wishlist, update the wishlist's details if the wishlist's id exist otherwise throws WishlistException
+	 * @throws WishlistException - It is raised if the wishlist's id is not present in our database.
+	 * By                        - Nikhil Narwat 
+	 * Created Date              - 16-08-2022
+	 ************************************************************************************/
+	
 	@Override
 	public Wishlist updateWishlist(Wishlist wishlist) throws WishlistException {
 		Optional<Wishlist> findWishlist = this.wishlistRepository.findById(wishlist.getWishlistId());
@@ -138,10 +148,10 @@ public class WishlistServiceImpl implements WishlistService {
 
 	/************************************************************************************
 	 * Method: addWishlistProductToCart
-	 * Description: To add products from wishlist to cart using customer id.
+	 * Description: To add products from wishlist to cart using customer's id.
 	 * 
 	 * @returns Boolean          - true, if customer, cart and wishlist are present otherwise throws CustomerException, WishlistException, CartException
-	 * @throws CustomerException - It is raised if invalid customer Id
+	 * @throws CustomerException - It is raised if invalid customer's id
 	 * @throws CartException     - It is raised if cart not found
 	 * @throws WishlistException - It is raised if wishlist not found
 	 * By                        - Nikhil Narwat 

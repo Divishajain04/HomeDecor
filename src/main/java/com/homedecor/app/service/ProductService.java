@@ -23,7 +23,7 @@ public interface ProductService {
 
 	public List<Product> findAllProductsLowToHigh() throws ProductException;
 	
-	public Product findProductByName(String productName) throws ProductException;
+	public List<Product> findProductByName(String productName) throws ProductException;
 	 
 	public long countAllVaritiesOfProduct() throws ProductException;
 	
