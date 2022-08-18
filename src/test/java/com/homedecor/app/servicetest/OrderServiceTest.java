@@ -23,7 +23,7 @@ import com.homedecor.app.service.OrderService;
 	
 	@Test
 	void deleteOrderByIdTest() throws OrderException {
-		OrderByCustomer getOrder = new OrderByCustomer(8, "Pending", null);
+		OrderByCustomer getOrder = new OrderByCustomer(8, "Pending", null,null);
 		assertTrue(orderService.addOrder(getOrder));
 		assertEquals(true, this.orderService.deleteOrderById(8));
 		assertThrows(OrderException.class,()->this.orderService.deleteOrderById(8));
@@ -32,7 +32,7 @@ import com.homedecor.app.service.OrderService;
 	@Test
 	void addOrderTest() throws OrderException {
 		assertThrows(OrderException.class,()->this.orderService.addOrder(null));
-		OrderByCustomer getOrder = new OrderByCustomer(8, "Pending", null);
+		OrderByCustomer getOrder = new OrderByCustomer(8, "Pending", null,null);
 		assertTrue(orderService.addOrder(getOrder));
 		assertNotNull(orderService);
 		assertThrows(OrderException.class,()->this.orderService.addOrder(getOrder));
@@ -42,7 +42,7 @@ import com.homedecor.app.service.OrderService;
 	
 	@Test
 	void getOrderByIdTest() throws OrderException {
-		OrderByCustomer order = new OrderByCustomer(8, "Pending", null);
+		OrderByCustomer order = new OrderByCustomer(8, "Pending", null,null);
 		assertTrue(orderService.addOrder(order));
 		OrderByCustomer getOrder = orderService.getOrderById(8).get();
 		Integer orderId = getOrder.getOrderId();
@@ -55,7 +55,7 @@ import com.homedecor.app.service.OrderService;
 	
 	@Test
 	void getAllOrdersTest() throws OrderException {
-		OrderByCustomer order = new OrderByCustomer(8, "Pending", null);
+		OrderByCustomer order = new OrderByCustomer(8, "Pending", null,null);
 		assertTrue(orderService.addOrder(order));
 		assertNotNull(this.orderService.getAllOrders());
 		assertEquals(true, this.orderService.deleteOrderById(8));
@@ -64,11 +64,11 @@ import com.homedecor.app.service.OrderService;
 	
 	@Test
 	void updateOrderTest() throws OrderException {
-		OrderByCustomer order = new OrderByCustomer(8, "Pending", null);
+		OrderByCustomer order = new OrderByCustomer(8, "Pending", null,null);
 		assertTrue(orderService.addOrder(order));
-		assertNotNull(this.orderService.updateOrder(new OrderByCustomer(8, "Done", null)));
+		assertNotNull(this.orderService.updateOrder(new OrderByCustomer(8, "Done", null,null)));
 		assertEquals(true, this.orderService.deleteOrderById(8));
-		assertThrows(OrderException.class,()-> this.orderService.updateOrder(new OrderByCustomer(8, "Successfull", null)));
+		assertThrows(OrderException.class,()-> this.orderService.updateOrder(new OrderByCustomer(8, "Successfull", null,null)));
 		
 	}
 

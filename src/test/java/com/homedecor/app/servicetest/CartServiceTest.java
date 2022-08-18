@@ -64,5 +64,14 @@ class CartServiceTest {
 		assertEquals(true, this.cartService.deleteCartById(14));
 		assertThrows(CartException.class, () -> this.cartService.updateCart(new Cart(14, null, null)));
 	}
+	
+	@Test
+	void totalProductInCustomerCartByIdTest() throws CartException {
+		Cart cart = new Cart(14, null, null);
+		assertTrue(this.cartService.addCart(cart));
+		assertNotNull(this.cartService.totalAmountOfCustomerCartById(14));
+		assertEquals(true, this.cartService.deleteCartById(14));
+		//assertThrows(CartException.class, () -> this.cartService.totalAmountOfCustomerCartById(14));
+	}
 
 }
