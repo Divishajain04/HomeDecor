@@ -13,7 +13,7 @@ import com.homedecor.app.exception.PaymentException;
 import com.homedecor.app.exception.WishlistException;
 
 /************************************************************************************
- *          @author          Prateek Tomer
+ *          @author          Prateek Tomar
  *          Description      It is a service class that provides the services for adding a new payment, 
                              get payment by id,get all payments information, updating into an existing payment, delete admin by id.  
   *         Version          1.0
@@ -33,7 +33,7 @@ public class PaymentServiceImpl implements PaymentService{
      * @Object payment                - adding payment by providing mandatory payment details
 	 * @returns Boolean               - true, if payment added successfully otherwise throws PaymentException
 	 * @throws PaymentException       - It is raised if payment Id is already registered in our database
-     * Created By                     - Prateek Tomer
+     * Created By                     - Prateek Tomar
      * Created Date                   - 16-AUG-2022                           
 	 
 	 ************************************************************************************/
@@ -61,7 +61,7 @@ public class PaymentServiceImpl implements PaymentService{
      * @param paymentId              - paymentId
 	 * @returns Boolean              - isPresent, if payment Id exists in our database otherwise throws PaymentException
 	 * @throws PaymentException      - It is raised if payment Id is not present or we provide an invalid payment Id                                                   
-     * Created By                    - Prateek Tomer
+     * Created By                    - Prateek Tomar
      * Created Date                  - 16-AUG-2022                           
 	 
 	 ************************************************************************************/
@@ -82,7 +82,7 @@ public class PaymentServiceImpl implements PaymentService{
 	 * 
 	 * @returns List                 - payments list, if payment is already present in the database otherwise throws PaymentException
 	 * @throws PaymenttException     - It is raised if the payment table is empty.
-	 * Created By                    - Prateek Tomer 
+	 * Created By                    - Prateek Tomar 
 	 * Created Date                  - 16-AUG-2022
 	 ************************************************************************************/
 	
@@ -103,7 +103,7 @@ public class PaymentServiceImpl implements PaymentService{
      * @param paymentId              - payment's Id
 	 * @returns Boolean              - true, if payment Id is present in our database otherwise throws AdminException
 	 * @throws PaymentException      - It is raised if payment Id is not present or we provide an invalid admin Id                                                   
-     * Created By                    - Prateek Tomer
+     * Created By                    - Prateek Tomar
      * Created Date                  - 16-AUG-2022                           
 	 
 	 ************************************************************************************/
@@ -125,7 +125,7 @@ public class PaymentServiceImpl implements PaymentService{
      * @Object payment            -  updating an existing payment record 
 	 * @returns payment           - payment, if payment details updated successfully otherwise throws PaymentException
 	 * @throws PaymentException   - It is raised if we payment Id is not present in records                                                      
-     * Created By                 - Prateek Tomer
+     * Created By                 - Prateek Tomar
      * Created Date               - 16-AUG-2022                           
 	 
 	 ************************************************************************************/
