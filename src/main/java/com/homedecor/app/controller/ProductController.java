@@ -69,8 +69,8 @@ public class ProductController {
 	}
 
 	@GetMapping("product/productByName/{productName}")
-	public Product findProductByName(@PathVariable("productName") String productName) throws ProductException {
-		Product foundProduct = this.productService.findProductByName(productName);
+	public List<Product> findProductByName(@PathVariable("productName") String productName) throws ProductException {
+		List<Product> foundProduct = this.productService.findProductByName(productName);
 		return foundProduct;
 	}
 
