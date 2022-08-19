@@ -1,16 +1,22 @@
 package com.homedecor.app.servicetest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.homedecor.app.controller.CustomerController;
+import com.homedecor.app.dao.CustomerRepository;
 import com.homedecor.app.dto.Cart;
 import com.homedecor.app.dto.Customer;
 import com.homedecor.app.dto.OrderByCustomer;
@@ -34,8 +40,8 @@ class CustomerServiceTest {
 	@Autowired
 	private CustomerService customerService;
 
-	
-	
+	@Autowired
+	private CustomerController customerController;
 	
 	@Test
 	void deleteCustomerByIdTest() throws CustomerException {
@@ -156,4 +162,89 @@ class CustomerServiceTest {
 		assertEquals(1, customerService.totalRegisteredCustomer());
 		assertEquals(true, this.customerService.deleteCustomer(8));
 	}
+	
+	@Test
+	void addCustomerControllerTest() throws CustomerException{
+		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		assertEquals("Customer added Successfully",customerController.addCustomer(customer));
+		assertEquals(true, this.customerService.deleteCustomer(8));
+	}
+
+	
+	@Test
+	void getCustomerByIdControllerTest() throws CustomerException{
+		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		assertEquals("Customer added Successfully",customerController.addCustomer(customer));
+		assertTrue(this.customerController.getCustomerById(8).isPresent());
+		assertEquals(true, this.customerService.deleteCustomer(8));
+	}
+	
+	
+	@Test
+	void getAllCustomers() throws CustomerException{
+		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		assertEquals("Customer added Successfully",customerController.addCustomer(customer));
+		List customerList = customerController.getAllCustomers();
+		assertThat(customerList).size().isGreaterThan(0);
+		assertEquals(true,this.customerService.deleteCustomer(8));
+	}
+	
+	@Test
+	void updateCustomerControllerTest() throws CustomerException{
+		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		assertEquals("Customer added Successfully",customerController.addCustomer(customer));
+		assertNotNull(customerController.updateCustomer(new Customer(8, "Divisha Jain", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null)));
+		assertEquals(true, this.customerService.deleteCustomer(8));
+	}
+	
+	@Test
+	void updateEmailControllerTest() throws CustomerException{
+		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		assertEquals("Customer added Successfully",customerController.addCustomer(customer));
+		Customer getCustomer = customerController.getCustomerById(8).get();
+		Integer customerId = getCustomer.getCustomerId();
+		assertEquals(8, customerId);
+		assertEquals("Email updated Successfully", customerController.updateEmail(customerId, "dibu0404@gmail.com"));
+		assertEquals(true, this.customerService.deleteCustomer(8));
+	}
+	@Test
+	void updateAddressControllerTest() throws CustomerException{
+		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		assertEquals("Customer added Successfully",customerController.addCustomer(customer));
+		Customer getCustomer = customerController.getCustomerById(8).get();
+		Integer customerId = getCustomer.getCustomerId();
+		assertEquals(8, customerId);
+		assertEquals("Address updated Successfully", customerController.updateAddress(customerId, "Neemuch"));
+		assertEquals(true, this.customerService.deleteCustomer(8));
+	}
+	
+	@Test
+	void updateMobileNoControllerTest() throws CustomerException{
+		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		assertEquals("Customer added Successfully",customerController.addCustomer(customer));
+		Customer getCustomer = customerController.getCustomerById(8).get();
+		Integer customerId = getCustomer.getCustomerId();
+		assertEquals(8, customerId);
+		assertEquals("Mobile no. updated Successfully", customerController.updatePhone(customerId, "9981143290"));
+		assertEquals(true, this.customerService.deleteCustomer(8));	
+	}
+	
+	@Test
+	void deleteByIDControllerTest() throws CustomerException{
+		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		assertEquals("Customer added Successfully",customerController.addCustomer(customer));
+		Customer getCustomer = customerController.getCustomerById(8).get();
+		Integer customerId = getCustomer.getCustomerId();
+		assertEquals(8, customerId);
+		assertEquals("Customer deleted Successfully", this.customerController.deleteCustomerById(8));	
+	}
+	
+	@Test
+	void countRegisteredCustomerControllerTest() throws CustomerException{
+		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		assertEquals("Customer added Successfully",customerController.addCustomer(customer));
+		assertEquals(1, customerController.countRegisteredCustomer());
+		assertEquals(true, this.customerService.deleteCustomer(8));
+	}
+	
 }
