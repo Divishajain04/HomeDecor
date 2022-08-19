@@ -75,7 +75,7 @@ class CustomerServiceTest {
 		assertNotNull(this.customerService.findAllCustomers());
 		assertEquals(true, this.customerService.deleteCustomer(8));
 	}
-/*
+
 	@Test
 	void customerLoginTest() throws CustomerException {
 		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
@@ -85,10 +85,9 @@ class CustomerServiceTest {
 		String customerPasswordTest = customer2.getPassword();
 		assertEquals(true, this.customerService.login(customerEmailIdTest, customerPasswordTest));
 		assertEquals(true, this.customerService.deleteCustomer(8));
-		assertThrows(CustomerException.class, () -> this.customerService.login(customerEmailId, customerPasswordTest));
+		assertThrows(CustomerException.class, () -> this.customerService.login(customerEmailIdTest, customerPasswordTest));
 	}
 
-	*/
 	@Test
 	void updateCustomerAddress() throws CustomerException {
 		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
@@ -122,19 +121,17 @@ class CustomerServiceTest {
 		assertEquals(true, this.customerService.deleteCustomer(8));
 	}
 
-/*
+
 	@Test
 	void updatePassword() throws CustomerException {
-		Customer customer = new Customer(6, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",
-				null, null, null, null);
+		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
 		assertTrue(this.customerService.addCustomer(customer));
-		Customer customer2 = customerService.getCustomerById(6).get();
-		String customerEmailId = customer2.getCustomerEmail();
+		Customer customer2 = customerService.getCustomerById(8).get();
+		String customerEmailIdTest = customer2.getCustomerEmail();
 		String customerPassword = customer2.getPassword();
-		assertEquals(true, this.customerService.updatePassword(customerEmailId, customerPassword, "Jain08"));
-		assertEquals(true, this.customerService.deleteCustomer(6));
+		assertEquals(true, this.customerService.updatePassword(customerEmailIdTest, customerPassword, "RubiJain08"));
+		assertEquals(true, this.customerService.deleteCustomer(8));
 	}
-*/
 	
 
 	@Test
