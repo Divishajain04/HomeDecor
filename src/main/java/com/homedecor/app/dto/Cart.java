@@ -3,6 +3,7 @@ package com.homedecor.app.dto;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
@@ -17,7 +18,7 @@ public class Cart {
 	@OneToOne
 	private OrderByCustomer orderByCustomer;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Product> product;
 
 	public Cart() {
