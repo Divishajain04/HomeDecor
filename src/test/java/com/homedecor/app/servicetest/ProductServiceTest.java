@@ -9,8 +9,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.homedecor.app.dto.Category;
 import com.homedecor.app.dto.Product;
+import com.homedecor.app.exception.CategoryException;
 import com.homedecor.app.exception.ProductException;
+import com.homedecor.app.service.CategoryService;
 import com.homedecor.app.service.ProductService;
 
 @SpringBootTest
@@ -18,29 +21,35 @@ class ProductServiceTest {
 
 	@Autowired
 	private ProductService productService;
-//
+	
+	@Autowired
+	private CategoryService categoryService;
+
 //	@Test
-//	void deleteProductByIdTest() throws ProductException {
-//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20);
+//	void deleteProductByIdTest() throws ProductException, CategoryException {
+//		Category category = new Category(1,"Furniture",null);
+//		assertTrue(this.categoryService.addCategory(category));
+//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
 //		assertTrue(this.productService.addProducts(product));
 //		assertEquals(true, this.productService.deleteProductById(21));
+//		assertEquals(true,categoryService.deleteCategoryById(1));
 //		assertThrows(ProductException.class, () -> this.productService.deleteProductById(21));
 //	}
+
+	@Test
+	void addProductTest() throws ProductException, CategoryException {
+		assertThrows(ProductException.class, () -> this.productService.addProducts(null));
+		Category category = new Category(421,"Furniture",null);
+		assertTrue(this.categoryService.addCategory(category));
+		Product product = new Product(421, "Sofa", "Double layer Foam", 20000.0, 20,421);
+		assertTrue(this.productService.addProducts(product));
+		assertEquals(true,categoryService.deleteCategoryById(421));
+		assertThrows(ProductException.class, () -> this.productService.deleteProductById(421));
+	}
 //
 //	@Test
-//	void addProductTest() throws ProductException {
-//		assertThrows(ProductException.class, () -> this.productService.addProducts(null));
-//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20);
-//		assertTrue(this.productService.addProducts(product));
-//		assertNotNull(this.productService.getProductById(21));
-//		assertThrows(ProductException.class, () -> this.productService.addProducts(product));
-//		assertEquals(true, this.productService.deleteProductById(21));
-//
-//	}
-//
-//	@Test
-//	void getProductByIdTest() throws ProductException {
-//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20);
+//	void getProductByIdTest() throws ProductException, CategoryException {
+//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
 //		assertTrue(this.productService.addProducts(product));
 //		assertNotNull(this.productService.getProductById(21));
 //		assertEquals(true, this.productService.deleteProductById(21));
@@ -48,8 +57,8 @@ class ProductServiceTest {
 //	}
 //
 //	@Test
-//	void getAllProductTest() throws ProductException {
-//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20);
+//	void getAllProductTest() throws ProductException, CategoryException {
+//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
 //		assertTrue(this.productService.addProducts(product));
 //		assertNotNull(this.productService.getAllProducts());
 //		assertEquals(true, this.productService.deleteProductById(21));
@@ -57,18 +66,18 @@ class ProductServiceTest {
 //	}
 //
 //	@Test
-//	void updateProductTest() throws ProductException {
-//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20);
+//	void updateProductTest() throws ProductException, CategoryException {
+//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
 //		assertTrue(this.productService.addProducts(product));
-//		assertNotNull(this.productService.updateProduct(new Product(21, "Chair", "Double layer Foam", 20000.0, 20)));
+//		assertNotNull(this.productService.updateProduct(new Product(21, "Chair", "Double layer Foam", 20000.0, 20,1)));
 //		assertEquals(true, this.productService.deleteProductById(21));
 //		assertThrows(ProductException.class,
-//				() -> this.productService.updateProduct(new Product(21, "Chair", "Double layer Foam", 20000.0, 20)));
+//				() -> this.productService.updateProduct(new Product(21, "Chair", "Double layer Foam", 20000.0, 20,1)));
 //	}
 //
 //	@Test
-//	void findAllProductHighToLowTest() throws ProductException {
-//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20);
+//	void findAllProductHighToLowTest() throws ProductException, CategoryException {
+//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
 //		assertTrue(this.productService.addProducts(product));
 //		assertNotNull(this.productService.findAllProductsHighToLow());
 //		assertEquals(true, this.productService.deleteProductById(21));
@@ -76,8 +85,8 @@ class ProductServiceTest {
 //	}
 //
 //	@Test
-//	void findAllProductLowToHighTest() throws ProductException {
-//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20);
+//	void findAllProductLowToHighTest() throws ProductException, CategoryException {
+//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
 //		assertTrue(this.productService.addProducts(product));
 //		assertNotNull(this.productService.findAllProductsLowToHigh());
 //		assertEquals(true, this.productService.deleteProductById(21));
@@ -85,8 +94,8 @@ class ProductServiceTest {
 //	}
 //
 //	@Test
-//	void findProductByNameTest() throws ProductException {
-//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20);
+//	void findProductByNameTest() throws ProductException, CategoryException {
+//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
 //		assertTrue(this.productService.addProducts(product));
 //		assertNotNull(this.productService.findProductByName("Sofa"));
 //		assertEquals(true, this.productService.deleteProductById(21));
