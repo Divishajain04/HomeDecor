@@ -15,6 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.homedecor.app.dto.Admin;
 import com.homedecor.app.exception.AdminException;
 import com.homedecor.app.service.AdminService;
+/************************************************************************************
+ *          @author          Lucky Rathore
+ *          Description      It is a controller class which provides RESTFUl API's to handle different HTTP requests.
+ *          Version          1.0
+ *          Created Date     16-AUG-2022
+ ************************************************************************************/
+
 
 @RestController
 public class AdminController {
@@ -22,17 +29,52 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 
+	
+	/************************************************************************************
+	 * Method: addAdmin
+     * Description: To handle a Http POST request
+     * 
+     * @Object admin                 - Admin's object
+	 * @returns String               - Admin added Successfully
+     * Created By                    - Lucky Rathore
+     * Created Date                  - 16-AUG-2022                           
+	 
+	 ************************************************************************************/
+
 	@PostMapping("admin")
 	public String addAdmin(@Valid @RequestBody Admin admin) throws AdminException {
 		this.adminService.addAdmin(admin);
 		return "Admin added Successfully";
 	}
+	
+	
+	/************************************************************************************
+	 * Method: getAdminById
+     * Description: To handle a Http GET request
+     * 
+     * @Param adminId                - admin's id
+	 * @returns Optional<Admin>      - foundAdmin     - 
+     * Created By                    - Lucky Rathore
+     * Created Date                  - 16-AUG-2022                           
+	 
+	 ************************************************************************************/
 
 	@GetMapping("admin/{adminId}")
 	public Optional<Admin> getAdminById(@PathVariable("adminId") Integer adminId) throws AdminException {
 		Optional<Admin> foundAdmin = this.adminService.getAdminById(adminId);
 		return foundAdmin;
 	}
+
+	/************************************************************************************
+	 * Method: deleteAdminById
+     * Description: To handle a Http DELETE request
+     * 
+     * @Param adminId               - admin's id 
+	 * @returns String              - Admin deleted Successfully
+     * Created By                   - Lucky Rathore
+     * Created Date                 - 16-AUG-2022                           
+	 
+	 ************************************************************************************/
 
 	@DeleteMapping("admin/{adminId}")
 	public String deleteAdminById(@PathVariable("adminId") Integer adminId) throws AdminException {
