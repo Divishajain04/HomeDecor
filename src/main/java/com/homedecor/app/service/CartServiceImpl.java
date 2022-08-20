@@ -44,7 +44,7 @@ public class CartServiceImpl implements CartService {
 	/************************************************************************************
 	 * Method:                  - addCart
      * Description:             - To add a new cart into the database
-	 * @param Cart              - Cart's object
+	 * @object Cart             - Cart's object
 	 * @returns Boolean         - true, if cart added otherwise throws CartException
 	 * @throws CartException    - It is raised due to mandatory details are not filled or cart already exist
      * Created By               - Prince Verma
