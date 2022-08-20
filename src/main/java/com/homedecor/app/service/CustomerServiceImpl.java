@@ -91,6 +91,7 @@ public class CustomerServiceImpl implements CustomerService {
 		this.customerRepository.deleteById(customerId);
 		this.cartRepository.deleteById(customerId);
 		this.wishlistRepository.deleteById(customerId);
+		this.walletRepository.deleteById(customerId);
 		return true;
 	}
 
