@@ -19,6 +19,12 @@ import com.homedecor.app.exception.OrderException;
 import com.homedecor.app.exception.PaymentException;
 import com.homedecor.app.service.OrderService;
 
+/************************************************************************************
+ *          @author          Prince Verma
+ *          Description      It is a controller class which provides RESTFUl API's to handle different HTTP requests.
+ *          Version          1.0
+ *          Created Date     16-AUG-2022
+ ************************************************************************************/
 
 @RestController
 public class OrderController {
@@ -26,6 +32,17 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
+	/************************************************************************************
+	 * Method: addOrder
+     * Description: To handle a Http POST request
+     * 
+     * @Object orderByCustomer       - orderByCustomer's object
+	 * @returns Boolean              - true
+     * Created By                    - Prince Verma
+     * Created Date                  - 16-AUG-2022                           
+	 
+	 ************************************************************************************/
+
 	@PostMapping("order")
 	public Boolean addOrder(@RequestBody OrderByCustomer orderByCustomer) throws OrderException {
 			this.orderService.addOrder(orderByCustomer);
@@ -33,6 +50,17 @@ public class OrderController {
 		return true;
 	}
 	
+	/************************************************************************************
+	 * Method: getOrderById
+     * Description: To handle a Http GET request
+     * 
+     * @OParam orderId                       - orderByCustomer's Id
+	 * @returns Optional<OrderByCustomer>    - foundOrder
+     * Created By                            - Prince Verma
+     * Created Date                          - 16-AUG-2022                           
+	 
+	 ************************************************************************************/
+
 	
 	@GetMapping("order/{orderId}")
 	public Optional<OrderByCustomer> getOrderById(@PathVariable ("orderId") Integer orderId) throws OrderException  {
@@ -40,6 +68,17 @@ public class OrderController {
 		 return foundOrder;
 	}
 	
+	/************************************************************************************
+	 * Method: updateOrder
+     * Description: To handle a Http PATCH request
+     * 
+     * @Object orderByCustomer       - orderByCustomer's object
+	 * @returns OrderByCustomer      - foundOrder
+     * Created By                    - Prince Verma
+     * Created Date                  - 16-AUG-2022                           
+	 
+	 ************************************************************************************/
+
 	
 	@PatchMapping("order")
 	public OrderByCustomer updateOrder(@RequestBody OrderByCustomer order) throws OrderException {
@@ -47,6 +86,16 @@ public class OrderController {
 		 return foundOrder;
 	}
 	
+	/************************************************************************************
+	 * Method: getAllOrders
+     * Description: To handle a Http GET request
+     * 
+	 * @returns List<OrderByCustomer>    - foundOrders
+     * Created By                        - Prince Verma
+     * Created Date                      - 16-AUG-2022                           
+	 
+	 ************************************************************************************/
+
 	@GetMapping("orders")
 	public List<OrderByCustomer> getAllOrders() throws OrderException {
 		List<OrderByCustomer> foundOrders = this.orderService.getAllOrders();
@@ -54,12 +103,35 @@ public class OrderController {
 		
 	}
 	
+	/************************************************************************************
+	 * Method: deleteOrderById
+     * Description: To handle a Http DELETE request
+     * 
+     * @Param orderId                - order's Id
+	 * @returns Boolean              - true
+     * Created By                    - Prince Verma
+     * Created Date                  - 16-AUG-2022                           
+	 
+	 ************************************************************************************/
+
 	@DeleteMapping("order/{orderId}")
 	public Boolean deleteOrderById(@PathVariable("orderId") Integer orderId) throws OrderException {
 			this.orderService.deleteOrderById(orderId);
 		return true;
 	}
 	
+	/************************************************************************************
+	 * Method: placeOrder
+     * Description: To handle a Http PATCH request
+     * 
+     * @Param customerId             - Customer's Id
+     * @Param orderId                - Order's Id
+	 * @returns String               - Order Placed Successfully
+     * Created By                    - Prince Verma
+     * Created Date                  - 16-AUG-2022                           
+	 
+	 ************************************************************************************/
+
 	@PatchMapping("order/placeOrder/{customerId}/{orderId}")
 	public String placeOrder(@PathVariable("customerId") Integer customerId,@PathVariable("orderId") Integer orderId)
 			throws OrderException, PaymentException, CartException, CustomerException {

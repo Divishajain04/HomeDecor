@@ -16,23 +16,64 @@ import com.homedecor.app.dto.Category;
 import com.homedecor.app.exception.CategoryException;
 import com.homedecor.app.service.CategoryService;
 
+/************************************************************************************
+ *          @author          Divisha Jain
+ *          Description      It is a controller class which provides RESTFUl API's to handle different HTTP requests.
+ *          Version          1.0
+ *          Created Date     16-AUG-2022
+ ************************************************************************************/
+
 @RestController
 public class CategoryController {
 	
 	@Autowired
 	private CategoryService categoryService;
-	
+
+	/************************************************************************************
+	 * Method: addCategory
+     * Description: To handle a Http POST request
+     * 
+     * @Object category              - Category's object
+	 * @returns String               - Category added Successfully
+     * Created By                    - Divisha Jain
+     * Created Date                  - 16-AUG-2022                           
+	 
+	 ************************************************************************************/
+
 	@PostMapping("category")
 	public String addCategory(@RequestBody Category category) throws CategoryException  {
 			this.categoryService.addCategory(category);
 		return "Category added Successfully";
 	}
 
+	/************************************************************************************
+	 * Method: updateCategory
+     * Description: To handle a Http PATCH request
+     * 
+     * @Object category              - Category's object
+	 * @returns Category             - CategoryUpdated
+     * Created By                    - Divisha Jain
+     * Created Date                  - 16-AUG-2022                           
+	 
+	 ************************************************************************************/
+
 	@PatchMapping("category")
 	public Category updateCategory(@RequestBody Category category) throws CategoryException {
 		Category categoryUpdated = this.categoryService.updateCategory(category);
 		 return categoryUpdated;
 	}
+	
+	/************************************************************************************
+	 * Method: getCategoryById
+     * Description: To handle a Http GET request
+     * 
+     * @Param categoryId             - Category's Id
+	 * @returns Optional<Category>   - foundCategory
+     * Created By                    - Divisha Jain
+     * Created Date                  - 16-AUG-2022                           
+	 
+	 ************************************************************************************/
+
 
 	@GetMapping("category/{categoryId}")
 	public Optional<Category> getCategoryById(@PathVariable ("categoryId") Integer categoryId) throws CategoryException  {
@@ -40,18 +81,50 @@ public class CategoryController {
 		 return foundCategory;
 	}
 	
+	/************************************************************************************
+	 * Method: getAllCategory
+     * Description: To handle a Http GET request
+     * 
+ 	 * @returns List<Category>       - foundAllCategory
+     * Created By                    - Divisha Jain
+     * Created Date                  - 16-AUG-2022                           
+	 
+	 ************************************************************************************/
+
 	@GetMapping("category/allCategory")
 	public List<Category> getAllCategory() throws CategoryException {
 		List<Category> foundAllCategory=this.categoryService.getAllCategories();
 		 return foundAllCategory;
 	}
 	
+	/************************************************************************************
+	 * Method: deleteCategoryById
+     * Description: To handle a Http DELETE request
+     * 
+     * @Param categoryId             - Category's Id
+	 * @returns String               - Category deleted Successfully
+     * Created By                    - Divisha Jain
+     * Created Date                  - 16-AUG-2022                           
+	 
+	 ************************************************************************************/
+
 	@DeleteMapping("category/{categoryId}")
 	public String deleteCategoryById(@PathVariable ("categoryId") Integer categoryId) throws CategoryException {
 			this.categoryService.deleteCategoryById(categoryId);
 		return "Category deleted Successfully";
 	}
 	
+	/************************************************************************************
+	 * Method: getCategoryByName
+     * Description: To handle a Http GET request
+     * 
+     * @Param categoryName           - Category's Name
+	 * @returns Category             - foundCategory
+     * Created By                    - Divisha Jain
+     * Created Date                  - 16-AUG-2022                           
+	 
+	 ************************************************************************************/
+
 	@GetMapping("category/name/{categoryName}")
 	public Category getCategoryByName(@PathVariable ("categoryName") String categoryName) throws CategoryException  {
 		Category foundCategory=this.categoryService.getCategoryByName(categoryName);
