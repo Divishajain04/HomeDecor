@@ -31,20 +31,20 @@ public class PaymentController {
 
 	@GetMapping("payment/{paymentId}")
 	public Optional<Payment> getPaymentById(@PathVariable("paymentId") Integer paymentId) throws PaymentException {
-		Optional<Payment> foundPayment = this.paymentService.getPaymentById(paymentId);
-		return foundPayment;
+		
+		return this.paymentService.getPaymentById(paymentId);
 	}
 
 	@PatchMapping("payment")
 	public Payment updatePayment(@RequestBody Payment payment) throws PaymentException {
-		Payment foundPayment =  this.paymentService.updatePayment(payment);
-		return foundPayment;
+	
+		return this.paymentService.updatePayment(payment);
 	}
 
 	@GetMapping("payment/")
 	public List<Payment> getAllPayment() throws PaymentException {
-		List<Payment> foundPayment = this.paymentService.getAllPayments();
-		return foundPayment;
+	
+		return this.paymentService.getAllPayments();
 	}
 
 	@DeleteMapping("payment/{paymentId}")
