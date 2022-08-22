@@ -63,8 +63,7 @@ public class CustomerController {
 
 	@GetMapping("customer/{customerId}")
 	public Optional<Customer> getCustomerById(@PathVariable("customerId") Integer customerId) throws CustomerException {
-		Optional<Customer> foundCustomer = this.customerService.getCustomerById(customerId);
-		return foundCustomer;
+		return this.customerService.getCustomerById(customerId);
 	}
 	
 	/************************************************************************************
@@ -80,8 +79,7 @@ public class CustomerController {
 
 	@GetMapping("allCustomers/")
 	public List<Customer> getAllCustomers() throws CustomerException {
-		List<Customer> foundCustomers = this.customerService.findAllCustomers();
-		return foundCustomers;
+		return this.customerService.findAllCustomers();
 	}
 	
 	/************************************************************************************
@@ -98,8 +96,7 @@ public class CustomerController {
 
 	@PatchMapping("customer")
 	public Customer updateCustomer(@Valid @RequestBody Customer customer) throws CustomerException {
-		Customer updatedCustomer = this.customerService.updateCustomer(customer);
-		return updatedCustomer;
+		return this.customerService.updateCustomer(customer);
 	}
 
 	/************************************************************************************

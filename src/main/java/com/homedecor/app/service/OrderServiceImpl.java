@@ -197,7 +197,7 @@ public class OrderServiceImpl implements OrderService {
 		String savedStatus = order.getStatus();
 		
 		Optional<Wallet> getWallet=this.walletRepository.findById(customerId);
-		//if(getWallet.isPresent())throw new WalletException("Wallet not exist for this customer");
+		if(getWallet.isEmpty())throw new WalletException("Wallet not exist for this customer");
 		Wallet foundWallet=getWallet.get();
 		Double walletBalance=foundWallet.getBalance();
 		

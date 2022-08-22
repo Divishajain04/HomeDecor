@@ -8,9 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.homedecor.app.dao.CategoryRepository;
 import com.homedecor.app.dto.Category;
-import com.homedecor.app.dto.Customer;
 import com.homedecor.app.exception.CategoryException;
-import com.homedecor.app.exception.CustomerException;
+
 
 /************************************************************************************
  * @author 		-   Divisha Jain 

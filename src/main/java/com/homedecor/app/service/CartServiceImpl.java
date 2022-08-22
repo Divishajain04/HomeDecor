@@ -240,11 +240,11 @@ public class CartServiceImpl implements CartService {
 		if(getCart==null)throw new CartException("Cart not present in the record");
 		List<Product> allProducts=new ArrayList<>();
 		allProducts.addAll(getCart.getProduct());
-		Boolean isremove=false;
+		boolean isRemove=false;
 		for(int i=0;i<quantity;i++) {
-		 isremove=allProducts.remove(getProduct);
+		 isRemove=allProducts.remove(getProduct);
 		}
-		if(isremove) {
+		if(isRemove) {
 			getCart.setProduct(allProducts);
 			this.cartRepository.save(getCart);
 		}else {

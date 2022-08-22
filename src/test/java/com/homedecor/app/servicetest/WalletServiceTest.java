@@ -16,7 +16,7 @@ import com.homedecor.app.exception.WalletException;
 import com.homedecor.app.service.WalletService;
 
 @SpringBootTest
-public class WalletServiceTest {
+ class WalletServiceTest {
 
 	@Autowired
 	private WalletService walletService;

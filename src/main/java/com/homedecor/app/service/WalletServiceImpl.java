@@ -50,7 +50,7 @@ public class WalletServiceImpl implements WalletService {
 		if (foundWallet.isEmpty())
 			throw new WalletException(walletId + " wallet Id not exist in the record for updation");
 
-		return this.walletRepository.getById(walletId);
+		return foundWallet.get();
 
 	}
 

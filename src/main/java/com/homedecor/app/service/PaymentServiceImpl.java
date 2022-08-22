@@ -8,9 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.homedecor.app.dao.PaymentRepository;
 import com.homedecor.app.dto.Payment;
-import com.homedecor.app.exception.AdminException;
 import com.homedecor.app.exception.PaymentException;
-import com.homedecor.app.exception.WishlistException;
+
 
 /************************************************************************************
  *          @author          Prateek Tomar

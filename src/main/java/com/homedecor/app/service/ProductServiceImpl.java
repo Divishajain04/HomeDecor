@@ -13,7 +13,7 @@ import com.homedecor.app.dto.Category;
 import com.homedecor.app.dto.Product;
 import com.homedecor.app.exception.CategoryException;
 import com.homedecor.app.exception.ProductException;
-import com.homedecor.app.exception.WishlistException;
+
 
 /************************************************************************************
  * @author      Nikhil Narwat 

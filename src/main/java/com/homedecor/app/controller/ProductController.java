@@ -34,20 +34,17 @@ public class ProductController {
 
 	@GetMapping("product/{productId}")
 	public Optional<Product> getProductById(@PathVariable("productId") Integer productId) throws ProductException {
-		Optional<Product> foundProduct = this.productService.getProductById(productId);
-		return foundProduct;
+		return this.productService.getProductById(productId);
 	}
 
 	@PatchMapping("product")
 	public Product updateProduct(@Valid @RequestBody Product product) throws ProductException {
-		Product foundProduct = this.productService.updateProduct(product);
-		return foundProduct;
+		return this.productService.updateProduct(product);
 	}
 
 	@GetMapping("product/allProduct")
 	public List<Product> getAllProduct() throws ProductException {
-		List<Product> foundProducts = this.productService.getAllProducts();
-		return foundProducts;
+		return this.productService.getAllProducts();
 	}
 
 	@DeleteMapping("product/{productId}")
@@ -58,20 +55,17 @@ public class ProductController {
 
 	@GetMapping("product/sortedHighToLow")
 	public List<Product> findProductHighToLow() throws ProductException {
-		List<Product> foundProducts = this.productService.findAllProductsHighToLow();
-		return foundProducts;
+		return this.productService.findAllProductsHighToLow();
 	}
 
 	@GetMapping("product/SortedLowToHigh")
 	public List<Product> findProductLowToHigh() throws ProductException {
-		List<Product> foundProducts = this.productService.findAllProductsLowToHigh();
-		return foundProducts;
+		return this.productService.findAllProductsLowToHigh();
 	}
 
 	@GetMapping("product/productByName/{productName}")
 	public List<Product> findProductByName(@PathVariable("productName") String productName) throws ProductException {
-		List<Product> foundProduct = this.productService.findProductByName(productName);
-		return foundProduct;
+		return this.productService.findProductByName(productName);
 	}
 
 	@GetMapping("varietiesOfProduct")
