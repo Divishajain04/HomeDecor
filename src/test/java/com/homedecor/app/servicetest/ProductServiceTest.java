@@ -25,16 +25,16 @@ class ProductServiceTest {
 	@Autowired
 	private CategoryService categoryService;
 
-//	@Test
-//	void deleteProductByIdTest() throws ProductException, CategoryException {
-//		Category category = new Category(1,"Furniture",null);
-//		assertTrue(this.categoryService.addCategory(category));
-//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
-//		assertTrue(this.productService.addProducts(product));
-//		assertEquals(true, this.productService.deleteProductById(21));
-//		assertEquals(true,categoryService.deleteCategoryById(1));
-//		assertThrows(ProductException.class, () -> this.productService.deleteProductById(21));
-//	}
+	@Test
+	void countAllVaritiesOfProductTest() throws ProductException, CategoryException {
+		Category category = new Category(1,"Furniture",null);
+		assertTrue(this.categoryService.addCategory(category));
+		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
+		assertTrue(this.productService.addProducts(product));
+		assertNotNull(this.productService.countAllVaritiesOfProduct());
+		assertEquals(true,categoryService.deleteCategoryById(1));
+		assertThrows(ProductException.class, () -> this.productService.deleteProductById(21));
+	}
 
 	@Test
 	void addProductTest() throws ProductException, CategoryException {
@@ -46,60 +46,82 @@ class ProductServiceTest {
 		assertEquals(true,categoryService.deleteCategoryById(421));
 		assertThrows(ProductException.class, () -> this.productService.deleteProductById(421));
 	}
-//
-//	@Test
-//	void getProductByIdTest() throws ProductException, CategoryException {
-//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
-//		assertTrue(this.productService.addProducts(product));
-//		assertNotNull(this.productService.getProductById(21));
-//		assertEquals(true, this.productService.deleteProductById(21));
-//		assertThrows(ProductException.class, () -> this.productService.getProductById(21));
-//	}
-//
-//	@Test
-//	void getAllProductTest() throws ProductException, CategoryException {
-//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
-//		assertTrue(this.productService.addProducts(product));
-//		assertNotNull(this.productService.getAllProducts());
-//		assertEquals(true, this.productService.deleteProductById(21));
-//		assertThrows(ProductException.class, () -> this.productService.getAllProducts());
-//	}
-//
-//	@Test
-//	void updateProductTest() throws ProductException, CategoryException {
-//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
-//		assertTrue(this.productService.addProducts(product));
-//		assertNotNull(this.productService.updateProduct(new Product(21, "Chair", "Double layer Foam", 20000.0, 20,1)));
-//		assertEquals(true, this.productService.deleteProductById(21));
+
+	@Test
+	void getProductByIdTest() throws ProductException, CategoryException {
+		Category category = new Category(1,"Furniture",null);
+		assertTrue(this.categoryService.addCategory(category));
+		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
+		assertTrue(this.productService.addProducts(product));
+		assertNotNull(this.productService.getProductById(21));
+		assertEquals(true,categoryService.deleteCategoryById(1));
+		assertThrows(ProductException.class, () -> this.productService.getProductById(21));
+	}
+
+	@Test
+	void getAllProductTest() throws ProductException, CategoryException {
+		Category category = new Category(1,"Furniture",null);
+		assertTrue(this.categoryService.addCategory(category));
+		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
+		assertTrue(this.productService.addProducts(product));
+		assertNotNull(this.productService.getAllProducts());
+		assertEquals(true,categoryService.deleteCategoryById(1));
+		assertThrows(ProductException.class, () -> this.productService.getAllProducts());
+	}
+
+	@Test
+	void updateProductTest() throws ProductException, CategoryException {
+		Category category = new Category(1,"Furniture",null);
+		assertTrue(this.categoryService.addCategory(category));
+		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
+		assertTrue(this.productService.addProducts(product));
+		assertNotNull(this.productService.updateProduct(new Product(21, "Chair", "Double layer Foam", 20000.0, 20,1)));
+		assertEquals(true,categoryService.deleteCategoryById(1));
 //		assertThrows(ProductException.class,
 //				() -> this.productService.updateProduct(new Product(21, "Chair", "Double layer Foam", 20000.0, 20,1)));
-//	}
-//
-//	@Test
-//	void findAllProductHighToLowTest() throws ProductException, CategoryException {
-//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
-//		assertTrue(this.productService.addProducts(product));
-//		assertNotNull(this.productService.findAllProductsHighToLow());
-//		assertEquals(true, this.productService.deleteProductById(21));
-//		assertThrows(ProductException.class, () -> this.productService.findAllProductsHighToLow());
-//	}
-//
-//	@Test
-//	void findAllProductLowToHighTest() throws ProductException, CategoryException {
-//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
-//		assertTrue(this.productService.addProducts(product));
-//		assertNotNull(this.productService.findAllProductsLowToHigh());
-//		assertEquals(true, this.productService.deleteProductById(21));
-//		assertThrows(ProductException.class, () -> this.productService.findAllProductsLowToHigh());
-//	}
-//
-//	@Test
-//	void findProductByNameTest() throws ProductException, CategoryException {
-//		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
-//		assertTrue(this.productService.addProducts(product));
-//		assertNotNull(this.productService.findProductByName("Sofa"));
-//		assertEquals(true, this.productService.deleteProductById(21));
+	}
+
+	@Test
+	void findAllProductHighToLowTest() throws ProductException, CategoryException {
+		Category category = new Category(1,"Furniture",null);
+		assertTrue(this.categoryService.addCategory(category));
+		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
+		assertTrue(this.productService.addProducts(product));
+		assertNotNull(this.productService.findAllProductsHighToLow());
+		assertEquals(true,categoryService.deleteCategoryById(1));
+		assertThrows(ProductException.class, () -> this.productService.findAllProductsHighToLow());
+	}
+
+	@Test
+	void findAllProductLowToHighTest() throws ProductException, CategoryException {
+		Category category = new Category(1,"Furniture",null);
+		assertTrue(this.categoryService.addCategory(category));
+		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
+		assertTrue(this.productService.addProducts(product));
+		assertNotNull(this.productService.findAllProductsLowToHigh());
+		assertEquals(true,categoryService.deleteCategoryById(1));
+		assertThrows(ProductException.class, () -> this.productService.findAllProductsLowToHigh());
+	}
+
+	@Test
+	void findProductByNameTest() throws ProductException, CategoryException {
+		Category category = new Category(1,"Furniture",null);
+		assertTrue(this.categoryService.addCategory(category));
+		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
+		assertTrue(this.productService.addProducts(product));
+		assertNotNull(this.productService.findProductByName("Sofa"));
+		assertEquals(true,categoryService.deleteCategoryById(1));
 //		assertThrows(ProductException.class, () -> this.productService.findProductByName("Sofa"));
-//	}
-//
+	}
+	
+	@Test
+	void countTotalStockTest() throws ProductException, CategoryException {
+		Category category = new Category(1,"Furniture",null);
+		assertTrue(this.categoryService.addCategory(category));
+		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
+		assertTrue(this.productService.addProducts(product));
+		assertNotNull(this.productService.countTotalStock());
+		assertEquals(true,categoryService.deleteCategoryById(1));
+		//assertThrows(ProductException.class, () -> this.productService.findProductByName("Sofa"));
+}
 }

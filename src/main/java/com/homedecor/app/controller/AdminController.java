@@ -61,8 +61,8 @@ public class AdminController {
 
 	@GetMapping("admin/{adminId}")
 	public Optional<Admin> getAdminById(@PathVariable("adminId") Integer adminId) throws AdminException {
-		Optional<Admin> foundAdmin = this.adminService.getAdminById(adminId);
-		return foundAdmin;
+		 
+		return this.adminService.getAdminById(adminId);
 	}
 
 	/************************************************************************************
