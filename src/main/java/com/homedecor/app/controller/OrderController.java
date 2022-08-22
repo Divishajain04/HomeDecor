@@ -17,6 +17,7 @@ import com.homedecor.app.exception.CartException;
 import com.homedecor.app.exception.CustomerException;
 import com.homedecor.app.exception.OrderException;
 import com.homedecor.app.exception.PaymentException;
+import com.homedecor.app.exception.WalletException;
 import com.homedecor.app.service.OrderService;
 
 /************************************************************************************
@@ -64,8 +65,7 @@ public class OrderController {
 	
 	@GetMapping("order/{orderId}")
 	public Optional<OrderByCustomer> getOrderById(@PathVariable ("orderId") Integer orderId) throws OrderException  {
-		Optional<OrderByCustomer> foundOrder = this.orderService.getOrderById(orderId);
-		 return foundOrder;
+		 return this.orderService.getOrderById(orderId);
 	}
 	
 	/************************************************************************************
@@ -82,8 +82,7 @@ public class OrderController {
 	
 	@PatchMapping("order")
 	public OrderByCustomer updateOrder(@RequestBody OrderByCustomer order) throws OrderException {
-		OrderByCustomer foundOrder = this.orderService.updateOrder(order);
-		 return foundOrder;
+		 return this.orderService.updateOrder(order);
 	}
 	
 	/************************************************************************************
@@ -98,8 +97,7 @@ public class OrderController {
 
 	@GetMapping("orders")
 	public List<OrderByCustomer> getAllOrders() throws OrderException {
-		List<OrderByCustomer> foundOrders = this.orderService.getAllOrders();
-		 return foundOrders;
+		 return this.orderService.getAllOrders();
 		
 	}
 	
@@ -123,6 +121,7 @@ public class OrderController {
 	/************************************************************************************
 	 * Method: placeOrder
      * Description: To handle a Http PATCH request
+	 * @throws WalletException 
      * 
      * @Param customerId             - Customer's Id
      * @Param orderId                - Order's Id
@@ -134,7 +133,7 @@ public class OrderController {
 
 	@PatchMapping("order/placeOrder/{customerId}/{orderId}")
 	public String placeOrder(@PathVariable("customerId") Integer customerId,@PathVariable("orderId") Integer orderId)
-			throws OrderException, PaymentException, CartException, CustomerException {
+			throws OrderException, PaymentException, CartException, CustomerException, WalletException {
 				this.orderService.placeOrder(customerId,orderId);
 		return "Order Placed Successfully";
 	}

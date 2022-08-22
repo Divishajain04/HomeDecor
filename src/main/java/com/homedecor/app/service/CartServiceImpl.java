@@ -154,7 +154,7 @@ public class CartServiceImpl implements CartService {
 		if(getCart.isEmpty())throw new CartException("Cart does not exist for this id " + cartId);
 		Cart foundCart=getCart.get();
 		List<Product> products =	foundCart.getProduct();
-			return  products.stream().map(i-> i.getProductPrice()).reduce((e1,e2)-> e1+e2);
+			return  products.stream().map(Product::getProductPrice).reduce((e1,e2)-> e1+e2);
 	}
 
 	/************************************************************************************
@@ -173,7 +173,7 @@ public class CartServiceImpl implements CartService {
 		if(getCart.isEmpty())throw new CartException("Cart does not exist for this id " + cartId);
 		Cart foundCart=getCart.get();
 		List<Product> products =	foundCart.getProduct();
-		return products.stream().map(i->i.getProductId()).count();
+		return products.stream().map(Product::getProductId).count();
 	}
 
 	/************************************************************************************
@@ -244,9 +244,13 @@ public class CartServiceImpl implements CartService {
 		for(int i=0;i<quantity;i++) {
 		 isremove=allProducts.remove(getProduct);
 		}
-		if(isremove==false)throw new ProductException(quantity+" product are not avilable in cart for product id "+productId);
-		getCart.setProduct(allProducts);
-		this.cartRepository.save(getCart);
+		if(isremove) {
+			getCart.setProduct(allProducts);
+			this.cartRepository.save(getCart);
+		}else {
+			throw new ProductException(quantity+" product are not avilable in cart for product id "+productId);
+		}
+		
 		return true;
 
 	}

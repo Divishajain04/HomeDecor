@@ -62,10 +62,10 @@ public class CartController {
 	 ************************************************************************************/
 
 	
-	@GetMapping("cart/{cartId}")
-	public Optional<Cart> getCartById(@PathVariable("cartId") Integer cartId) throws CartException {
-		Optional<Cart> foundCart = this.cartService.getCartById(cartId);
-		return foundCart;
+	@GetMapping("cart/{cartid}")
+	public Optional<Cart> getCartById(@PathVariable("cartid") Integer cartId) throws CartException {
+	
+		return this.cartService.getCartById(cartId);
 	}
 
 	/************************************************************************************
@@ -81,8 +81,8 @@ public class CartController {
 
 	@PatchMapping("cart")
 	public Cart updateCart(@RequestBody Cart cart) throws CartException {
-		Cart cartUpdated = this.cartService.updateCart(cart);
-		return cartUpdated;
+		
+		return this.cartService.updateCart(cart);
 	}
 
 	/************************************************************************************
@@ -97,8 +97,8 @@ public class CartController {
 
 	@GetMapping("cart/")
 	public List<Cart> getAllCart() throws CartException {
-		List<Cart> foundAllCart = this.cartService.getAllCarts();
-		return foundAllCart;
+		
+		return this.cartService.getAllCarts();
 	}
 
 	/************************************************************************************
@@ -112,8 +112,8 @@ public class CartController {
 	 
 	 ************************************************************************************/
 
-	@DeleteMapping("cart/{cartId}")
-	public String deleteCartById(@PathVariable("cartId") Integer cartId) throws CartException {
+	@DeleteMapping("cart/{cartid}")
+	public String deleteCartById(@PathVariable("cartid") Integer cartId) throws CartException {
 		this.cartService.deleteCartById(cartId);
 		return "Cart deleted successfully";
 	}
@@ -129,8 +129,8 @@ public class CartController {
 	 
 	 ************************************************************************************/
 
-	@GetMapping("cart/customer/totalAmount/{cartId}")
-	public String getTotalAmountOfCartById(@PathVariable("cartId") Integer cartId) throws CartException {
+	@GetMapping("cart/customer/amount/{cartid}")
+	public String getTotalAmountOfCartById(@PathVariable("cartid") Integer cartId) throws CartException {
 		Optional<Double> totalBalance = this.cartService.totalAmountOfCustomerCartById(cartId);
 		return "Total amount of " + cartId + " Id is :- " + totalBalance;
 	}
@@ -146,8 +146,8 @@ public class CartController {
 	 
 	 ************************************************************************************/
 
-	@GetMapping("cart/customer/totalProduct/{cartId}")
-	public String countAllProductInCartById(@PathVariable("cartId") Integer cartId) throws CartException {
+	@GetMapping("cart/customer/product/{cartid}")
+	public String countAllProductInCartById(@PathVariable("cartid") Integer cartId) throws CartException {
 		Long totalProduct = this.cartService.totalProductInCustomerCartById(cartId);
 		return "Total amount of " + cartId + " Id is :- " + totalProduct;
 	}
@@ -165,9 +165,9 @@ public class CartController {
 	 
 	 ************************************************************************************/
 
-	@PutMapping("cart/addProduct/{customerId}/{productId}/{quantity}")
-	public String addProductInCartByProductId(@PathVariable("customerId") Integer customerId,
-			@PathVariable("productId") Integer productId, @PathVariable("quantity") Integer quantity)
+	@PutMapping("cart/customer/product/{customerid}/{productid}/{quantity}")
+	public String addProductInCartByProductId(@PathVariable("customerid") Integer customerId,
+			@PathVariable("productid") Integer productId, @PathVariable("quantity") Integer quantity)
 			throws ProductException, CustomerException, CartException {
 		this.cartService.addProductToCart(customerId, productId, quantity);
 		return "Product added in cart Successfully";
@@ -186,9 +186,9 @@ public class CartController {
 	 
 	 ************************************************************************************/
 
-	@PutMapping("cart/removeProduct/{customerId}/{productId}/{quantity}")
-	public String removeProductInCartByProductId(@PathVariable("customerId") Integer customerId,
-			@PathVariable("productId") Integer productId, @PathVariable("quantity") Integer quantity)
+	@PutMapping("cart/product/{customerid}/{productid}/{quantity}")
+	public String removeProductInCartByProductId(@PathVariable("customerid") Integer customerId,
+			@PathVariable("productid") Integer productId, @PathVariable("quantity") Integer quantity)
 			throws ProductException, CustomerException, CartException {
 		this.cartService.removeProductFromCart(customerId, productId, quantity);
 		return "Product removed from cart Successfully";

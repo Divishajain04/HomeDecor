@@ -102,22 +102,28 @@ import com.homedecor.app.service.WalletService;
 		
 	}
 	
-//	@Test
-//	void placeOrderTest() throws CustomerException, CategoryException, ProductException, CartException, WalletException, OrderException, PaymentException {
-//		Customer customer = new Customer(15, "Prince", "prince123@gmail.com", "Prince0404", "9424499512", "Ayodhya",null, null, null, null);
-//		assertTrue(customerService.addCustomer(customer));
-//		OrderByCustomer order = new OrderByCustomer(8, "Pending", null,15);
-//		Category category = new Category(15,"Furniture",null);
-//		assertTrue(this.categoryService.addCategory(category));
-//		assertTrue(orderService.addOrder(order));
-//		Product product = new Product(15, "Sofa", "Double layer Foam", 20000.0, 20,15);
-//		assertTrue(this.productService.addProducts(product));
-//		this.cartService.addProductToCart(15, 15, 4);
-//		assertNotNull(this.walletService.updateWallet(new Wallet(15,1000000.0)));
-//		assertTrue(this.orderService.placeOrder(15,8));
-//		assertEquals(true, this.customerService.deleteCustomer(15));
-//		assertEquals(true,productService.deleteProductById(15));
-//		assertEquals(true, this.orderService.deleteOrderById(8));
-//	}
+	@Test
+	void placeOrderTest() throws CustomerException, CategoryException, ProductException, CartException, WalletException, OrderException, PaymentException {
+		Customer customer = new Customer(15, "Prince", "prince123@gmail.com", "Prince0404", "9424499512", "Ayodhya",null, null, null, null);
+		assertTrue(customerService.addCustomer(customer));
+		
+		OrderByCustomer order = new OrderByCustomer(8, "Pending", null,15);
+		assertTrue(orderService.addOrder(order));
+		
+		Category category = new Category(15,"Furniture",null);
+		assertTrue(this.categoryService.addCategory(category));
+		
+		
+		Product product = new Product(15, "Sofa", "Double layer Foam", 20000.0, 20,15);
+		assertTrue(this.productService.addProducts(product));
+		
+		this.cartService.addProductToCart(15, 15, 4);	
+		assertNotNull(this.walletService.updateWallet(new Wallet(15,1000000.0)));
+		assertTrue(this.orderService.placeOrder(15,8));
+		assertEquals(true, this.customerService.deleteCustomer(15));
+		assertEquals(true, this.orderService.deleteOrderById(8));
+	    assertEquals(true,categoryService.deleteCategoryById(15));
+	   
+	}
 
 }

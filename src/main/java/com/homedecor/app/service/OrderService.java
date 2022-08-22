@@ -8,6 +8,7 @@ import com.homedecor.app.exception.CartException;
 import com.homedecor.app.exception.CustomerException;
 import com.homedecor.app.exception.OrderException;
 import com.homedecor.app.exception.PaymentException;
+import com.homedecor.app.exception.WalletException;
 
 public interface OrderService {
 
@@ -21,6 +22,6 @@ public interface OrderService {
 
 	public OrderByCustomer updateOrder(OrderByCustomer orderByCustomer) throws OrderException;
 
-	public Boolean placeOrder(Integer CustomerId,Integer orderId)
-			throws OrderException, PaymentException, CartException, CustomerException;
+	public Boolean placeOrder(Integer customerId,Integer orderId)
+			throws OrderException, PaymentException, CartException, CustomerException, WalletException;
 }

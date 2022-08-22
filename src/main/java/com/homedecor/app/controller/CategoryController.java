@@ -59,8 +59,8 @@ public class CategoryController {
 
 	@PatchMapping("category")
 	public Category updateCategory(@RequestBody Category category) throws CategoryException {
-		Category categoryUpdated = this.categoryService.updateCategory(category);
-		 return categoryUpdated;
+		
+		 return this.categoryService.updateCategory(category);
 	}
 	
 	/************************************************************************************
@@ -77,8 +77,7 @@ public class CategoryController {
 
 	@GetMapping("category/{categoryId}")
 	public Optional<Category> getCategoryById(@PathVariable ("categoryId") Integer categoryId) throws CategoryException  {
-		Optional<Category> foundCategory=this.categoryService.getCategoryById(categoryId);
-		 return foundCategory;
+		 return this.categoryService.getCategoryById(categoryId);
 	}
 	
 	/************************************************************************************
@@ -93,8 +92,7 @@ public class CategoryController {
 
 	@GetMapping("category/allCategory")
 	public List<Category> getAllCategory() throws CategoryException {
-		List<Category> foundAllCategory=this.categoryService.getAllCategories();
-		 return foundAllCategory;
+		 return this.categoryService.getAllCategories();
 	}
 	
 	/************************************************************************************
@@ -127,8 +125,7 @@ public class CategoryController {
 
 	@GetMapping("category/name/{categoryName}")
 	public Category getCategoryByName(@PathVariable ("categoryName") String categoryName) throws CategoryException  {
-		Category foundCategory=this.categoryService.getCategoryByName(categoryName);
-		 return foundCategory;
+		 return this.categoryService.getCategoryByName(categoryName);
 	}
 
 }

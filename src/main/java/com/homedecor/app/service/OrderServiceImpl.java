@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,7 @@ import com.homedecor.app.exception.CartException;
 import com.homedecor.app.exception.CustomerException;
 import com.homedecor.app.exception.OrderException;
 import com.homedecor.app.exception.PaymentException;
+import com.homedecor.app.exception.WalletException;
 
 /************************************************************************************
  *   @author           Prince Verma
@@ -78,7 +81,6 @@ public class OrderServiceImpl implements OrderService {
 		} else {
 			Payment payment=this.paymentRepository.save(new Payment(orderByCustomer.getOrderId(),"Wallet",0.0,"Order Not Placed"));
 			orderByCustomer.setPayment(payment);
-		//	orderByCustomer.getOrderId();
 			this.orderRepository.save(orderByCustomer);
 			
 		}
@@ -173,11 +175,14 @@ public class OrderServiceImpl implements OrderService {
 	 * @throws PaymentException - It is raised due to Payment Id not found in database
      * Created By               - Prince Verma
      * Created Date             - 16-AUG-2022                           
+	 * @throws WalletException 
 	 
 	 ************************************************************************************/
+	
 	@Override
+	 @Transactional
 	public Boolean placeOrder(Integer customerId, Integer orderId)
-			throws OrderException, PaymentException, CartException, CustomerException {
+			throws OrderException, PaymentException, CartException, CustomerException, WalletException {
 		Optional<Customer> getCustomer = this.customerRepository.findById(customerId);
 		if (getCustomer.isEmpty())
 			throw new CustomerException("Customer Id is not present in record");
@@ -192,6 +197,7 @@ public class OrderServiceImpl implements OrderService {
 		String savedStatus = order.getStatus();
 		
 		Optional<Wallet> getWallet=this.walletRepository.findById(customerId);
+		//if(getWallet.isPresent())throw new WalletException("Wallet not exist for this customer");
 		Wallet foundWallet=getWallet.get();
 		Double walletBalance=foundWallet.getBalance();
 		
@@ -270,90 +276,4 @@ public class OrderServiceImpl implements OrderService {
 		return true;
 	}
 	
-//	@Override
-//	public Boolean placeOrder(Integer customerId, Integer orderId, Integer paymentId)
-//			throws OrderException, PaymentException, CartException, CustomerException {
-//		Optional<Customer> getCustomer = this.customerRepository.findById(customerId);
-//		if (getCustomer.isEmpty())
-//			throw new CustomerException("Customer Id is not present in record");
-//		Customer foundCustomer = getCustomer.get();
-//
-//		Optional<Cart> getCart = this.cartRepository.findById(foundCustomer.getCustomerId());
-//		if (getCart.isEmpty())
-//			throw new CartException("Cart Id is not present in record");
-//		Cart foundCart = getCart.get();
-//
-//		Optional<Payment> getPayment = this.paymentRepository.findById(paymentId);
-//		if (getPayment.isEmpty())
-//			throw new PaymentException("Payment Id is not present in record");
-//		Payment foundPayment = getPayment.get();
-//
-//		OrderByCustomer order = this.orderRepository.findById(orderId).get();
-//		String savedStatus = order.getStatus();
-//		String savedStatusOfPayment = foundPayment.getPaymentStatus();
-//		Double cartTotalAmount = this.cartService.totalAmountOfCustomerCartById(foundCart.getCartId()).get();
-//		Double avilableBalance = foundPayment.getPaymentAmount();
-//
-//		List<Product> cartProduct = foundCart.getProduct();
-//
-//		List<Product> allProduct = productRepository.findAll();
-//
-//		cartProduct.forEach(r -> {
-//			final Optional<Product> existProduct = allProduct.stream()
-//					.filter(d -> d.getProductId().equals(r.getProductId())).findFirst();
-//			Integer newQuantity = existProduct.get().getQuantity() - 1;
-//			if (newQuantity > 0) {
-//				existProduct.get().setQuantity(newQuantity);
-//				this.productRepository.saveAll(allProduct);
-//			}
-//
-//		});
-//		if (cartTotalAmount <= avilableBalance) {
-//			if (order.getCustomerId().equals(customerId)) {
-//				List<OrderByCustomer> getAllOrders = new ArrayList<>();
-//				getAllOrders.addAll(foundCustomer.getOrderByCustomer());
-//				getAllOrders.add(order);
-//				foundCustomer.setOrderByCustomer(getAllOrders);
-//				this.orderRepository.save(order);
-//				this.customerRepository.save(foundCustomer);		
-//			}
-//			else {
-//				order.setCustomerId(customerId);
-//				List<OrderByCustomer> getAllOrders = new ArrayList<>();
-//				getAllOrders.addAll(foundCustomer.getOrderByCustomer());
-//				getAllOrders.add(order);
-//				foundCustomer.setOrderByCustomer(getAllOrders);
-//				this.orderRepository.save(order);
-//				this.customerRepository.save(foundCustomer);
-//			}
-//			Double newBalance1 = avilableBalance - cartTotalAmount;
-//			foundPayment.setPaymentAmount(newBalance1);
-//			this.paymentRepository.save(foundPayment);
-//			String newStatusOfPayment = foundPayment.getPaymentStatus().replaceAll(savedStatusOfPayment,
-//					"Payment done Successfully");
-//			foundPayment.setPaymentStatus(newStatusOfPayment);
-//			this.paymentRepository.save(foundPayment);
-//			foundCart.getProduct().removeAll(foundCart.getProduct());
-//			this.cartRepository.save(foundCart);
-//			String newStatus = order.getStatus().replaceAll(savedStatus, "Order Placed Successfully");
-//			order.setStatus(newStatus);
-//			this.orderRepository.save(order);
-//			order.setPayment(foundPayment);
-//			this.orderRepository.save(order);
-//			this.customerRepository.save(foundCustomer);
-//			
-//		} else {
-//			String newStatusOfPayment = foundPayment.getPaymentStatus().replaceAll(savedStatusOfPayment,
-//					"Payment unSuccessfull");
-//			foundPayment.setPaymentStatus(newStatusOfPayment);
-//			this.paymentRepository.save(foundPayment);
-//			String newStatus = order.getStatus().replaceAll(savedStatus, "Order Not Placed");
-//			order.setStatus(newStatus);
-//			this.orderRepository.save(order);
-//			order.setPayment(foundPayment);
-//			this.orderRepository.save(order);
-//			throw new PaymentException("Not having sufficent Balance to place Order");
-//		}
-//		return true;
-//	}
 }
