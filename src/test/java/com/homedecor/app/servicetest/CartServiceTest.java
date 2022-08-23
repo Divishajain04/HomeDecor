@@ -124,19 +124,14 @@ class CartServiceTest {
 	void removeProductFromCartTest() throws CustomerException, CategoryException, ProductException, CartException {
 		Customer customer = new Customer(15, "Prince", "prince123@gmail.com", "Prince0404", "9424499512", "Ayodhya",null, null, null, null);
 		assertTrue(customerService.addCustomer(customer));
-		
 		Category category = new Category(15,"Furniture",null);
 		assertTrue(this.categoryService.addCategory(category));
-		
 		Product product = new Product(15, "Sofa", "Double layer Foam", 20000.0, 20,15);
 		assertTrue(this.productService.addProducts(product));
-		
 		assertTrue(this.cartService.addProductToCart(15, 15, 1));
-		
 		assertTrue(this.cartService.removeProductFromCart(15,15,1));
 		assertEquals(true, this.customerService.deleteCustomer(15));
 		assertEquals(true,categoryService.deleteCategoryById(15));
-		//assertThrows(CartException.class, () -> this.cartService.totalAmountOfCustomerCartById(15));
 	}
 
 }
