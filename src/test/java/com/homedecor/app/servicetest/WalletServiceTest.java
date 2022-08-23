@@ -23,38 +23,38 @@ import com.homedecor.app.service.WalletService;
 
 	@Test
 	void deleteWalletByIdTest() throws WalletException {
-		Wallet wallet = new Wallet(1, 100.00);
+		Wallet wallet = new Wallet(111, 100.00);
 		assertTrue(this.walletService.addWallet(wallet));
-		assertEquals(true, this.walletService.deleteWallet(1));
-		assertThrows(WalletException.class, () -> this.walletService.deleteWallet(1));
+		assertEquals(true, this.walletService.deleteWallet(111));
+		assertThrows(WalletException.class, () -> this.walletService.deleteWallet(111));
 	}
 
 	@Test
 	void addWalletTest() throws WalletException {
 		assertThrows(WalletException.class, () -> this.walletService.addWallet(null));
-		Wallet wallet = new Wallet(1, 100.00);
+		Wallet wallet = new Wallet(111, 100.00);
 		assertTrue(this.walletService.addWallet(wallet));
-		assertNotNull(this.walletService.getWalletById(1));
+		assertNotNull(this.walletService.getWalletById(111));
 		assertThrows(WalletException.class, () -> this.walletService.addWallet(wallet));
-		assertEquals(true, this.walletService.deleteWallet(1));
+		assertEquals(true, this.walletService.deleteWallet(111));
 	}
 
 	@Test
 	void getWalletByIdTest() throws WalletException {
-		Wallet wallet = new Wallet(1, 100.00);
+		Wallet wallet = new Wallet(111, 100.00);
 		assertTrue(this.walletService.addWallet(wallet));
-		assertNotNull(this.walletService.getWalletById(1));
-		assertEquals(true, this.walletService.deleteWallet(1));
-		assertThrows(WalletException.class, () -> this.walletService.getWalletById(1));
+		assertNotNull(this.walletService.getWalletById(111));
+		assertEquals(true, this.walletService.deleteWallet(111));
+		assertThrows(WalletException.class, () -> this.walletService.getWalletById(111));
 	}
 
 	@Test
 	void updateWalletTest() throws WalletException {
-		Wallet wallet = new Wallet(1, 100.00);
+		Wallet wallet = new Wallet(111, 100.00);
 		assertTrue(this.walletService.addWallet(wallet));
-		assertNotNull(this.walletService.updateWallet(new Wallet(1, 1000.00)));
-		assertEquals(true, this.walletService.deleteWallet(1));
-		assertThrows(WalletException.class, () -> this.walletService.updateWallet(new Wallet(1,1000.00)));
+		assertNotNull(this.walletService.updateWallet(new Wallet(111, 1000.00)));
+		assertEquals(true, this.walletService.deleteWallet(111));
+		assertThrows(WalletException.class, () -> this.walletService.updateWallet(new Wallet(111,1000.00)));
 	}
 
 }

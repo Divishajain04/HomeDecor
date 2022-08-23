@@ -28,46 +28,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 	
 	@Test
 	void deletePaymentById() throws PaymentException{
-		Payment payment = new Payment(2,"cod", 20.0,"done");
+		Payment payment = new Payment(111,"cod", 20.0,"done");
 		assertTrue(this.paymentService.addPayment(payment));
-		assertEquals(true, this.paymentService.deletePaymentById(2));
-		assertThrows(PaymentException.class, ()-> this.paymentService.deletePaymentById(2));
+		assertEquals(true, this.paymentService.deletePaymentById(111));
+		assertThrows(PaymentException.class, ()-> this.paymentService.deletePaymentById(111));
 	}
 	
 	@Test
 	void addPaymentTest() throws PaymentException{
 		assertThrows(PaymentException.class, ()-> this.paymentService.addPayment(null));
-		Payment payment = new Payment(2,"cod", 20.0,"done");
+		Payment payment = new Payment(111,"cod", 20.0,"done");
 		assertTrue(this.paymentService.addPayment(payment));
 		assertThrows(PaymentException.class, ()-> this.paymentService.addPayment(payment));
-		assertEquals(true, this.paymentService.deletePaymentById(2));
+		assertEquals(true, this.paymentService.deletePaymentById(111));
 	}
 	
 	@Test
 	void getPaymentByIdTest() throws PaymentException{
-		Payment payment = new Payment(2,"cod", 20.0,"done");
+		Payment payment = new Payment(111,"cod", 20.0,"done");
 		assertTrue(this.paymentService.addPayment(payment));
-		assertEquals(2, this.paymentService.getPaymentById(2).get().getPaymentId());
-		assertEquals(true, this.paymentService.deletePaymentById(2));
-		assertThrows(PaymentException.class, ()-> this.paymentService.getPaymentById(2));
+		assertEquals(111, this.paymentService.getPaymentById(111).get().getPaymentId());
+		assertEquals(true, this.paymentService.deletePaymentById(111));
+		assertThrows(PaymentException.class, ()-> this.paymentService.getPaymentById(111));
 	}
 	
 	@Test
 	void getAllPaymentTest() throws PaymentException{
-		Payment payment = new Payment(2,"cod", 20.0,"done");
+		Payment payment = new Payment(111,"cod", 20.0,"done");
 		assertTrue(this.paymentService.addPayment(payment));
 		assertNotNull(this.paymentService.getAllPayments());
-	
-		assertEquals(true, this.paymentService.deletePaymentById(2));
+		assertEquals(true, this.paymentService.deletePaymentById(111));
 		assertThrows(PaymentException.class, ()-> this.paymentService.getAllPayments());
 	}
 	
 	@Test
 	void updatePaymentTest() throws PaymentException{
-		Payment payment = new Payment(2,"cod", 20.0,"done");
+		Payment payment = new Payment(111,"cod", 20.0,"done");
 		assertTrue(this.paymentService.addPayment(payment));
-		assertNotNull(this.paymentService.updatePayment(payment));
-		assertEquals(true, this.paymentService.deletePaymentById(2));
+		assertNotNull(this.paymentService.updatePayment(new Payment(111,"cod", 20.0,"Not Done")));
+		assertEquals(true, this.paymentService.deletePaymentById(111));
 		assertThrows(PaymentException.class, ()-> this.paymentService.updatePayment(payment));
 	}
 	

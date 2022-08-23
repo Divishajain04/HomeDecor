@@ -19,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Customer {
 
 	@Id
-	// @GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer customerId;
 
 	@NotNull(message = "Please provide name")

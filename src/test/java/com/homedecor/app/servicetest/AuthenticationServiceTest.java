@@ -31,33 +31,33 @@ class AuthenticationServiceTest {
 	
 	@Test
 	void adminAuthenticationTest() throws AdminException {
-		Admin admin=new Admin(8,"Lucky","lucky@gmail.com","lucky@0888");
+		Admin admin=new Admin(111,"Lucky","lucky@gmail.com","lucky@0888");
 		assertTrue(adminService.addAdmin(admin));
 		assertTrue(this.authenticationService.adminAuthentication(new Authentications("lucky@gmail.com", "lucky@0888", null)));
-		assertEquals(true, this.adminService.deleteAdminById(8));	
+		assertEquals(true, this.adminService.deleteAdminById(111));	
 	}
 	
 	@Test
 	void customerAuthenticationTest() throws CustomerException {
-		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		Customer customer = new Customer(111, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
 		assertTrue(this.customerService.addCustomer(customer));
 		assertTrue(this.authenticationService.customerAuthentication(new Authentications("divisha123@gmail.com", "Divisha0404", null)));
-		assertEquals(true, this.customerService.deleteCustomer(8));
+		assertEquals(true, this.customerService.deleteCustomer(111));
 	}
 	@Test
 	void updateAdminPasswordTest() throws AdminException {
-		Admin admin=new Admin(8,"Lucky","lucky@gmail.com","lucky@0888");
+		Admin admin=new Admin(111,"Lucky","lucky@gmail.com","lucky@0888");
 		assertTrue(adminService.addAdmin(admin));
 		assertTrue(this.authenticationService.updateAdminPassword(new Authentications("lucky@gmail.com", "lucky@0888", "lucky@81222")));
-		assertEquals(true, this.adminService.deleteAdminById(8));	
+		assertEquals(true, this.adminService.deleteAdminById(111));	
 	}
 	
 	@Test
 	void updateCustomerPasswordTest() throws CustomerException {
-		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		Customer customer = new Customer(111, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
 		assertTrue(this.customerService.addCustomer(customer));
 		assertTrue(this.authenticationService.updateCustomerPassword(new Authentications("divisha123@gmail.com", "Divisha0404", "jawed@121212")));
-		assertEquals(true, this.customerService.deleteCustomer(8));
+		assertEquals(true, this.customerService.deleteCustomer(111));
 	}
 	
 

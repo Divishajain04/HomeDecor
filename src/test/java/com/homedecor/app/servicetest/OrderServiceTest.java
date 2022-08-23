@@ -53,76 +53,75 @@ import com.homedecor.app.service.WalletService;
 	
 	@Test
 	void deleteOrderByIdTest() throws OrderException {
-		OrderByCustomer getOrder = new OrderByCustomer(8, "Pending", null,null);
+		OrderByCustomer getOrder = new OrderByCustomer(111, "Pending", null,null);
 		assertTrue(orderService.addOrder(getOrder));
-		assertEquals(true, this.orderService.deleteOrderById(8));
-		assertThrows(OrderException.class,()->this.orderService.deleteOrderById(8));
+		assertEquals(true, this.orderService.deleteOrderById(111));
+		assertThrows(OrderException.class,()->this.orderService.deleteOrderById(111));
 	}
 	
 	@Test
 	void addOrderTest() throws OrderException {
 		assertThrows(OrderException.class,()->this.orderService.addOrder(null));
-		OrderByCustomer getOrder = new OrderByCustomer(8, "Pending", null,null);
+		OrderByCustomer getOrder = new OrderByCustomer(111, "Pending", null,null);
 		assertTrue(orderService.addOrder(getOrder));
 		assertNotNull(orderService);
 		assertThrows(OrderException.class,()->this.orderService.addOrder(getOrder));
-		assertEquals(true, orderService.deleteOrderById(8));
+		assertEquals(true, orderService.deleteOrderById(111));
 			
 	}
 	
 	@Test
 	void getOrderByIdTest() throws OrderException {
-		OrderByCustomer order = new OrderByCustomer(8, "Pending", null,null);
+		OrderByCustomer order = new OrderByCustomer(111, "Pending", null,null);
 		assertTrue(orderService.addOrder(order));
-		OrderByCustomer getOrder = orderService.getOrderById(8).get();
+		OrderByCustomer getOrder = orderService.getOrderById(111).get();
 		Integer orderId = getOrder.getOrderId();
-		assertEquals(8,orderId);
+		assertEquals(111,orderId);
 		assertNotNull(orderService.getOrderById(orderId));
-		assertEquals(true, orderService.deleteOrderById(8));
-		assertThrows(OrderException.class,()->this.orderService.getOrderById(8));
+		assertEquals(true, orderService.deleteOrderById(111));
+		assertThrows(OrderException.class,()->this.orderService.getOrderById(111));
 		
 	}
 	
 	@Test
 	void getAllOrdersTest() throws OrderException {
-		OrderByCustomer order = new OrderByCustomer(8, "Pending", null,null);
+		OrderByCustomer order = new OrderByCustomer(111, "Pending", null,null);
 		assertTrue(orderService.addOrder(order));
 		assertNotNull(this.orderService.getAllOrders());
-		assertEquals(true, this.orderService.deleteOrderById(8));
-		//assertThrows(OrderException.class,()-> this.orderService.getAllOrders());
+		assertEquals(true, this.orderService.deleteOrderById(111));
 	}
 	
 	@Test
 	void updateOrderTest() throws OrderException {
-		OrderByCustomer order = new OrderByCustomer(8, "Pending", null,null);
+		OrderByCustomer order = new OrderByCustomer(111, "Pending", null,null);
 		assertTrue(orderService.addOrder(order));
-		assertNotNull(this.orderService.updateOrder(new OrderByCustomer(8, "Done", null,null)));
-		assertEquals(true, this.orderService.deleteOrderById(8));
-		assertThrows(OrderException.class,()-> this.orderService.updateOrder(new OrderByCustomer(8, "Successfull", null,null)));
+		assertNotNull(this.orderService.updateOrder(new OrderByCustomer(111, "Done", null,null)));
+		assertEquals(true, this.orderService.deleteOrderById(111));
+		assertThrows(OrderException.class,()-> this.orderService.updateOrder(new OrderByCustomer(111, "Successfull", null,null)));
 		
 	}
 	
 	@Test
 	void placeOrderTest() throws CustomerException, CategoryException, ProductException, CartException, WalletException, OrderException, PaymentException {
-		Customer customer = new Customer(15, "Prince", "prince123@gmail.com", "Prince0404", "9424499512", "Ayodhya",null, null, null, null);
+		Customer customer = new Customer(111, "Prince", "prince123@gmail.com", "Prince0404", "9424499512", "Ayodhya",null, null, null, null);
 		assertTrue(customerService.addCustomer(customer));
-		assertNotNull(this.walletService.updateWallet(new Wallet(15,1000000.0)));
-		OrderByCustomer order = new OrderByCustomer(8, "Pending", null,15);
+		assertNotNull(this.walletService.updateWallet(new Wallet(111,1000000.0)));
+		OrderByCustomer order = new OrderByCustomer(111, "Pending", null,111);
 		assertTrue(orderService.addOrder(order));
 		
-		Category category = new Category(15,"Furniture",null);
+		Category category = new Category(111,"Furniture",null);
 		assertTrue(this.categoryService.addCategory(category));
 		
 		
-		Product product = new Product(15, "Sofa", "Double layer Foam", 20000.0, 20,15);
+		Product product = new Product(111, "Sofa", "Double layer Foam", 20000.0, 20,111);
 		assertTrue(this.productService.addProducts(product));
 		
-		this.cartService.addProductToCart(15, 15, 4);	
+		this.cartService.addProductToCart(111, 111, 4);	
 		
-		assertTrue(this.orderService.placeOrder(15,8));
-		assertEquals(true, this.customerService.deleteCustomer(15));
-		assertEquals(true, this.orderService.deleteOrderById(8));
-	    assertEquals(true,categoryService.deleteCategoryById(15));
+		assertTrue(this.orderService.placeOrder(111,111));
+		assertEquals(true, this.customerService.deleteCustomer(111));
+		assertEquals(true, this.orderService.deleteOrderById(111));
+	    assertEquals(true,categoryService.deleteCategoryById(111));
 	   
 	}
 

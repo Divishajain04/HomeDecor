@@ -21,61 +21,61 @@ class CategoryServiceTest {
 
 	@Test
 	void deleteCategoryByIdTest() throws CategoryException {
-		Category addCategory = new Category(4, "Furniture", null);
+		Category addCategory = new Category(111, "Furniture", null);
 		assertTrue(this.categoryService.addCategory(addCategory));
-		assertEquals(true, this.categoryService.deleteCategoryById(4));
-		assertThrows(CategoryException.class, () -> this.categoryService.deleteCategoryById(4));
+		assertEquals(true, this.categoryService.deleteCategoryById(111));
+		assertThrows(CategoryException.class, () -> this.categoryService.deleteCategoryById(111));
 	}
 
 	@Test
 	void addCategoryTest() throws CategoryException {
 		assertThrows(CategoryException.class, () -> this.categoryService.addCategory(null));
-		Category addCategory = new Category(4, "Furniture", null);
+		Category addCategory = new Category(111, "Furniture", null);
 		assertTrue(this.categoryService.addCategory(addCategory));
 		assertThrows(CategoryException.class,
-				() -> this.categoryService.addCategory(new Category(4, "Furniture", null)));
-		assertEquals(true, this.categoryService.deleteCategoryById(4));
+				() -> this.categoryService.addCategory(new Category(111, "Furniture", null)));
+		assertEquals(true, this.categoryService.deleteCategoryById(111));
 
 	}
 
 	@Test
 	void getCategoryByIdTest() throws CategoryException {
-		Category addCategory = new Category(4, "Furniture", null);
+		Category addCategory = new Category(111, "Furniture", null);
 		assertTrue(this.categoryService.addCategory(addCategory));
-		assertNotNull(this.categoryService.getCategoryById(4));
-		assertEquals(true, this.categoryService.deleteCategoryById(4));
-		assertThrows(CategoryException.class, () -> this.categoryService.getCategoryById(4));
+		assertNotNull(this.categoryService.getCategoryById(111));
+		assertEquals(true, this.categoryService.deleteCategoryById(111));
+		assertThrows(CategoryException.class, () -> this.categoryService.getCategoryById(111));
 
 	}
 
 	@Test
 	void getAllCategoryTest() throws CategoryException {
-		Category addCategory = new Category(4, "Furniture", null);
+		Category addCategory = new Category(111, "Furniture", null);
 		assertTrue(this.categoryService.addCategory(addCategory));
 		assertNotNull(this.categoryService.getAllCategories());
-		assertEquals(true, this.categoryService.deleteCategoryById(4));
+		assertEquals(true, this.categoryService.deleteCategoryById(111));
 		assertThrows(CategoryException.class, () -> this.categoryService.getAllCategories());
 
 	}
 
 	@Test
 	void getCategoryByNameTest() throws CategoryException {
-		Category addCategory = new Category(4, "Furniture", null);
+		Category addCategory = new Category(111, "Furniture", null);
 		assertTrue(this.categoryService.addCategory(addCategory));
 		assertNotNull(this.categoryService.getCategoryByName("Furniture"));
-		assertEquals(true, this.categoryService.deleteCategoryById(4));
+		assertEquals(true, this.categoryService.deleteCategoryById(111));
 		assertThrows(CategoryException.class, () -> this.categoryService.getCategoryByName("Furniture"));
 
 	}
 
 	@Test
 	void updateCategoryTest() throws CategoryException {
-		Category addCategory = new Category(4, "Furniture", null);
+		Category addCategory = new Category(111, "Furniture", null);
 		assertTrue(this.categoryService.addCategory(addCategory));
-		assertNotNull(this.categoryService.updateCategory(new Category(4, "furniture", null)));
-		assertEquals(true, this.categoryService.deleteCategoryById(4));
+		assertNotNull(this.categoryService.updateCategory(new Category(111, "furniture", null)));
+		assertEquals(true, this.categoryService.deleteCategoryById(111));
 		assertThrows(CategoryException.class,
-				() -> this.categoryService.updateCategory(new Category(4, "Furni", null)));
+				() -> this.categoryService.updateCategory(new Category(111, "Furni", null)));
 
 	}
 
