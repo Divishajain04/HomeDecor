@@ -131,7 +131,7 @@ public class CustomerController {
 	 ************************************************************************************/
 
 	@PutMapping("customer/phone/{loginid}/{newphone}")
-	public String updatePhone(@PathVariable("loginId") Integer loginId, @PathVariable("newphone") String newPhone)
+	public String updatePhone(@PathVariable("loginid") Integer loginId, @PathVariable("newphone") String newPhone)
 			throws CustomerException {
 		this.customerService.updateMobileNo(loginId, newPhone);
 		return "Mobile no. updated Successfully";
