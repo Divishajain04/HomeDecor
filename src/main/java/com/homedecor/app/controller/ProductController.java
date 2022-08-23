@@ -34,7 +34,7 @@ public class ProductController {
 
 	/************************************************************************************
 	 * Method: addProduct
-     * Description: To handle a Http POST request
+     * Description: To add a single product or multiple products.
      * 
      * @Object customer              - Product's object
 	 * @returns String               - Product added Successfully
@@ -46,16 +46,15 @@ public class ProductController {
 	@PostMapping("product")
 	public String addProduct(@Valid @RequestBody Product product) throws ProductException , CategoryException{
 		this.productService.addProducts(product);
-
 		return "product added successfully";
 	}
 
 	/************************************************************************************
 	 * Method: getProductById
-     * Description: To handle a Http GET request
+     * Description: To fetch a product by it's id.
      * 
      * @Param productId              - Product's Id
-	 * @returns Optional<Product>    - foundProduct
+	 * @returns Optional<Product>    - Product with same id.
      * Created By                    - Nikhil Narwat
      * Created Date                  - 16-AUG-2022                           
 	 
@@ -68,7 +67,7 @@ public class ProductController {
 
 	/************************************************************************************
 	 * Method: updateProduct
-     * Description: To handle a Http PATCH request
+     * Description: To update a product by it's id.
      * 
      * @Object product               - Product's object
 	 * @returns Product              - updated Product
@@ -84,9 +83,9 @@ public class ProductController {
 
 	/************************************************************************************
 	 * Method: getAllProduct
-     * Description: To handle a Http GET request
+     * Description: To fetch every product from the database.
      * 
-	 * @returns List<Product>        - List of Products
+	 * @returns List<Product>        - List of Products present in the database
      * Created By                    - Nikhil Narwat
      * Created Date                  - 16-AUG-2022                           
 	 
@@ -99,7 +98,7 @@ public class ProductController {
 
 	/************************************************************************************
 	 * Method: deleteProductById
-     * Description: To handle a Http DELETE request
+     * Description: To delete a product by it's id.
      * 
      * @Param productId              - Product's Id
 	 * @returns String               - Product deleted Successfully
@@ -116,9 +115,9 @@ public class ProductController {
 
 	/************************************************************************************
 	 * Method: findProductsHighToLow
-     * Description: To handle a Http GET request
+     * Description: To filter the products in terms of price from high to low(descending order)
      * 
-	 * @returns List<Product>        - return products in high to low price order
+	 * @returns List<Product>        - list of products in high to low price order
      * Created By                    - Nikhil Narwat
      * Created Date                  - 16-AUG-2022                           
 	 
@@ -131,9 +130,9 @@ public class ProductController {
 
 	/************************************************************************************
 	 * Method: findProductLowToHigh
-     * Description: To handle a Http GET request
+     * Description: To filter the products in terms of price from low to high(Ascending order)
      * 
-	 * @returns List<Product>        - return products in low to high price order
+	 * @returns List<Product>        - list of products in low to high price order
      * Created By                    - Nikhil Narwat
      * Created Date                  - 16-AUG-2022                           
 	 
@@ -146,10 +145,10 @@ public class ProductController {
 
 	/************************************************************************************
 	 * Method: findProductByName
-     * Description: To handle a Http GET request
+     * Description: To search the products by their name
      * 
      * @Param productname            - Product's Name
-	 * @returns List<Product>        - return list of products
+	 * @returns List<Product>        - list of products with same name
      * Created By                    - Nikhil Narwat
      * Created Date                  - 16-AUG-2022                           
 	 
@@ -162,9 +161,9 @@ public class ProductController {
 	
 	/************************************************************************************
 	 * Method: varietiesOfProduct
-     * Description: To handle a Http GET request
+     * Description: To count the products by their variety
      * 
-	 * @returns Long                 - return count of varieties
+	 * @returns Long                 - count of varieties of products
      * Created By                    - Nikhil Narwat
      * Created Date                  - 16-AUG-2022                           
 	 
@@ -178,7 +177,7 @@ public class ProductController {
 	
 	/************************************************************************************
 	 * Method: countOfProductByQuantity
-     * Description: To handle a Http GET request
+     * Description: To count the products by their total quantity
      * 
 	 * @returns Integer              - count of products
      * Created By                    - Nikhil Narwat

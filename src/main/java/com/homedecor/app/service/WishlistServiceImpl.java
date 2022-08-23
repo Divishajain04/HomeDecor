@@ -30,7 +30,7 @@ import com.homedecor.app.exception.WishlistException;
 
 @Service
 public class WishlistServiceImpl implements WishlistService {
-
+	
 	@Autowired
 	private WishlistRepository wishlistRepository;
 
@@ -127,7 +127,7 @@ public class WishlistServiceImpl implements WishlistService {
 
 	/************************************************************************************
 	 * Method: updateWishlist
-	 * Description: To update a wishlist by it's id.
+	 * Description: To update a wishlist.
 	 * 
 	 * @returns Wishlist         - wishlist, update the wishlist's details if the wishlist's id exist otherwise throws WishlistException
 	 * @throws WishlistException - It is raised if the wishlist's id is not present in our database.
