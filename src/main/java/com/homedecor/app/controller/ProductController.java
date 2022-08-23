@@ -32,8 +32,8 @@ public class ProductController {
 		return "product added successfully";
 	}
 
-	@GetMapping("product/{productId}")
-	public Optional<Product> getProductById(@PathVariable("productId") Integer productId) throws ProductException {
+	@GetMapping("product/{productid}")
+	public Optional<Product> getProductById(@PathVariable("productid") Integer productId) throws ProductException {
 		return this.productService.getProductById(productId);
 	}
 
@@ -42,38 +42,38 @@ public class ProductController {
 		return this.productService.updateProduct(product);
 	}
 
-	@GetMapping("product/allProduct")
+	@GetMapping("products")
 	public List<Product> getAllProduct() throws ProductException {
 		return this.productService.getAllProducts();
 	}
 
-	@DeleteMapping("product/{productId}")
-	public String deleteProductById(@PathVariable("productId") Integer productId) throws ProductException {
+	@DeleteMapping("product/{productid}")
+	public String deleteProductById(@PathVariable("productid") Integer productId) throws ProductException {
 		this.productService.deleteProductById(productId);
 		return "product deleted successfully";
 	}
 
-	@GetMapping("product/sortedHighToLow")
+	@GetMapping("products/price/hightolow")
 	public List<Product> findProductHighToLow() throws ProductException {
 		return this.productService.findAllProductsHighToLow();
 	}
 
-	@GetMapping("product/SortedLowToHigh")
+	@GetMapping("product/price/lowtohigh")
 	public List<Product> findProductLowToHigh() throws ProductException {
 		return this.productService.findAllProductsLowToHigh();
 	}
 
-	@GetMapping("product/productByName/{productName}")
-	public List<Product> findProductByName(@PathVariable("productName") String productName) throws ProductException {
+	@GetMapping("products/{productname}")
+	public List<Product> findProductByName(@PathVariable("productname") String productName) throws ProductException {
 		return this.productService.findProductByName(productName);
 	}
 
-	@GetMapping("varietiesOfProduct")
+	@GetMapping("varietiesofproduct")
 	public Long countAllVaritiesOfProducts() throws ProductException {
 		return this.productService.countAllVaritiesOfProduct();
 	}
 	
-	@GetMapping("countOfProductByQuantity")
+	@GetMapping("totalstock")
 	public Integer countOfProductByQuantity() throws ProductException{
 		return this.productService.countTotalStock();
 	}

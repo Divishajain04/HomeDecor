@@ -31,13 +31,13 @@ public class WalletController {
 		return this.walletService.updateWallet(wallet);
 	}
 	
-	@GetMapping("wallet/{walletId}")
-	public Wallet getWalletById(@PathVariable ("walletId") Integer walletId) throws WalletException {
+	@GetMapping("wallet/{walletid}")
+	public Wallet getWalletById(@PathVariable ("walletid") Integer walletId) throws WalletException {
 		return this.walletService.getWalletById(walletId);
 	}
 	
-	@DeleteMapping("wallet/{walletId}")
-	public String deleteWalletById(@PathVariable ("walletId") Integer walletId) throws WalletException {
+	@DeleteMapping("wallet/{walletid}")
+	public String deleteWalletById(@PathVariable ("walletid") Integer walletId) throws WalletException {
 		this.walletService.deleteWallet(walletId);
 		return "Wallet deleted successfully";
 	}

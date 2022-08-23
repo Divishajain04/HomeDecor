@@ -61,8 +61,8 @@ public class CustomerController {
 	 ************************************************************************************/
 
 
-	@GetMapping("customer/{customerId}")
-	public Optional<Customer> getCustomerById(@PathVariable("customerId") Integer customerId) throws CustomerException {
+	@GetMapping("customer/{customerid}")
+	public Optional<Customer> getCustomerById(@PathVariable("customerid") Integer customerId) throws CustomerException {
 		return this.customerService.getCustomerById(customerId);
 	}
 	
@@ -77,7 +77,7 @@ public class CustomerController {
 	 ************************************************************************************/
 
 
-	@GetMapping("allCustomers/")
+	@GetMapping("customers")
 	public List<Customer> getAllCustomers() throws CustomerException {
 		return this.customerService.findAllCustomers();
 	}
@@ -111,8 +111,8 @@ public class CustomerController {
 	 
 	 ************************************************************************************/
 
-	@PutMapping("customer/{loginId}/{newEmail}")
-	public String updateEmail(@PathVariable("loginId") Integer loginId, @PathVariable("newEmail") String newEmail)
+	@PutMapping("customer/{loginid}/{newemail}")
+	public String updateEmail(@PathVariable("loginid") Integer loginId, @PathVariable("newemail") String newEmail)
 			throws CustomerException {
 		this.customerService.updateEmail(loginId, newEmail);
 		return "Email updated Successfully";
@@ -130,8 +130,8 @@ public class CustomerController {
 	 
 	 ************************************************************************************/
 
-	@PutMapping("customer/phone/{loginId}/{newPhone}")
-	public String updatePhone(@PathVariable("loginId") Integer loginId, @PathVariable("newPhone") String newPhone)
+	@PutMapping("customer/phone/{loginid}/{newphone}")
+	public String updatePhone(@PathVariable("loginId") Integer loginId, @PathVariable("newphone") String newPhone)
 			throws CustomerException {
 		this.customerService.updateMobileNo(loginId, newPhone);
 		return "Mobile no. updated Successfully";
@@ -149,8 +149,8 @@ public class CustomerController {
 	 
 	 ************************************************************************************/
 
-	@PutMapping("customer/address/{loginId}/{newAddress}/")
-	public String updateAddress(@PathVariable("loginId") Integer loginId, @PathVariable("newAddress") String newAddress)
+	@PutMapping("customer/address/{loginid}/{newaddress}/")
+	public String updateAddress(@PathVariable("loginId") Integer loginId, @PathVariable("newaddress") String newAddress)
 			throws CustomerException {
 		this.customerService.updateAddress(loginId, newAddress);
 		return "Address updated Successfully";
@@ -167,8 +167,8 @@ public class CustomerController {
 	 
 	 ************************************************************************************/
 
-	@DeleteMapping("customer/{customerId}")
-	public String deleteCustomerById(@PathVariable("customerId") Integer customerId) throws CustomerException {
+	@DeleteMapping("customer/{customerid}")
+	public String deleteCustomerById(@PathVariable("customerid") Integer customerId) throws CustomerException {
 		this.customerService.deleteCustomer(customerId);
 		return "Customer deleted Successfully";
 	}
@@ -183,7 +183,7 @@ public class CustomerController {
 	 
 	 ************************************************************************************/
 
-	@GetMapping("countRegisteredNumberOfUser")
+	@GetMapping("count/customers")
 	public long countRegisteredCustomer() throws CustomerException{
 		return this.customerService.totalRegisteredCustomer();
 	}
