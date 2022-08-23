@@ -169,8 +169,8 @@ public class CustomerServiceImpl implements CustomerService {
 		if (getCustomer.isEmpty())
 			throw new CustomerException("This customer is not present in record");
 		Customer foundCustomer = getCustomer.get();
-		String savedAddress = foundCustomer.getCustomerAddress();
-		foundCustomer.getCustomerAddress().replaceAll(savedAddress, newAddress);
+	
+
 		foundCustomer.setCustomerAddress(newAddress);
 		this.customerRepository.save(foundCustomer);
 		return true;
@@ -190,8 +190,8 @@ public class CustomerServiceImpl implements CustomerService {
 		if (getCustomer.isEmpty())
 			throw new CustomerException("This customer is not present in record");
 		Customer foundCustomer = getCustomer.get();
-		String savedPhoneNo = foundCustomer.getCustomerPhoneNo();
-		foundCustomer.getCustomerPhoneNo().replaceAll(savedPhoneNo, newMobileNo);
+	
+	
 		foundCustomer.setCustomerPhoneNo(newMobileNo);
 		this.customerRepository.save(foundCustomer);
 		return true;
@@ -211,8 +211,7 @@ public class CustomerServiceImpl implements CustomerService {
 		if (getCustomer.isEmpty())
 			throw new CustomerException("This customer is not present in record");
 		Customer foundCustomer = getCustomer.get();
-		String savedAddress = foundCustomer.getCustomerEmail();
-		foundCustomer.getCustomerEmail().replaceAll(savedAddress, newEmail);
+	
 		foundCustomer.setCustomerEmail(newEmail);
 		this.customerRepository.save(foundCustomer);
 		return true;
@@ -235,7 +234,7 @@ public class CustomerServiceImpl implements CustomerService {
 		if (getCustomer.isEmpty())
 			throw new CustomerException("Invalid emailId or Password");
 		Customer foundCustomer = getCustomer.get();
-		foundCustomer.getPassword().replaceAll(oldPassword, newPassword);
+		
 		foundCustomer.setPassword(newPassword);
 		customerRepository.save(foundCustomer);
 		return true;

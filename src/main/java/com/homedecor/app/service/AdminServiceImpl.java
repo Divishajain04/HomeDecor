@@ -115,7 +115,7 @@ public class AdminServiceImpl implements AdminService {
 		Optional<Admin> getAdmin=this.adminRepository.findByAdminEmailIdAndAdminPassword(adminEmailId, oldPassword);
 		if(getAdmin.isEmpty())throw new AdminException("Invalid admin email id or password");
 		Admin foundAdmin  = getAdmin.get();
-			foundAdmin.getAdminPassword().replaceAll(oldPassword, newPassword);
+			
 			foundAdmin.setAdminPassword(newPassword);
 			adminRepository.save(foundAdmin);
 			

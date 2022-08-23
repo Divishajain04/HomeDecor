@@ -185,7 +185,7 @@ class CustomerServiceTest {
 		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
 		assertEquals("Customer added Successfully",customerController.addCustomer(customer));
 		List customerList = customerController.getAllCustomers();
-		assertThat(customerList).size().isGreaterThan(0);
+		assertThat(customerList).size().isPositive();
 		assertEquals(true,this.customerService.deleteCustomer(8));
 	}
 	

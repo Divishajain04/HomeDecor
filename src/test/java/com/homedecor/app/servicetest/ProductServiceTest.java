@@ -31,7 +31,7 @@ class ProductServiceTest {
 		assertTrue(this.categoryService.addCategory(category));
 		Product product = new Product(21, "Sofa", "Double layer Foam", 20000.0, 20,1);
 		assertTrue(this.productService.addProducts(product));
-		assertNotNull(this.productService.countAllVaritiesOfProduct());
+		assertEquals(1,this.productService.countAllVaritiesOfProduct());
 		assertEquals(true,categoryService.deleteCategoryById(1));
 		assertThrows(ProductException.class, () -> this.productService.deleteProductById(21));
 	}
