@@ -75,8 +75,8 @@ public class CategoryController {
 	 ************************************************************************************/
 
 
-	@GetMapping("category/{categoryId}")
-	public Optional<Category> getCategoryById(@PathVariable ("categoryId") Integer categoryId) throws CategoryException  {
+	@GetMapping("category/{categoryid}")
+	public Optional<Category> getCategoryById(@PathVariable ("categoryid") Integer categoryId) throws CategoryException  {
 		 return this.categoryService.getCategoryById(categoryId);
 	}
 	
@@ -90,7 +90,7 @@ public class CategoryController {
 	 
 	 ************************************************************************************/
 
-	@GetMapping("category/allCategory")
+	@GetMapping("categories")
 	public List<Category> getAllCategory() throws CategoryException {
 		 return this.categoryService.getAllCategories();
 	}
@@ -106,8 +106,8 @@ public class CategoryController {
 	 
 	 ************************************************************************************/
 
-	@DeleteMapping("category/{categoryId}")
-	public String deleteCategoryById(@PathVariable ("categoryId") Integer categoryId) throws CategoryException {
+	@DeleteMapping("category/{categoryid}")
+	public String deleteCategoryById(@PathVariable ("categoryid") Integer categoryId) throws CategoryException {
 			this.categoryService.deleteCategoryById(categoryId);
 		return "Category deleted Successfully";
 	}
@@ -123,8 +123,8 @@ public class CategoryController {
 	 
 	 ************************************************************************************/
 
-	@GetMapping("category/name/{categoryName}")
-	public Category getCategoryByName(@PathVariable ("categoryName") String categoryName) throws CategoryException  {
+	@GetMapping("category/name/{categoryname}")
+	public Category getCategoryByName(@PathVariable ("categoryname") String categoryName) throws CategoryException  {
 		 return this.categoryService.getCategoryByName(categoryName);
 	}
 

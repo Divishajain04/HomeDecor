@@ -30,8 +30,8 @@ public class WishlistController {
 		return true;
 	}
 
-	@GetMapping("wishlist/{wishlistId}")
-	public Optional<Wishlist> getWishlistById(@PathVariable("wishlistId") Integer wishlistId) throws WishlistException {
+	@GetMapping("wishlist/{wishlistid}")
+	public Optional<Wishlist> getWishlistById(@PathVariable("wishlistid") Integer wishlistId) throws WishlistException {
 		return this.wishlistServiceImpl.getWishlistById(wishlistId);
 	}
 
@@ -43,20 +43,20 @@ public class WishlistController {
 		return "Wishlist Updated Successfully";
 	}
 
-	@GetMapping("wishlist/")
+	@GetMapping("wishlists")
 	public List<Wishlist> getAllWishlist() throws WishlistException {
 		
 		return this.wishlistServiceImpl.getAllWishlists();
 	}
 
-	@DeleteMapping("wishlist/{wishlistId}")
-	public Boolean deleteWishlistById(@PathVariable("wishlistId") Integer wishlistId) throws WishlistException {
+	@DeleteMapping("wishlist/{wishlistid}")
+	public Boolean deleteWishlistById(@PathVariable("wishlistid") Integer wishlistId) throws WishlistException {
 		this.wishlistServiceImpl.deleteWishlistById(wishlistId);
 		return true;
 	}
 
-	@PatchMapping("wishlist/addProductToCart/{customerId}")
-	public Boolean addProductToCart(@PathVariable("customerId") Integer customerId)
+	@PatchMapping("wishlist/product/cart/{customerid}")
+	public Boolean addProductToCart(@PathVariable("customerid") Integer customerId)
 			throws CustomerException, WishlistException, CartException {
 		this.wishlistServiceImpl.addWishlistProductToCart(customerId);
 		return true;

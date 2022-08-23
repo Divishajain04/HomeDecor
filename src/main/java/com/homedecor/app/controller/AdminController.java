@@ -59,8 +59,8 @@ public class AdminController {
 	 
 	 ************************************************************************************/
 
-	@GetMapping("admin/{adminId}")
-	public Optional<Admin> getAdminById(@PathVariable("adminId") Integer adminId) throws AdminException {
+	@GetMapping("admin/{adminid}")
+	public Optional<Admin> getAdminById(@PathVariable("adminid") Integer adminId) throws AdminException {
 		 
 		return this.adminService.getAdminById(adminId);
 	}
@@ -76,8 +76,8 @@ public class AdminController {
 	 
 	 ************************************************************************************/
 
-	@DeleteMapping("admin/{adminId}")
-	public String deleteAdminById(@PathVariable("adminId") Integer adminId) throws AdminException {
+	@DeleteMapping("admin/{adminid}")
+	public String deleteAdminById(@PathVariable("adminid") Integer adminId) throws AdminException {
 		this.adminService.deleteAdminById(adminId);
 		return "Admin deleted SuccessFully";
 	}

@@ -29,8 +29,8 @@ public class PaymentController {
 		return "payment added successfully";
 	}
 
-	@GetMapping("payment/{paymentId}")
-	public Optional<Payment> getPaymentById(@PathVariable("paymentId") Integer paymentId) throws PaymentException {
+	@GetMapping("payment/{paymentid}")
+	public Optional<Payment> getPaymentById(@PathVariable("paymentid") Integer paymentId) throws PaymentException {
 		
 		return this.paymentService.getPaymentById(paymentId);
 	}
@@ -47,8 +47,8 @@ public class PaymentController {
 		return this.paymentService.getAllPayments();
 	}
 
-	@DeleteMapping("payment/{paymentId}")
-	public String deletePaymentById(@PathVariable("paymentId") Integer paymentId) throws PaymentException {
+	@DeleteMapping("payment/{paymentid}")
+	public String deletePaymentById(@PathVariable("paymentid") Integer paymentId) throws PaymentException {
 		this.paymentService.deletePaymentById(paymentId);
 		return "payment deleted successfully";
 	}

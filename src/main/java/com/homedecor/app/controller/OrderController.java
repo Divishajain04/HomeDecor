@@ -63,8 +63,8 @@ public class OrderController {
 	 ************************************************************************************/
 
 	
-	@GetMapping("order/{orderId}")
-	public Optional<OrderByCustomer> getOrderById(@PathVariable ("orderId") Integer orderId) throws OrderException  {
+	@GetMapping("order/{orderid}")
+	public Optional<OrderByCustomer> getOrderById(@PathVariable ("orderid") Integer orderId) throws OrderException  {
 		 return this.orderService.getOrderById(orderId);
 	}
 	
@@ -112,8 +112,8 @@ public class OrderController {
 	 
 	 ************************************************************************************/
 
-	@DeleteMapping("order/{orderId}")
-	public Boolean deleteOrderById(@PathVariable("orderId") Integer orderId) throws OrderException {
+	@DeleteMapping("order/{orderid}")
+	public Boolean deleteOrderById(@PathVariable("orderid") Integer orderId) throws OrderException {
 			this.orderService.deleteOrderById(orderId);
 		return true;
 	}
@@ -131,8 +131,8 @@ public class OrderController {
 	 
 	 ************************************************************************************/
 
-	@PatchMapping("order/placeOrder/{customerId}/{orderId}")
-	public String placeOrder(@PathVariable("customerId") Integer customerId,@PathVariable("orderId") Integer orderId)
+	@PatchMapping("order/placeorder/{customerid}/{orderid}")
+	public String placeOrder(@PathVariable("customerid") Integer customerId,@PathVariable("orderid") Integer orderId)
 			throws OrderException, PaymentException, CartException, CustomerException, WalletException {
 				this.orderService.placeOrder(customerId,orderId);
 		return "Order Placed Successfully";
