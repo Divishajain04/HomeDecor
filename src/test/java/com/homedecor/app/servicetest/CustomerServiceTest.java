@@ -45,148 +45,148 @@ class CustomerServiceTest {
 	
 	@Test
 	void deleteCustomerByIdTest() throws CustomerException {
-		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		Customer customer = new Customer(111, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
 		assertTrue(customerService.addCustomer(customer));
-		assertEquals(true, this.customerService.deleteCustomer(8));
-		assertThrows(CustomerException.class, () -> this.customerService.deleteCustomer(8));
+		assertEquals(true, this.customerService.deleteCustomer(111));
+		assertThrows(CustomerException.class, () -> this.customerService.deleteCustomer(111));
 	}
 
 	@Test
 	void addCustomerTest() throws CustomerException {
 		assertThrows(CustomerException.class,()->this.customerService.addCustomer(null));
-		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		Customer customer = new Customer(111, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
 		assertTrue(customerService.addCustomer(customer));
 		assertNotNull(customer);
 		assertThrows(CustomerException.class,()->this.customerService.addCustomer(customer));
-		assertEquals(true, customerService.deleteCustomer(8));		
+		assertEquals(true, customerService.deleteCustomer(111));		
 	}
 	
 	@Test
 	void getCustomerByIdTest() throws CustomerException {
-		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		Customer customer = new Customer(111, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
 		assertTrue(customerService.addCustomer(customer));
-		Customer getCustomer = customerService.getCustomerById(8).get();
+		Customer getCustomer = customerService.getCustomerById(111).get();
 		Integer customerId = getCustomer.getCustomerId();
-		assertEquals(8, customerId);
+		assertEquals(111, customerId);
 		assertNotNull(customerService.getCustomerById(customerId));
-		assertEquals(true, customerService.deleteCustomer(8));
-		assertThrows(CustomerException.class, () -> this.customerService.getCustomerById(8));
+		assertEquals(true, customerService.deleteCustomer(111));
+		assertThrows(CustomerException.class, () -> this.customerService.getCustomerById(111));
 	}
 	
 
 	@Test
 	void getAllCustomerTest() throws CustomerException {
-		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		Customer customer = new Customer(111, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
 		assertTrue(this.customerService.addCustomer(customer));
 		assertNotNull(this.customerService.findAllCustomers());
-		assertEquals(true, this.customerService.deleteCustomer(8));
+		assertEquals(true, this.customerService.deleteCustomer(111));
 	}
 
 	@Test
 	void customerLoginTest() throws CustomerException {
-		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		Customer customer = new Customer(111, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
 		assertTrue(this.customerService.addCustomer(customer));
-		Customer customer2 = customerService.getCustomerById(8).get();
+		Customer customer2 = customerService.getCustomerById(111).get();
 		String customerEmailIdTest = customer2.getCustomerEmail();
 		String customerPasswordTest = customer2.getPassword();
 		assertEquals(true, this.customerService.login(customerEmailIdTest, customerPasswordTest));
-		assertEquals(true, this.customerService.deleteCustomer(8));
+		assertEquals(true, this.customerService.deleteCustomer(111));
 		assertThrows(CustomerException.class, () -> this.customerService.login(customerEmailIdTest, customerPasswordTest));
 	}
 
 	@Test
 	void updateCustomerAddress() throws CustomerException {
-		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		Customer customer = new Customer(111, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
 		assertTrue(this.customerService.addCustomer(customer));
-		Customer getCustomer = customerService.getCustomerById(8).get();
+		Customer getCustomer = customerService.getCustomerById(111).get();
 		Integer customerId = getCustomer.getCustomerId();
-		assertEquals(8, customerId);
+		assertEquals(111, customerId);
 		assertEquals(true ,customerService.updateAddress(customerId, "Neemuch"));
-		assertEquals(true, this.customerService.deleteCustomer(8));
+		assertEquals(true, this.customerService.deleteCustomer(111));
 	}
 
 	@Test
 	void updateCustomerEmail() throws CustomerException {
-		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		Customer customer = new Customer(111, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
 		assertTrue(this.customerService.addCustomer(customer));
-		Customer getCustomer = customerService.getCustomerById(8).get();
+		Customer getCustomer = customerService.getCustomerById(111).get();
 		Integer customerId = getCustomer.getCustomerId();
-		assertEquals(8, customerId);
+		assertEquals(111, customerId);
 		assertEquals(true, customerService.updateEmail(customerId, "dibu0404@gmail.com"));
-		assertEquals(true, this.customerService.deleteCustomer(8));
+		assertEquals(true, this.customerService.deleteCustomer(111));
 	}
 
 	@Test
 	void updateCustomerPhone() throws CustomerException {
-		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		Customer customer = new Customer(111, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
 		assertTrue(this.customerService.addCustomer(customer));
-		Customer customer2 = customerService.getCustomerById(8).get();
+		Customer customer2 = customerService.getCustomerById(111).get();
 		Integer customerInteger = customer2.getCustomerId();
-		assertEquals(8, customerInteger);
+		assertEquals(111, customerInteger);
 		assertEquals(true,customerService.updateMobileNo(customerInteger, "7999779211"));
-		assertEquals(true, this.customerService.deleteCustomer(8));
+		assertEquals(true, this.customerService.deleteCustomer(111));
 	}
 
 
 	@Test
 	void updatePassword() throws CustomerException {
-		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		Customer customer = new Customer(111, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
 		assertTrue(this.customerService.addCustomer(customer));
-		Customer customer2 = customerService.getCustomerById(8).get();
+		Customer customer2 = customerService.getCustomerById(111).get();
 		String customerEmailIdTest = customer2.getCustomerEmail();
 		String customerPassword = customer2.getPassword();
 		assertEquals(true, this.customerService.updatePassword(customerEmailIdTest, customerPassword, "RubiJain08"));
-		assertEquals(true, this.customerService.deleteCustomer(8));
+		assertEquals(true, this.customerService.deleteCustomer(111));
 	}
 	
 
 	@Test
 	void updateCustomerInformation() throws CustomerException {
 		assertThrows(CustomerException.class, () -> this.customerService.addCustomer(null));
-		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		Customer customer = new Customer(111, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
 		assertTrue(this.customerService.addCustomer(customer));
-		Customer customer2 = customerService.getCustomerById(8).get();
+		Customer customer2 = customerService.getCustomerById(111).get();
 		Integer customerInteger = customer2.getCustomerId();
-		assertEquals(8, customerInteger);
+		assertEquals(111, customerInteger);
 		assertThrows(CustomerException.class, () -> this.customerService.updateCustomer(null));
-		assertNotNull(customerService.updateCustomer(new Customer(8, "Divisha Jain", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null)));
-		assertEquals(true, this.customerService.deleteCustomer(8));
+		assertNotNull(customerService.updateCustomer(new Customer(111, "Divisha Jain", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null)));
+		assertEquals(true, this.customerService.deleteCustomer(111));
 		assertThrows(CustomerException.class, () -> this.customerService.updateCustomer(customer));
 
 	}
 
 	@Test
 	void totalRegisterCustomerTest() throws CustomerException{
-		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		Customer customer = new Customer(111, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
 		assertTrue(this.customerService.addCustomer(customer));
 		assertEquals(1, customerService.totalRegisteredCustomer());
-		assertEquals(true, this.customerService.deleteCustomer(8));
+		assertEquals(true, this.customerService.deleteCustomer(111));
 	}
 	
 	@Test
 	void addCustomerControllerTest() throws CustomerException{
-		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		Customer customer = new Customer(111, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
 		assertEquals("Customer added Successfully",customerController.addCustomer(customer));
-		assertEquals(true, this.customerService.deleteCustomer(8));
+		assertEquals(true, this.customerService.deleteCustomer(111));
 	}
 
 	
 	@Test
 	void getCustomerByIdControllerTest() throws CustomerException{
-		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		Customer customer = new Customer(111, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
 		assertEquals("Customer added Successfully",customerController.addCustomer(customer));
-		assertTrue(this.customerController.getCustomerById(8).isPresent());
-		assertEquals(true, this.customerService.deleteCustomer(8));
+		assertTrue(this.customerController.getCustomerById(111).isPresent());
+		assertEquals(true, this.customerService.deleteCustomer(111));
 	}
 	
 	
 	@Test
 	void getAllCustomers() throws CustomerException{
-		Customer customer = new Customer(8, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
+		Customer customer = new Customer(111, "Divisha", "divisha123@gmail.com", "Divisha0404", "9424499512", "Jawad",null, null, null, null);
 		assertEquals("Customer added Successfully",customerController.addCustomer(customer));
 		List customerList = customerController.getAllCustomers();
 		assertThat(customerList).size().isPositive();
-		assertEquals(true,this.customerService.deleteCustomer(8));
+		assertEquals(true,this.customerService.deleteCustomer(111));
 	}
 	
 	@Test

@@ -17,12 +17,12 @@ import com.homedecor.app.dto.Cart;
 	
 	@Test
 	void addCartTest() {
-		Cart cart = new Cart(16, null, null);
+		Cart cart = new Cart(111, null, null);
 		this.cartRepository.save(cart);
-		Boolean a=this.cartRepository.existsById(16);
+		Boolean a=this.cartRepository.existsById(111);
 		assertThat(a).isTrue();
-		this.cartRepository.deleteById(16);
-		Boolean b=this.cartRepository.existsById(16);
+		this.cartRepository.deleteById(111);
+		Boolean b=this.cartRepository.existsById(111);
 		assertThat(b).isFalse();
 		
 	}

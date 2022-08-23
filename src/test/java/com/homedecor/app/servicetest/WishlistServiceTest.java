@@ -93,19 +93,18 @@ import com.homedecor.app.service.WishlistService;
 	
 	@Test
 	void addWishlistProductToCartTest() throws WishlistException, CustomerException, CartException, ProductException, CategoryException{
-		Customer customer = new Customer(15, "prince", "badluckLucky@gmail.com", "princess123", "9999966666", "xyz", null, null, null, null);
+		Customer customer = new Customer(111, "prince", "badluckLucky@gmail.com", "princess123", "9999966666", "xyz", null, null, null, null);
 		assertTrue(this.customerService.addCustomer(customer));
-		Category category = new Category(15, "JD", null);
+		Category category = new Category(111, "JD", null);
 		assertTrue(this.categoryService.addCategory(category));
 		List<Product> products=new ArrayList<>();
-		Product product = new Product(15, "cinnamon spice", "tooooo good", 10000000.00, 2, 15);
+		Product product = new Product(111, "cinnamon spice", "tooooo good", 10000000.00, 2, 111);
 		assertTrue(this.productService.addProducts(product));
 		products.add(product);
-		this.wishlistService.updateWishlist(new Wishlist(15,products));
-		assertTrue(this.wishlistService.addWishlistProductToCart(15));
-		assertEquals(true, this.customerService.deleteCustomer(15));
-		assertEquals(true, this.categoryService.deleteCategoryById(15));
-//		assertThrows(WishlistException.class,()->this.wishlistService.addWishlistProductToCart(15));
+		this.wishlistService.updateWishlist(new Wishlist(111,products));
+		assertTrue(this.wishlistService.addWishlistProductToCart(111));
+		assertEquals(true, this.customerService.deleteCustomer(111));
+		assertEquals(true, this.categoryService.deleteCategoryById(111));
 		
 	}
 	

@@ -43,81 +43,80 @@ class CartServiceTest {
 
 	@Test
 	void deleteCartByIdTest() throws CartException {
-		Cart cart = new Cart(15, null, null);
+		Cart cart = new Cart(111, null, null);
 		assertTrue(this.cartService.addCart(cart));
-		assertEquals(true, this.cartService.deleteCartById(15));
-		assertThrows(CartException.class, () -> this.cartService.deleteCartById(15));
+		assertEquals(true, this.cartService.deleteCartById(111));
+		assertThrows(CartException.class, () -> this.cartService.deleteCartById(111));
 	}
 
 	@Test
 	void addCartTest() throws CartException {
 		assertThrows(CartException.class, () -> this.cartService.addCart(null));
-		Cart cart = new Cart(15, null, null);
+		Cart cart = new Cart(111, null, null);
 		assertTrue(this.cartService.addCart(cart));
-		assertNotNull(this.cartService.getCartById(15));
+		assertNotNull(this.cartService.getCartById(111));
 		assertThrows(CartException.class, () -> this.cartService.addCart(cart));
-		assertEquals(true, this.cartService.deleteCartById(15));
+		assertEquals(true, this.cartService.deleteCartById(111));
 	}
 
 	@Test
 	void getCartByIdTest() throws CartException {
-		Cart cart = new Cart(15, null, null);
+		Cart cart = new Cart(111, null, null);
 		assertTrue(this.cartService.addCart(cart));
-		assertNotNull(this.cartService.getCartById(15));
-		assertEquals(true, this.cartService.deleteCartById(15));
-		assertThrows(CartException.class, () -> this.cartService.getCartById(15));
+		assertNotNull(this.cartService.getCartById(111));
+		assertEquals(true, this.cartService.deleteCartById(111));
+		assertThrows(CartException.class, () -> this.cartService.getCartById(111));
 	}
 
 	@Test
 	void getAllCartTest() throws CartException {
-		//assertThrows(CartException.class, () -> this.cartService.getAllCarts());
-		Cart cart = new Cart(15, null, null);
+		Cart cart = new Cart(111, null, null);
 		assertTrue(this.cartService.addCart(cart));
 		assertNotNull(this.cartService.getAllCarts());
-		assertEquals(true, this.cartService.deleteCartById(15));
+		assertEquals(true, this.cartService.deleteCartById(111));
 		
 	}
 
 	@Test
 	void updateCartTest() throws CartException {
-		Cart cart = new Cart(15, null, null);
+		Cart cart = new Cart(111, null, null);
 		assertTrue(this.cartService.addCart(cart));
-		assertNotNull(this.cartService.updateCart(new Cart(15, null, null)));
-		assertEquals(true, this.cartService.deleteCartById(15));
-		assertThrows(CartException.class, () -> this.cartService.updateCart(new Cart(15, null, null)));
+		assertNotNull(this.cartService.updateCart(new Cart(111, null, null)));
+		assertEquals(true, this.cartService.deleteCartById(111));
+		assertThrows(CartException.class, () -> this.cartService.updateCart(new Cart(111, null, null)));
 	}
 	
 	
 	@Test
 	void totalProductInCustomerCartByIdTest() throws CartException {
-		Cart cart = new Cart(15, null, null);
+		Cart cart = new Cart(111, null, null);
 		assertTrue(this.cartService.addCart(cart));
-		assertNotNull(this.cartService.totalProductInCustomerCartById(15));
-		assertEquals(true, this.cartService.deleteCartById(15));
-		assertThrows(CartException.class, () -> this.cartService.totalProductInCustomerCartById(15));
+		assertNotNull(this.cartService.totalProductInCustomerCartById(111));
+		assertEquals(true, this.cartService.deleteCartById(111));
+		assertThrows(CartException.class, () -> this.cartService.totalProductInCustomerCartById(111));
 	}
 	
 	@Test
 	void totalAmountOfCustomerCartByIdTest() throws CartException {
-		Cart cart = new Cart(15, null, null);
+		Cart cart = new Cart(111, null, null);
 		assertTrue(this.cartService.addCart(cart));
-		assertNotNull(this.cartService.totalAmountOfCustomerCartById(15));
-		assertEquals(true, this.cartService.deleteCartById(15));
-		assertThrows(CartException.class, () -> this.cartService.totalAmountOfCustomerCartById(15));
+		assertNotNull(this.cartService.totalAmountOfCustomerCartById(111));
+		assertEquals(true, this.cartService.deleteCartById(111));
+		assertThrows(CartException.class, () -> this.cartService.totalAmountOfCustomerCartById(111));
 	}
 	
 	@Test
 	void addProductToCartTest() throws CartException, CustomerException, CategoryException, ProductException {
-		Customer customer = new Customer(15, "Prince", "prince123@gmail.com", "Prince0404", "9424499512", "Ayodhya",null, null, null, null);
+		Customer customer = new Customer(111, "Prince", "prince123@gmail.com", "Prince0404", "9424499512", "Ayodhya",null, null, null, null);
 		assertTrue(customerService.addCustomer(customer));
-		Category category = new Category(15,"Furniture",null);
+		Category category = new Category(111,"Furniture",null);
 		assertTrue(this.categoryService.addCategory(category));
-		assertThrows(ProductException.class, () -> this.cartService.addProductToCart(15,15,1));
-		Product product = new Product(15, "Sofa", "Double layer Foam", 20000.0, 20,15);
+		assertThrows(ProductException.class, () -> this.cartService.addProductToCart(111,111,1));
+		Product product = new Product(111, "Sofa", "Double layer Foam", 20000.0, 20,111);
 		assertTrue(this.productService.addProducts(product));
-		assertTrue(this.cartService.addProductToCart(15, 15, 2));
-		assertEquals(true, this.customerService.deleteCustomer(15));
-		assertEquals(true,categoryService.deleteCategoryById(15));
+		assertTrue(this.cartService.addProductToCart(111, 111, 2));
+		assertEquals(true, this.customerService.deleteCustomer(111));
+		assertEquals(true,categoryService.deleteCategoryById(111));
 		
 	}
 	
