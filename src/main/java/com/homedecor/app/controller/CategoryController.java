@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -57,7 +58,7 @@ public class CategoryController {
 	 
 	 ************************************************************************************/
 
-	@PatchMapping("category")
+	@PutMapping("category")
 	public Category updateCategory(@RequestBody Category category) throws CategoryException {
 		
 		 return this.categoryService.updateCategory(category);
@@ -124,7 +125,7 @@ public class CategoryController {
 	 ************************************************************************************/
 
 	@GetMapping("category/name/{categoryname}")
-	public Category getCategoryByName(@PathVariable ("categoryname") String categoryName) throws CategoryException  {
+	public List<Category> getCategoryByName(@PathVariable ("categoryname") String categoryName) throws CategoryException  {
 		 return this.categoryService.getCategoryByName(categoryName);
 	}
 

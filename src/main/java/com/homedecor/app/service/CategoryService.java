@@ -18,6 +18,6 @@ public interface CategoryService {
 	
 	public List<Category> getAllCategories()throws CategoryException;
 
-	public Category getCategoryByName(String categoryName)throws CategoryException;
+	public List<Category> getCategoryByName(String categoryName)throws CategoryException;
 
 }

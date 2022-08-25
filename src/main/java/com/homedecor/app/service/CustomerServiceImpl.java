@@ -54,7 +54,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public boolean addCustomer(Customer customer) throws CustomerException {
 		if (customer == null) {
-			throw new CustomerException("Customer not added please fill the mandatory feilds");
+			throw new CustomerException("Customer not added. please fill the mandatory feilds");
 		}
 		Optional<Customer> foundCustomer = this.customerRepository.findById(customer.getCustomerId());
 		if (foundCustomer.isPresent()) {

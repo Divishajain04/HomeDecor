@@ -34,7 +34,7 @@ public class CustomerController {
 
 	/************************************************************************************
 	 * Method: addCustomer
-     * Description: To handle a Http POST request
+     * Description: 				 - To add or create the customer in application
      * 
      * @Object customer              - Customer's object
 	 * @returns String               - Customer added Successfully
@@ -51,9 +51,9 @@ public class CustomerController {
 	
 	/************************************************************************************
 	 * Method: getCustomerById
-     * Description: To handle a Http GET request
+     * Description: 				  -	To get the customer by their Customer Id.
      * 
-     * @Param customerId              - Customer's Id
+     * @Param customerId              - customerId
 	 * @returns Optional<Customer>    - foundCustomer
      * Created By                     - Divisha Jain
      * Created Date                   - 16-AUG-2022                           
@@ -67,8 +67,8 @@ public class CustomerController {
 	}
 	
 	/************************************************************************************
-	 * Method: getAllCustomers
-     * Description: To handle a Http GET request
+	 * Method: 						 - getAllCustomers
+     * Description:                  - To get all the customers.
      * 
 	 * @returns List<Customer>       - foundCustomers
      * Created By                    - Divisha Jain
@@ -84,7 +84,7 @@ public class CustomerController {
 	
 	/************************************************************************************
 	 * Method: updateCustomer
-     * Description: To handle a Http PATCH request
+     * Description: 				 - To update the customer details.
      * 
      * @Object customer              - Customer's object
 	 * @returns Customer             - updatedCustomer
@@ -94,24 +94,24 @@ public class CustomerController {
 	 ************************************************************************************/
 
 
-	@PatchMapping("customer")
+	@PutMapping("customer")
 	public Customer updateCustomer(@Valid @RequestBody Customer customer) throws CustomerException {
 		return this.customerService.updateCustomer(customer);
 	}
 
 	/************************************************************************************
 	 * Method: updateCustomerEmail
-     * Description: To handle a Http PUT request
+     * Description: 				 - Update customer email.
      * 
      * @Param loginId                - Customer's Id
      * @Param newEmail               - Customer's new Email
 	 * @returns String               - Email updated Successfully
      * Created By                    - Divisha Jain
      * Created Date                  - 16-AUG-2022                           
-	 
+	 //enchancement
 	 ************************************************************************************/
 
-	@PutMapping("customer/{loginid}/{newemail}")
+	@PatchMapping("customer/{loginid}/{newemail}")
 	public String updateEmail(@PathVariable("loginid") Integer loginId, @PathVariable("newemail") String newEmail)
 			throws CustomerException {
 		this.customerService.updateEmail(loginId, newEmail);
@@ -120,7 +120,7 @@ public class CustomerController {
 
 	/************************************************************************************
 	 * Method: updatePhone
-     * Description: To handle a Http PUT request
+     * Description:                  - Update customer Phone Number
      * 
      * @Param loginId                - Customer's Id
      * @Param newPhone               - Customer's new Phone number
@@ -130,7 +130,7 @@ public class CustomerController {
 	 
 	 ************************************************************************************/
 
-	@PutMapping("customer/phone/{loginid}/{newphone}")
+	@PatchMapping("customer/phone/{loginid}/{newphone}")
 	public String updatePhone(@PathVariable("loginid") Integer loginId, @PathVariable("newphone") String newPhone)
 			throws CustomerException {
 		this.customerService.updateMobileNo(loginId, newPhone);
@@ -139,7 +139,7 @@ public class CustomerController {
 
 	/************************************************************************************
 	 * Method: updateAddress
-     * Description: To handle a Http PUT request
+     * Description:                  - To update new address for the customer
      * 
      * @Param loginId                - Customer's Id
      * @Param newAddress             - Customer's new address
@@ -149,7 +149,7 @@ public class CustomerController {
 	 
 	 ************************************************************************************/
 
-	@PutMapping("customer/address/{loginid}/{newaddress}/")
+	@PatchMapping("customer/address/{loginid}/{newaddress}/")
 	public String updateAddress(@PathVariable("loginId") Integer loginId, @PathVariable("newaddress") String newAddress)
 			throws CustomerException {
 		this.customerService.updateAddress(loginId, newAddress);
@@ -158,7 +158,7 @@ public class CustomerController {
 
 	/************************************************************************************
 	 * Method: deleteCustomerById
-     * Description: To handle a Http DELETE request
+     * Description: 				  - To delete the customer
      * 
      * @Param customerId              - Customer's Id
 	 * @returns String                - Customer deleted Successfully
@@ -175,7 +175,7 @@ public class CustomerController {
 	
 	/************************************************************************************
 	 * Method: countRegisteredCustomer
-     * Description: To handle a Http GET request
+     * Description:					  - To count all the customer that is present in application
      * 
    	 * @returns long                  - count of total no. of registered customers
      * Created By                     - Divisha Jain

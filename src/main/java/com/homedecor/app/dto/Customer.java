@@ -36,7 +36,7 @@ public class Customer {
 	private String password;
 
 	@NotNull(message = "Please provide phone number")
-	@Pattern(regexp = "[0-9]{10}", message = "Phone munber must be 10 digits[0-9].")
+	@Pattern(regexp = "[0-9]{10}", message = "Phone munber must be 10 digits.")
 	private String customerPhoneNo;
 
 	@NotNull(message = "Please provide address")

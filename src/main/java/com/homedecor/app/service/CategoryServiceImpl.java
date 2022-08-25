@@ -114,8 +114,8 @@ public class CategoryServiceImpl implements CategoryService {
 	 * Created By  				 -	Divisha Jain
 	 ************************************************************************************/
 	@Override
-	public Category getCategoryByName(String categoryName) throws CategoryException {
-		Category foundCategory=this.categoryRepository.findByCategoryNameStartingWith(categoryName);
+	public List<Category> getCategoryByName(String categoryName) throws CategoryException {
+		List<Category> foundCategory=this.categoryRepository.findByCategoryNameStartingWith(categoryName);
 		if(foundCategory==null)throw new CategoryException("No Category found by this name");
 		return foundCategory;
 	}
